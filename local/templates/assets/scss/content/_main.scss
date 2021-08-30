@@ -1,0 +1,57 @@
+body {
+	color: #292929;
+
+}
+
+.container {
+	max-width: 1550px;
+	margin: 0 auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+}
+
+.btn {
+	background-color: #799BC9;
+	font-size: 22px;
+	color: #fff;
+	padding: .875em 2.8em;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.headding-wrap {
+	display: flex;
+	justify-content: center;
+}
+
+.heading {
+	position: relative;
+	font-size: 2.6em;
+	@include Forum(400);
+	display: inline-block;
+	padding: 1.23em 0;
+
+	@media screen and (max-width: 991px) {
+		padding: 0;
+		text-align: center;
+	}
+
+	& div {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		font-size: 3.462em;
+		text-transform: uppercase;
+		color: rgba(138, 207, 229, 0.2);
+		display: flex;
+		justify-content: center;
+		z-index: -999;
+
+		@media screen and (max-width: 991px) {
+			display: none;
+		}
+	}
+}

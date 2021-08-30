@@ -1,0 +1,23 @@
+// @import url('./../fonts/Circe/stylesheet.css');
+// @import url('./../fonts/Forum/stylesheet.css');
+
+
+$nameFont: 'Circe';
+
+@mixin font-family($font) {
+	font-family: $font, sans-serif;
+}
+
+@mixin Circe($weight:400, $style:normal) {
+	@include font-family ('Circe');
+	font-weight: $weight;
+	font-style: $style;
+}
+
+@mixin Forum($weight:400, $style:normal) {
+	@include font-family ('Forum');
+	font-weight: $weight;
+	font-style: $style;
+}
+
+// @include name(400);  // Использование шрифтов
