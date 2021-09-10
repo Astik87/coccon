@@ -80,6 +80,7 @@
 		& svg {
 			max-width: 30px;
 			max-height: 30px;
+			fill: #292929;
 		}
 	}
 
@@ -241,6 +242,31 @@
 
 		&:last-child {
 			margin-right: 0;
+		}
+
+		& a {
+			position: relative;
+
+			&::after {
+				left: 50%;
+				width: 0;
+				height: 2px;
+				bottom: -5px;
+				background-color: #799BC9;
+				content: "";
+				position: absolute;
+				transition: .3s all;
+			}
+
+			&:hover {
+				color: #292929 !important;
+			}
+
+			&.selected::after,
+			&:hover::after {
+				left: 0;
+				width: 100%;
+			}
 		}
 
 	}

@@ -21,6 +21,8 @@ use Bitrix\Main\Page\Asset;
     Asset::getInstance()->addCss(TEMPLATE_PATH . '/assets/css/libs.min.css');
     Asset::getInstance()->addCss(TEMPLATE_PATH . "/assets/css/main.min.css");
     ?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="<?= TEMPLATE_PATH ?>/assets/js/libs.min.js"></script>
 </head>
 
 
@@ -48,28 +50,29 @@ use Bitrix\Main\Page\Asset;
 
                 <!-- Logo -->
                 <div class="logo">
-                    <img class="logo__img" src="<?= TEMPLATE_PATH ?>/assets/img/logo.png" alt="">
+                    <a href="/">
+                        <img class="logo__img" src="<?= TEMPLATE_PATH ?>/assets/img/logo.png" alt="">
+                    </a>
                 </div>
 
                 <? $APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	"main_menu", 
-	array(
-		"ALLOW_MULTI_SELECT" => "N",
-		"CHILD_MENU_TYPE" => "left",
-		"DELAY" => "N",
-		"MAX_LEVEL" => "1",
-		"MENU_CACHE_GET_VARS" => array(
-		),
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"ROOT_MENU_TYPE" => "top",
-		"USE_EXT" => "N",
-		"COMPONENT_TEMPLATE" => "main_menu"
-	),
-	false
-); ?>
+                    "bitrix:menu",
+                    "main_menu",
+                    array(
+                        "ALLOW_MULTI_SELECT" => "N",
+                        "CHILD_MENU_TYPE" => "left",
+                        "DELAY" => "N",
+                        "MAX_LEVEL" => "1",
+                        "MENU_CACHE_GET_VARS" => array(),
+                        "MENU_CACHE_TIME" => "3600",
+                        "MENU_CACHE_TYPE" => "N",
+                        "MENU_CACHE_USE_GROUPS" => "Y",
+                        "ROOT_MENU_TYPE" => "top",
+                        "USE_EXT" => "N",
+                        "COMPONENT_TEMPLATE" => "main_menu"
+                    ),
+                    false
+                ); ?>
 
                 <!-- Menu -->
                 <!-- <ul class="menu">
@@ -86,7 +89,7 @@ use Bitrix\Main\Page\Asset;
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#phone"></use>
                         </svg>
                     </div>
-                    <a href="#" class="phone"><?= $DATE[0]['DATA_PHONE']['VALUE']; ?></a>
+                    <a href="#" class="phone hover"><?= $DATE[0]['DATA_PHONE']['VALUE']; ?></a>
                 </div>
 
                 <div class="header__icons">

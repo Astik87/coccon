@@ -9,7 +9,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Lookbook", 
-		"/", 
+		"/lookbook/", 
 		Array(), 
 		Array(), 
 		"" 

@@ -29,6 +29,10 @@
             prevArrow: ''
         });
 
-
+        // Show more in main  page
+        $('#show_more').on('click', () => {
+            console.log('asdsad');
+            $('.category-items').css('display', 'flex');
+        });
     })
 }(jQuery);

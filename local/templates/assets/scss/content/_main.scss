@@ -1,5 +1,64 @@
 body {
 	color: #292929;
+}
+
+.scrollbar {
+
+	/* width */
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: #fff;
+	}
+
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: rgba(138, 207, 229, 0.7);
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: rgba(138, 207, 229, 1);
+	}
+}
+
+.jcs {
+	justify-content: start !important;
+}
+
+.hide-block {
+	display: none !important;
+}
+
+.breadcrumbs ul {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 40px 0;
+
+	& li {
+		margin-right: 10px;
+
+		&:nth-child(2n) {
+			height: 26px;
+		}
+
+		&:last-child {
+			color: #799bc9;
+		}
+	}
+
+	& a {
+		font-size: 16px;
+	}
+
+	& svg {
+		height: 12px;
+		width: 7px;
+	}
 
 }
 
@@ -32,14 +91,14 @@ body {
 	font-size: 2.6em;
 	@include Forum(400);
 	display: inline-block;
-	padding: 1.23em 0;
+	padding: 1em 0;
 
 	@media screen and (max-width: 991px) {
 		padding: 0;
 		text-align: center;
 	}
 
-	& div {
+	& .heading__subtitle {
 		position: absolute;
 		top: 0;
 		width: 100%;
@@ -54,4 +113,47 @@ body {
 			display: none;
 		}
 	}
+}
+
+.hover,
+.menu a,
+.bottom-menu a,
+.breadcrumbs a {
+	transition: .2s all;
+	cursor: pointer;
+
+	&:hover {
+		color: #799bc9 !important;
+		border-color: #799bc9 !important;
+	}
+}
+
+body.modal-open {
+	height: 100vh;
+	overflow-y: hidden;
+}
+
+.list {
+	& li {
+		display: flex;
+		margin: 2.5px 0;
+
+		&::before {
+			content: '';
+			display: inline-block;
+			min-width: 6px;
+			min-height: 6px;
+			width: 6px;
+			height: 6px;
+			margin-right: 7px;
+			margin-top: 0.5em;
+			border-radius: 50%;
+			background-color: #799BC9;
+		}
+	}
+}
+
+.content-title h2 {
+	font-size: 24px;
+	color: #799bc9;
 }

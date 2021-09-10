@@ -1,0 +1,81 @@
+.return {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 77px;
+
+	& .text {
+
+		& h2,
+		& h3 {
+			font-size: 24px;
+			color: #799bc9;
+			margin: 5px 0;
+
+			@media screen and (max-width: 568px) {
+				text-align: center;
+			}
+		}
+
+		& p,
+		& h3 {
+			font-size: 18px;
+			margin: 5px 0;
+		}
+
+	}
+
+	& .left {
+		width: 60.43%;
+		max-width: 860px;
+
+		@media screen and (max-width: 1200px) {
+			width: 100%;
+			max-width: none;
+		}
+
+		& .heading {
+			@media screen and (max-width: 991px) {
+				margin: 30px 0;
+			}
+
+			@media screen and (max-width: 568px) {
+				text-align: center;
+				width: 100%;
+			}
+		}
+
+	}
+
+	& .right {
+		display: flex;
+		align-items: center;
+		margin-top: 77px;
+		margin-left: 50px;
+
+		@media screen and (max-width: 1200px) {
+			display: none;
+		}
+
+		& img {
+			width: 600px;
+		}
+	}
+
+	& .return-form {
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+		width: fit-content;
+
+		@media screen and (max-width: 568px) {
+			width: 100%;
+			justify-content: center;
+		}
+
+		& svg {
+			width: 28px;
+			height: 28px;
+			margin-right: 10px;
+		}
+	}
+}

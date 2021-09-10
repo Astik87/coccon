@@ -1,0 +1,65 @@
+.lookbook {
+	position: relative;
+	max-width: 1350px;
+	width: 95%;
+
+
+	& .category-items {
+		max-width: 100%;
+		margin-bottom: 110px;
+
+		@media screen and (max-width: 1200px) {
+			flex-direction: row;
+		}
+
+		@media screen and (max-width: 768px) {
+			flex-direction: column;
+			margin-bottom: 0;
+		}
+
+		& .item {
+			margin: 0 15px;
+
+			@media screen and (max-width: 768px) {
+				margin: 0;
+				margin-bottom: 30px;
+			}
+		}
+	}
+
+	& .item-center {
+		position: absolute;
+		top: 47.5%;
+		left: auto;
+		display: block;
+		width: 44.44%;
+
+		@media screen and (max-width: 768px) {
+			position: relative;
+			top: 0;
+			margin-bottom: 100px;
+			width: 100%;
+		}
+
+		& a {
+			height: 0;
+			display: flex;
+			align-items: center;
+
+			@media screen and (max-width: 768px) {
+				height: fit-content;
+				justify-content: center;
+			}
+		}
+
+		& img {
+			width: 100%;
+			height: fit-content;
+
+			@media screen and (max-width: 768px) {
+				width: 100%;
+				max-width: 600px;
+			}
+		}
+	}
+}

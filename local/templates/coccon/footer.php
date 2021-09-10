@@ -5,8 +5,10 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 <footer>
 	<div class="container footer">
 		<div class="logo">
-			<img src="<?= TEMPLATE_PATH ?>/assets/img/logo.png" alt="">
-			<span>Вязаные тренды</span>
+			<a href="/">
+				<img src="<?= TEMPLATE_PATH ?>/assets/img/logo.png" alt="">
+				<span>Вязаные тренды</span>
+			</a>
 		</div>
 
 		<div class="bottom-menu">
@@ -94,8 +96,6 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 	</div>
 </footer>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="<?= TEMPLATE_PATH ?>/assets/js/libs.min.js"></script>
 <script src="<?= TEMPLATE_PATH ?>/assets/js/main.min.js"></script>
 </body>
 
