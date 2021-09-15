@@ -117,7 +117,7 @@ if ($_SESSION['REMEMBER'] == "Y")
                     </div>
                     <!-- End Search -->
 
-                    <a class="header__icon" id="user" <?= $USER->IsAuthorized() ? 'href="#"' : "" ?>>
+                    <a class="header__icon user" <?= $USER->IsAuthorized() ? 'href="#"' : "" ?>>
                         <svg>
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#woman"> </use>
                         </svg>
@@ -132,7 +132,7 @@ if ($_SESSION['REMEMBER'] == "Y")
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
                         </svg>
 
-                        <div class="cart-count" id="cart-count">
+                        <div class="cart-count">
                             <span>2</span>
                         </div>
                     </a>

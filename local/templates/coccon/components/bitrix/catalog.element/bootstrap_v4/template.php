@@ -2257,6 +2257,7 @@ while ($ob = $res->GetNextElement()) {
 		let startDetailOffset = $('.detail').offset();
 
 		function detailScroll() {
+			if (!$('.element-container').length) return false;
 			let left = $('.element-container').offset().left + $('.element-container').width() - $('.detail').width() - 25;
 			if (!$('.detail').hasClass('absolute')) $('.detail').css('left', left);
 			let detailHeight = $('.detail').height();

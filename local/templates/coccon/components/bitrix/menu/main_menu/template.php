@@ -23,7 +23,7 @@
 				</div>
 				<!-- End Search -->
 
-				<a class="header__icon" id="user" <?= $USER->IsAuthorized() ? 'href="#"' : "" ?>>
+				<a class="header__icon user" <?= $USER->IsAuthorized() ? 'href="#"' : "" ?>>
 					<svg>
 						<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#woman"> </use>
 					</svg>

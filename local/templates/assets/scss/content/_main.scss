@@ -168,6 +168,11 @@ body.modal-open {
 	height: 95%;
 	max-height: 665px;
 	overflow-y: auto;
+	overflow-x: hidden;
+
+	@media screen and (max-width: 500px) {
+		padding: 60px 15px;
+	}
 
 	& .remember {
 		display: flex;
@@ -186,6 +191,19 @@ body.modal-open {
 		@include Forum(400);
 		text-align: center;
 		margin-bottom: 15px;
+	}
+
+	& .smartfilter {
+		flex-direction: row;
+
+		@media screen and (max-width: 380px) {
+			flex-direction: column;
+		}
+
+		& .checkbox {
+			width: auto;
+			order: inherit;
+		}
 	}
 
 	&__form {

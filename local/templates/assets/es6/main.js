@@ -119,8 +119,8 @@
             $('#signup').parent().toggle();
         });
 
-        if (!$('#user').attr('href')) {
-            $('#user').on('click', function () {
+        if (!$('.user').attr('href')) {
+            $('.user').on('click', function () {
                 $('#signup').parent().toggle();
             });
         }
