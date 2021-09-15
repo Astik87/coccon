@@ -326,65 +326,6 @@ JCSmartFilter.prototype.hideFilterProps = function (element) {
 		$(element).find('i').addClass('fa-angle-up');
 		$(element).siblings('.bx-filter-block').slideToggle();
 	}
-
-	// var obj = element.parentNode,
-	// 	filterBlock = obj.querySelector("[data-role='bx_filter_block']"),
-	// 	propAngle = obj.querySelector("[data-role='prop_angle']");
-
-	// if (BX.hasClass(obj, "bx-active")) {
-	// 	new BX.easing({
-	// 		duration: 300,
-	// 		start: {
-	// 			opacity: 1,
-	// 			height: filterBlock.offsetHeight
-	// 		},
-	// 		finish: {
-	// 			opacity: 0,
-	// 			height: 0
-	// 		},
-	// 		transition: BX.easing.transitions.quart,
-	// 		step: function (state) {
-	// 			filterBlock.style.opacity = state.opacity;
-	// 			filterBlock.style.height = state.height + "px";
-	// 		},
-	// 		complete: function () {
-	// 			filterBlock.setAttribute("style", "");
-	// 			BX.removeClass(obj, "bx-active");
-	// 		}
-	// 	}).animate();
-
-	// 	BX.addClass(propAngle, "fa-angle-down");
-	// 	BX.removeClass(propAngle, "fa-angle-up");
-	// } else {
-	// 	filterBlock.style.display = "block";
-	// 	filterBlock.style.opacity = 0;
-	// 	filterBlock.style.height = "auto";
-
-	// 	var obj_children_height = filterBlock.offsetHeight;
-	// 	filterBlock.style.height = 0;
-
-	// 	new BX.easing({
-	// 		duration: 300,
-	// 		start: {
-	// 			opacity: 0,
-	// 			height: 0
-	// 		},
-	// 		finish: {
-	// 			opacity: 1,
-	// 			height: obj_children_height
-	// 		},
-	// 		transition: BX.easing.transitions.quart,
-	// 		step: function (state) {
-	// 			filterBlock.style.opacity = state.opacity;
-	// 			filterBlock.style.height = state.height + "px";
-	// 		},
-	// 		complete: function () {}
-	// 	}).animate();
-
-	// 	BX.addClass(obj, "bx-active");
-	// 	BX.removeClass(propAngle, "fa-angle-down");
-	// 	BX.addClass(propAngle, "fa-angle-up");
-	// }
 };
 
 JCSmartFilter.prototype.showDropDownPopup = function (element, popupId) {
