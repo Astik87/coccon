@@ -11,6 +11,7 @@ if ($_GET['sort'] == 'catalog_PRICE_asc') {
 	$_GET['sort'] = 'catalog_PRICE_1';
 	$_GET['method'] = 'asc';
 }
+
 ?><? $APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"coccon", 

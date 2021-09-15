@@ -175,6 +175,9 @@ if (($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y') && !empty($arResult['DESCRIP
 }
 //endregion
 */ ?>
+
+<? //$APPLICATION->AddChainItem($arResult['NAME'], "/catalog/")
+?>
 <div class="products-wrapper" data-entity="<?= $containerName ?>">
 	<!-- items-container -->
 	<?

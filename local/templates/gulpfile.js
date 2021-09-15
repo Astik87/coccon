@@ -61,7 +61,9 @@ gulp.task('sass', function () {
 });
 
 gulp.task('es6', () => {
-    return gulp.src(dirs.es6 + '/**/*.js')
+    return gulp.src([
+            dirs.es6 + '/main.js',
+        ])
         .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: notify.onError((error) => {

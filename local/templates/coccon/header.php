@@ -1,7 +1,12 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+<? \Bitrix\Main\Context::getCurrent()->getResponse()->writeHeaders(); ?>
 <?
 
 use Bitrix\Main\Page\Asset;
+
+if ($_SESSION['REMEMBER'] == "Y")
+    $USER->Authorize($USER->GetID(), true);
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,17 +33,18 @@ use Bitrix\Main\Page\Asset;
 
 
 <body>
+
     <div id="panel">
         <? $APPLICATION->ShowPanel(); ?>
     </div>
     <?
-    global $DATE;
+    global $DATA;
     CModule::IncludeModule("iblock");
     $arFilter = array("IBLOCK_ID" => 5, "ACTIVE" => "Y");
     $res = CIBlockElement::GetList(array(), $arFilter, false, array(), array());
     while ($ob = $res->GetNextElement()) {
         $arFields = $ob->GetProperties();
-        $DATE[] = $arFields;
+        $DATA[] = $arFields;
     }
 
     ?>
@@ -89,7 +95,7 @@ use Bitrix\Main\Page\Asset;
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#phone"></use>
                         </svg>
                     </div>
-                    <a href="#" class="phone hover"><?= $DATE[0]['DATA_PHONE']['VALUE']; ?></a>
+                    <a href="tel:<?= $DATA[0]['DATA_PHONE']['VALUE']; ?>" class="phone hover"><?= $DATA[0]['DATA_PHONE']['VALUE']; ?></a>
                 </div>
 
                 <div class="header__icons">
@@ -111,7 +117,7 @@ use Bitrix\Main\Page\Asset;
                     </div>
                     <!-- End Search -->
 
-                    <a href="#" class="header__icon">
+                    <a class="header__icon" id="user" <?= $USER->IsAuthorized() ? 'href="#"' : "" ?>>
                         <svg>
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#woman"> </use>
                         </svg>
@@ -139,5 +145,71 @@ use Bitrix\Main\Page\Asset;
                 </div>
 
             </div>
+
         </header>
         <!-- End Header -->
+        <div class="modal-wrapp" style="display: none;">
+            <div class="signup scrollbar" id="signup">
+                <div class="modal-close">
+                    <span></span>
+                    <span></span>
+                </div>
+                <h2 class="title">Регистрация</h2>
+
+                <form action="/ajax/signup.php" method="post" class="signup__form" id="signup-form">
+                    <div class="item">
+                        <label for="">E-mail *</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="item">
+                        <label for="">Пароль *</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="item">
+                        <label for="">Повторите пароль *</label>
+                        <input type="password" name="repeat_password">
+                    </div>
+                    <input class="submit-btn" type="submit" value="Зарегистрироваться">
+                    <span class="btn">
+                        Войти
+                    </span>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="modal-wrapp" style="display: none;">
+            <div class="login scrollbar" id="login">
+                <div class="modal-close">
+                    <span></span>
+                    <span></span>
+                </div>
+                <h2 class="title">Авторизация</h2>
+
+                <form action="/ajax/login.php" method="post" class="login__form" id="login-form">
+                    <div class="item">
+                        <label for="">E-mail *</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="item">
+                        <label for="">Пароль *</label>
+                        <input type="password" name="password">
+                    </div>
+
+                    <div class="remember smartfilter">
+                        <div class="checkbox">
+                            <label for="remember" class="bx-filter-param-label">Запомнить меня</label>
+                            <input type="checkbox" name="remember" id="remember" class="hide-block">
+                        </div>
+
+                        <span class="forgot hover">Забыли пароль?</span>
+                    </div>
+
+                    <input class="submit-btn" type="submit" value="Войти">
+                    <span class="btn">
+                        Зарегистрироваться
+                    </span>
+                </form>
+
+            </div>
+        </div>

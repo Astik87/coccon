@@ -229,8 +229,31 @@ while ($obj = $res->GetNextElement()) {
 	$comments[] = $item;
 }
 
+$res = CIBlockElement::GetList(
+	array(),
+	array(
+		"IBLOCK_ID" => 11,
+	),
+	false,
+	false
+);
+
+$sizes = [];
+
+while ($obj = $res->GetNextElement()) {
+	$fields = $obj->GetFields();
+	$properties = $obj->GetProperties();
+	$sizes[$fields['NAME']] = [
+		'SIZE' => $properties['SIZE']['VALUE'],
+		'SIZE_IN_TABLE' => $properties['SIZE_IN_TABLE']['VALUE'],
+		'OBKHFAT_GRUDI' => $properties['OBKHFAT_GRUDI']['VALUE'],
+		'OBKHFAT_TALII' => $properties['OBKHFAT_TALII']['VALUE'],
+		'OBKHFAT_BEDRA' => $properties['OBKHFAT_BEDRA']['VALUE'],
+	];
+}
+
 ?>
-<div class="container">
+<div class="container element-container">
 
 	<? $APPLICATION->IncludeComponent(
 		"bitrix:breadcrumb",
@@ -422,9 +445,9 @@ while ($obj = $res->GetNextElement()) {
 		<!-- End product images slider -->
 
 		<div class="detail">
+			<span class="artnumber">Артикул: <?= $ARTNUMBER ?></span>
 			<h1 class="card-title"><?= $name ?></h1>
 			<div class="feedback">
-				<span class="artnumber">Артикул: <?= $ARTNUMBER ?></span>
 				<a href="#comments" class="comments hover" id="comment-form-btn"><?= count($comments) ?> отзывов</a>
 				<span class="share hover" id="share-btn">
 					Поделиться
@@ -507,6 +530,9 @@ while ($obj = $res->GetNextElement()) {
 																	} else {
 																	?>
 																		<li class="product-item-scu-item-text-container" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+																			<div class="size">
+																				<?= $sizes[$value['NAME']]['SIZE'] ?>
+																			</div>
 																			<div class="product-item-scu-item-text-block">
 																				<div class="product-item-scu-item-text"><?= $value['NAME'] ?></div>
 																			</div>
@@ -1290,6 +1316,9 @@ while ($obj = $res->GetNextElement()) {
 									<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#star"> </use>
 								</svg>
 							</div>
+							<span id="close-comment-form" class="hover">
+								Закрыть форму
+							</span>
 						</div>
 
 						<form action="/ajax/index.php" method="post" enctype="multipart/form-data" class="comment-form" id="comment-form">
@@ -2118,43 +2147,30 @@ if ($arParams['DISPLAY_COMPARE']) {
 		</div>
 
 		<div class="table-wrapp">
+			<?
+
+			$tr = [
+				'SIZE_IN_TABLE' => 'Размер',
+				'OBKHFAT_GRUDI' => 'Обхват груди(см)',
+				'OBKHFAT_TALII' => 'Обхват талии(см)',
+				'OBKHFAT_BEDRA' => 'Обхват бедер(см)'
+			];
+
+			?>
 			<table>
-				<tr>
-					<td>Размер</td>
-					<td>40 / XS</td>
-					<td>42 / S</td>
-					<td>44 / M</td>
-					<td>46 / L</td>
-					<td>48 / XL</td>
-					<td>50 / XXL</td>
-				</tr>
-				<tr>
-					<td>Обхват груди(см)</td>
-					<td>80 см</td>
-					<td>84 см</td>
-					<td>88 см</td>
-					<td>92 см</td>
-					<td>94 см</td>
-					<td>102 см</td>
-				</tr>
-				<tr>
-					<td>Обхват талии(см)</td>
-					<td>62 см</td>
-					<td>66 см</td>
-					<td>70 см</td>
-					<td>74 см</td>
-					<td>78 см</td>
-					<td>82 см</td>
-				</tr>
-				<tr>
-					<td>Обхват бедер(см)</td>
-					<td>90 см</td>
-					<td>94 см</td>
-					<td>98 см</td>
-					<td>102 см</td>
-					<td>104 см</td>
-					<td>108 см</td>
-				</tr>
+
+				<? foreach ($tr as $key => $value) : ?>
+
+					<tr>
+						<td><?= $value ?></td>
+						<? foreach ($sizes as $item) : ?>
+
+							<td><?= $item[$key] ?></td>
+
+						<? endforeach; ?>
+					</tr>
+
+				<? endforeach; ?>
 			</table>
 		</div>
 	</div>
@@ -2188,8 +2204,8 @@ if ($arParams['DISPLAY_COMPARE']) {
 					</a>
 				</div>
 
-				<div class="item">
-					<a href="#"><img src="<?= TEMPLATE_PATH . '/assets/img/instagram.png' ?>"> </img></a>
+				<div class="item" onclick="shareInstagram()">
+					<img src="<?= TEMPLATE_PATH . '/assets/img/instagram.png' ?>"> </img>
 				</div>
 			</div>
 		</div>
@@ -2205,7 +2221,24 @@ if ($arParams['DISPLAY_COMPARE']) {
 	</div>
 </div>
 
+<?
+global $DATA;
+CModule::IncludeModule("iblock");
+$arFilter = array("IBLOCK_ID" => 5, "ACTIVE" => "Y");
+$res = CIBlockElement::GetList(array(), $arFilter, false, array(), array());
+while ($ob = $res->GetNextElement()) {
+	$arFields = $ob->GetProperties();
+	$DATA[] = $arFields;
+}
+
+?>
+
 <script>
+	function shareInstagram() {
+		$('#copy-link').click();
+		window.location.href = "<?= $DATA[0]['DATA_INSTAGRAM']['VALUE'] ?>";
+	}
+
 	function productInit() {
 		$('.product-item-scu-item-list').on('click', function() {
 			let title = $('.product-item-scu-item-color-container.selected').attr('title');
@@ -2220,6 +2253,45 @@ if ($arParams['DISPLAY_COMPARE']) {
 
 	window.onload = function() {
 		productInit();
+
+		let startDetailOffset = $('.detail').offset();
+
+		function detailScroll() {
+			let left = $('.element-container').offset().left + $('.element-container').width() - $('.detail').width() - 25;
+			if (!$('.detail').hasClass('absolute')) $('.detail').css('left', left);
+			let detailHeight = $('.detail').height();
+			let containerHeight = $('.element-container').height();
+			let containerOffset = $('.element-container').offset();
+			let maxTop = containerHeight + containerOffset.top;
+			let headerOffset = $('.header').offset();
+			let detailOffset = $('.detail').offset();
+			if (headerOffset.top >= detailOffset.top - 81 && !$('.detail').hasClass('absolute')) {
+				$('.detail').addClass('fixed');
+			}
+
+			if (detailOffset.top < startDetailOffset.top && $('.detail').hasClass('fixed')) {
+				$('.detail').removeClass('fixed');
+			}
+
+			if (detailHeight + detailOffset.top >= maxTop && !$('.detail').hasClass('absolute')) {
+				$('.detail').removeClass('fixed');
+				$('.detail').css('left', 'auto');
+				$('.detail').css('right', '15px');
+				$('.detail').addClass('absolute');
+			}
+
+			if (detailHeight + detailOffset.top <= maxTop && headerOffset.top <= detailOffset.top - 81 && $('.detail').hasClass('absolute')) {
+				$('.detail').removeClass('absolute');
+				$('.detail').css('right', 'auto');
+				$('.detail').css('left', left)
+				$('.detail').addClass('fixed');
+			}
+		}
+
+		setInterval(detailScroll, 10);
+
+		detailScroll();
+		// $(window).scroll(detailScroll);
 
 		$('.share-modal a').each((i, e) => {
 			$(e).attr('href', $(e).attr('href') + document.location.href);
@@ -2302,27 +2374,30 @@ if ($arParams['DISPLAY_COMPARE']) {
 			}
 		});
 
-		$('#add-comment-btn').on('click', function() {
+		$('#add-comment-btn, #close-comment-form').on('click', function() {
 			$('#comment-list').toggleClass('hide-block');
-			$(this).toggleClass('hide-block');
+			$('#add-comment-btn').toggleClass('hide-block');
 			$('#form-wrapper').toggleClass('hide-block');
 		});
 
 		$('#size-table-link').on('click', () => {
-			console.log('asdasd');
+			$('body').css('overflow-y', 'hidden');
 			$('#size-modal').toggle();
 		});
 
 		$('#size-modal .modal-close').on('click', () => {
 			$('#size-modal').toggle();
+			$('body').css('overflow-y', 'auto');
 		});
 
 		$('#share-btn').on('click', () => {
 			$('#share-modal').toggle();
+			$('body').css('overflow-y', 'hidden');
 		});
 
 		$('#share-modal .modal-close').on('click', () => {
 			$('#share-modal').toggle();
+			$('body').css('overflow-y', 'auto');
 		});
 
 		// Product description
@@ -2357,7 +2432,7 @@ if ($arParams['DISPLAY_COMPARE']) {
 			$(href).click();
 
 			$('html, body').animate({
-				scrollTop: $(href).offset().top
+				scrollTop: $(href).offset().top - 150
 			}, {
 				duration: 370, // по умолчанию «400» 
 				easing: "linear" // по умолчанию «swing» 

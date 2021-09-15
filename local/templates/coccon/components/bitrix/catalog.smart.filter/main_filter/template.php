@@ -24,6 +24,23 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 
 $isActiveFilter = ($_GET['set_filter'] == 'y' && count($_GET) > 2);
 
+$res = CIBlockElement::GetList(
+	array(),
+	array(
+		"IBLOCK_ID" => 11,
+	),
+	false,
+	false
+);
+
+$sizes = [];
+
+while ($obj = $res->GetNextElement()) {
+	$fields = $obj->GetFields();
+	$properties = $obj->GetProperties();
+	$sizes[$fields['NAME']] = $properties['SIZE']['VALUE'];
+}
+
 ?>
 
 <div class="bx-filter <?= $templateData["TEMPLATE_CLASS"] ?> <? if ($arParams["FILTER_VIEW_MODE"] == "HORIZONTAL") echo "bx-filter-horizontal" ?>">
@@ -539,10 +556,16 @@ $isActiveFilter = ($_GET['set_filter'] == 'y' && count($_GET) > 2);
 												<label data-role="label_<?= $ar["CONTROL_ID"] ?>" class="bx-filter-param-label <? if ($ar['CHECKED']) : ?>active<? endif; ?> <? echo $ar["DISABLED"] ? 'disabled' : '' ?> hover" for="<? echo $ar["CONTROL_ID"] ?>">
 													<span class="bx-filter-input-checkbox">
 														<input type="checkbox" value="<? echo $ar["HTML_VALUE"] ?>" name="<? echo $ar["CONTROL_NAME"] ?>" id="<? echo $ar["CONTROL_ID"] ?>" <? echo $ar["CHECKED"] ? 'checked="checked"' : '' ?> onclick="smartFilter.click(this)" />
-														<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"><?= $ar["VALUE"]; ?><?
-																																																								if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])) :
-																																																								?>&nbsp;(<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<?
-																																																																																																								endif; ?></span>
+														<?
+														if ($sizes[$ar["VALUE"]]) {
+															$size = $sizes[$ar["VALUE"]];
+															$size .= ' / ';
+														}
+														?>
+														<span class="bx-filter-param-text" title="<?= $ar["VALUE"]; ?>"> <?= $size ?><?= $ar["VALUE"]; ?><?
+																																																															if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])) :
+																																																															?>&nbsp;(<span data-role="count_<?= $ar["CONTROL_ID"] ?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<?
+																																																																																																															endif; ?></span>
 													</span>
 												</label>
 											</div>

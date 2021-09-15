@@ -68,12 +68,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
 		</div>
 
-
 		<div class="contacts">
 			<h3 class="title">Мы в социальных сетях</h3>
 			<div class="social">
 				<div class="item">
-					<a href="#">
+					<a href="<?= $DATA[0]['DATA_TELEGRAM']['VALUE'] ?>">
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH . '/assets/img/sprite.svg#telegram' ?>"> </use>
 						</svg>
@@ -81,7 +80,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 				</div>
 
 				<div class="item">
-					<a href="#">
+					<a href="<?= $DATA[0]['DATA_WHATSAPP']['VALUE'] ?>">
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH . '/assets/img/sprite.svg#whatsapp' ?>"> </use>
 						</svg>
@@ -89,7 +88,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 				</div>
 
 				<div class="item">
-					<a href="#"><img src="<?= TEMPLATE_PATH . '/assets/img/instagram.png' ?>"> </img></a>
+					<a href="<?= $DATA[0]['DATA_INSTAGRAM']['VALUE'] ?>"><img src="<?= TEMPLATE_PATH . '/assets/img/instagram.png' ?>"> </img></a>
 				</div>
 			</div>
 		</div>

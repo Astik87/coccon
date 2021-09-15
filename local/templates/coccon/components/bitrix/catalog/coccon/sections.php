@@ -27,6 +27,8 @@ $sectionListParams = array(
 	"TOP_DEPTH" => $arParams["SECTION_TOP_DEPTH"],
 	"SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
 	"VIEW_MODE" => $arParams["SECTIONS_VIEW_MODE"],
+	"SECTION_ID" => "",
+	"SECTION_CODE" => "",
 	"SHOW_PARENT_NAME" => $arParams["SECTIONS_SHOW_PARENT_NAME"],
 	"HIDE_SECTION_NAME" => (isset($arParams["SECTIONS_HIDE_SECTION_NAME"]) ? $arParams["SECTIONS_HIDE_SECTION_NAME"] : "N"),
 	"ADD_SECTIONS_CHAIN" => (isset($arParams["ADD_SECTIONS_CHAIN"]) ? $arParams["ADD_SECTIONS_CHAIN"] : ''),
@@ -42,7 +44,18 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 ?>
 
 <div class="container">
-
+	<? $APPLICATION->IncludeComponent(
+		"bitrix:breadcrumb",
+		"main_breadcrumb",
+		array(
+			"PATH" => "",
+			"SITE_ID" => "s1",
+			"START_FROM" => "0",
+			"COMPONENT_TEMPLATE" => "main_breadcrumb"
+		),
+		false
+	);
+	?>
 	<!-- <div class="breadcrumbs">
 		<ul>
 			<li><a href="#">Главная</a></li>
@@ -54,17 +67,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 			<li><a href="#">Каталог</a></li>
 		</ul>
 	</div> -->
-
-	<? $APPLICATION->IncludeComponent(
-		"bitrix:breadcrumb",
-		"main_breadcrumb",
-		array(
-			"PATH" => "",	// Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
-			"SITE_ID" => "s1",	// Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
-			"START_FROM" => "0",	// Номер пункта, начиная с которого будет построена навигационная цепочка
-		),
-		false
-	); ?>
 
 	<div class="catalog-title">
 		<h1>Каталог</h1>

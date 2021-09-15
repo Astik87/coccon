@@ -55,36 +55,25 @@ while ($obj = $res->GetNextElement()) {
 
 		<div class="category-items">
 			<div class="item">
-				<a href="<?= $lookbooks[0]['LINK'] ?>">
-					<img src="<?= $lookbooks[0]['IMAGE'] ?>" alt="">
-				</a>
+				<img src="<?= $lookbooks[0]['IMAGE'] ?>" alt="">
 			</div>
 
 			<div class="item">
-				<a href="<?= $lookbooks[1]['LINK'] ?>">
-					<img src="<?= $lookbooks[1]['IMAGE'] ?>" alt="">
-				</a>
+				<img src="<?= $lookbooks[1]['IMAGE'] ?>" alt="">
 			</div>
 		</div>
 
 		<div class="category-items">
 			<div class="item">
-				<a href="<?= $lookbooks[2]['LINK'] ?>">
-					<img src="<?= $lookbooks[2]['IMAGE'] ?>" alt="">
-				</a>
+				<img src="<?= $lookbooks[2]['IMAGE'] ?>" alt="">
 			</div>
 
 			<div class="item">
-				<a href="<?= $lookbooks[3]['LINK'] ?>">
-					<img src="<?= $lookbooks[3]['IMAGE'] ?>" alt="">
-				</a>
+				<img src="<?= $lookbooks[3]['IMAGE'] ?>" alt="">
 			</div>
 		</div>
-
 		<div class="item item-center">
-			<a href="<?= $lookbooks[4]['LINK'] ?>">
-				<img src="<?= $lookbooks[4]['IMAGE'] ?>" alt="">
-			</a>
+			<img src="<?= $lookbooks[4]['IMAGE'] ?>" alt="">
 		</div>
 
 	</div>
