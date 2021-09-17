@@ -203,7 +203,7 @@ if (($arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y') && !empty($arResult['DESCRIP
 					'RESULT' => array(
 						'ITEM' => $item,
 						'AREA_ID' => $areaIds[$item['ID']],
-						'TYPE' => 'card',
+						'TYPE' => $arParams['CARD_TYPE'] ? $arParams['CARD_TYPE'] : 'card',
 						'BIG_LABEL' => 'N',
 						'BIG_DISCOUNT_PERCENT' => 'N',
 						'BIG_BUTTONS' => 'N',

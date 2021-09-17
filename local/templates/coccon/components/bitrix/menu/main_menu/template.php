@@ -38,8 +38,16 @@
 						<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
 					</svg>
 
-					<div class="cart-count" id="cart-count">
-						<span>2</span>
+					<?
+					$count = 0;
+					if (!$USER->IsAuthorized()) {
+						$count = count(json_decode($_COOKIE['favourites']));
+					}
+
+					?>
+
+					<div class="header-count<?= $count > 0 ? '' : ' hide-block' ?>">
+						<span><?= $count ?></span>
 					</div>
 				</a>
 			</div>

@@ -23,14 +23,36 @@ use \Bitrix\Main\Localization\Loc;
  */
 ?>
 
+<?
+
+if (!$USER->IsAuthorized()) {
+	$favourites = (array) json_decode($_COOKIE['favourites']);
+
+	$action = in_array($arResult['ITEM']['ID'], $favourites) ? "del" : "add";
+	$class = in_array($arResult['ITEM']['ID'], $favourites) ? " active" : "";
+} else {
+	$connection = Bitrix\Main\Application::getConnection();
+	$sqlHelper = $connection->getSqlHelper();
+
+	$sql = 'SELECT count(*) AS c FROM favourites WHERE user_id=' . $sqlHelper->forSql($USER->GetID()) . ' and product_id=' . $sqlHelper->forSql($arResult['ITEM']['ID']);
+	$recordset = $connection->query($sql);
+	$count = (bool)$recordset->fetch()['c'];
+
+	$action = $count ? "del" : "add";
+	$class = $count ? " active" : "";
+}
+
+
+?>
+
 <div class="product-item">
 	<div class="img">
 		<a href="<?= $item['DETAIL_PAGE_URL'] ?>" style="display: break; height: 100%;"><img src="<?= $item['PREVIEW_PICTURE']['SRC'] ?>" alt=""></a>
-		<a href="#" class="heart">
+		<span class="heart<?= $class ?>" data-id="<?= $arResult['ITEM']['ID'] ?>" data-a="<?= $action ?>" onclick="favourites(this)">
 			<svg>
 				<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
 			</svg>
-		</a>
+		</span>
 		<a href="#" class="cart">
 			<svg>
 				<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>

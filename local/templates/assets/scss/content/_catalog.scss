@@ -31,9 +31,19 @@
 	}
 }
 
-.product-item .price {
-	flex-wrap: nowrap;
-	justify-content: flex-start;
+.product-item {
+	& .price {
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+	}
+
+	& .heart.active {
+		background-color: #799BC9;
+	}
+
+	& .img span {
+		cursor: pointer;
+	}
 }
 
 .catalogs {

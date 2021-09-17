@@ -30,10 +30,25 @@ if ($_SESSION['REMEMBER'] == "Y")
     <script src="<?= TEMPLATE_PATH ?>/assets/js/libs.min.js"></script>
 </head>
 
+<?
 
+if (!$USER->IsAuthorized()) {
+    $favourites = (array) json_decode($_COOKIE['favourites']);
+    $count = count($favourites);
+} else {
+    $connection = Bitrix\Main\Application::getConnection();
+    $sqlHelper = $connection->getSqlHelper();
+
+    $sql = 'SELECT count(*) AS c FROM favourites WHERE user_id=' . $sqlHelper->forSql($USER->GetID());
+    $recordset = $connection->query($sql);
+    $count = $recordset->fetch()['c'];
+}
+
+
+
+?>
 
 <body>
-
     <div id="panel">
         <? $APPLICATION->ShowPanel(); ?>
     </div>
@@ -122,17 +137,20 @@ if ($_SESSION['REMEMBER'] == "Y")
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#woman"> </use>
                         </svg>
                     </a>
-                    <a href="#" class="header__icon">
+                    <a href="/favourites" class="header__icon heart">
                         <svg>
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
                         </svg>
+                        <div class="header-count<?= !$count ? " hide-block" : '' ?>">
+                            <span><?= $count ?></span>
+                        </div>
                     </a>
                     <a href="#" class="header__icon cart">
                         <svg>
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
                         </svg>
 
-                        <div class="cart-count">
+                        <div class="header-count">
                             <span>2</span>
                         </div>
                     </a>

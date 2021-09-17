@@ -252,6 +252,24 @@ while ($obj = $res->GetNextElement()) {
 	];
 }
 
+if (!$USER->IsAuthorized()) {
+	$favourites = (array) json_decode($_COOKIE['favourites']);
+
+	$action = in_array($arResult['ID'], $favourites) ? "del" : "add";
+	$class = in_array($arResult['ID'], $favourites) ? " active" : "";
+} else {
+	$connection = Bitrix\Main\Application::getConnection();
+	$sqlHelper = $connection->getSqlHelper();
+
+	$sql = 'SELECT count(*) AS c FROM favourites WHERE user_id=' . $sqlHelper->forSql($USER->GetID()) . ' and product_id=' . $sqlHelper->forSql($arResult['ID']);
+	$recordset = $connection->query($sql);
+	$count = (bool)$recordset->fetch()['c'];
+
+	$action = $count ? "del" : "add";
+	$class = $count ? " active" : "";
+}
+
+
 ?>
 <div class="container element-container">
 
@@ -660,7 +678,7 @@ while ($obj = $res->GetNextElement()) {
 					</div>
 				</div>
 
-				<div class="favourites">
+				<div class="favourites <?= $class ?>" data-a="<?= $action ?>" data-id="<?= $arResult['ID'] ?>" onclick="favourites(this)">
 					<svg>
 						<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
 					</svg>
@@ -1321,7 +1339,7 @@ while ($obj = $res->GetNextElement()) {
 							</span>
 						</div>
 
-						<form action="/ajax/index.php" method="post" enctype="multipart/form-data" class="comment-form" id="comment-form">
+						<form action="/ajax/comments.php" method="post" enctype="multipart/form-data" class="comment-form" id="comment-form">
 							<input type="text" name="id" value="<?= $arResult['ID'] ?>" class="hide-block">
 							<input type="number" id="rating" name="rating" value="0" min="0" max="5" class="hide-block">
 							<div class="oneline">
@@ -2367,7 +2385,7 @@ while ($ob = $res->GetNextElement()) {
 		});
 
 		$("#comment-form").ajaxForm({
-			url: '/ajax/index.php',
+			url: '/ajax/comments.php',
 			type: 'post',
 			success: (d) => {
 				let res = JSON.parse(d);

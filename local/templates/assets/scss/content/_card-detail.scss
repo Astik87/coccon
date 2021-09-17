@@ -383,6 +383,10 @@
 		justify-content: space-around;
 	}
 
+	& .favourites.active {
+		background-color: #799BC9;
+	}
+
 	& .product-item-detail-price-current {
 		font-size: 32px;
 		color: #292929;

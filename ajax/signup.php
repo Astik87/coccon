@@ -2,6 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 CModule::IncludeModule('cuser');
 
+$connection = Bitrix\Main\Application::getConnection();
+$sqlHelper = $connection->getSqlHelper();
+
 $res = [];
 
 if ($USER->IsAuthorized()) $res['result'] = false;
@@ -38,8 +41,25 @@ $USER->Add($user_data);
 $res['result'] = !$USER->LAST_ERROR;
 $res['cerror'] = $USER->LAST_ERROR;
 
-echo json_encode($res);
-
 if ($res['result']) {
-	$USER->Login($user_data['email'], $user_data['password'], 'Y');
+
+	$USER->Login($user_data['LOGIN'], $user_data['PASSWORD'], 'Y');
+
+	if ($_COOKIE['favourites'])
+		$favourites = (array) json_decode($_COOKIE['favourites']);
+	else $favourites = false;
+
+	if ($favourites != false && $USER->IsAuthorized()) {
+		$sql = "INSERT INTO `favourites`(`user_id`, `product_id`) VALUES ";
+		$values = [];
+		foreach ($favourites as $key => $productId) {
+			$values[] = "(" . $sqlHelper->forSql($USER->GetID()) . "," . $sqlHelper->forSql($productId) . ")";
+		}
+
+		$sql .= implode(',', $values);
+		$recordset = $connection->query($sql);
+		setcookie('favourites', null, -1, '/');
+	}
 }
+
+echo json_encode($res);

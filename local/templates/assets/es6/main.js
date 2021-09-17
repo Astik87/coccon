@@ -68,10 +68,8 @@
                     let label = $('#signup-form input[name="email"]').siblings('label');
                     $('#signup-form input[name="email"]').parent().addClass('error');
                     label.html(res.cerror);
-                } else {
-                    $('#login').parent().toggle();
-                    $('#signup').parent().toggle();
-                }
+                } else
+                    window.location.reload(false);
 
             }
         });
@@ -138,5 +136,42 @@
             $('#signup').parent().toggle();
         });
 
+
     })
 }(jQuery);
+
+function favourites(e, reload = false) {
+    let productId = $(e).data('id');
+    let a = $(e).attr('data-a');
+    $.ajax({
+        url: "/ajax/favourites.php",
+        data: {
+            action: a,
+            id: productId
+        },
+        method: 'get',
+        dataType: 'json',
+        success: d => {
+            if (d.result) {
+                if (a == 'add') {
+                    $(e).addClass('active');
+                    $(e).attr('data-a', 'del');
+                } else {
+                    $(e).removeClass('active');
+                    $(e).attr('data-a', 'add');
+                }
+                $('.heart .header-count').html(d.count)
+
+                if (d.count == 0) {
+                    $('.heart .header-count').addClass('hide-block');
+                } else {
+                    $('.heart .header-count').removeClass('hide-block');
+                }
+
+                if (reload)
+                    window.location.reload(false);
+
+            }
+        }
+    });
+}
