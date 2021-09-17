@@ -7,18 +7,18 @@
 			<div class="header__icons">
 				<!-- Search -->
 				<div class="header__icon search">
-					<div class="search-field">
+					<form action="/search/index.php" method="get" class="search-field">
 						<input type="text" class="search__input" placeholder="Введите запрос...">
 						<svg class="search__close">
 							<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#close"> </use>
 						</svg>
-					</div>
+					</form>
 
-					<a href="#" class="search__icon">
+					<button class="search__icon show-block">
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#search"> </use>
 						</svg>
-					</a>
+					</button>
 
 				</div>
 				<!-- End Search -->

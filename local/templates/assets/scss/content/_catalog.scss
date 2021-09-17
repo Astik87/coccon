@@ -37,8 +37,13 @@
 		justify-content: flex-start;
 	}
 
+	& img {
+		margin: 0 auto;
+	}
+
 	& .heart.active {
 		background-color: #799BC9;
+		fill: #fff;
 	}
 
 	& .img span {

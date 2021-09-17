@@ -33,6 +33,10 @@ body {
 	display: none !important;
 }
 
+.show-block {
+	display: block !important;
+}
+
 .breadcrumbs ul {
 	display: flex;
 	align-items: center;
@@ -262,4 +266,12 @@ body.modal-open {
 
 .login {
 	max-height: 610px;
+}
+
+.search-page {
+	margin-bottom: 100px;
+
+	& .headding-wrap {
+		justify-content: start;
+	}
 }

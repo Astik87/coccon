@@ -116,14 +116,21 @@ if (!$USER->IsAuthorized()) {
                 <div class="header__icons">
                     <!-- Search -->
                     <div class="header__icon search">
-                        <div class="search-field">
-                            <input type="text" class="search__input" placeholder="Введите запрос...">
+                        <form action="/search/index.php" class="search-field">
+                            <input name="q" type="text" class="search__input" placeholder="Введите запрос...">
+
+                            <button type="submit" class="search-submit">
+                                <svg>
+                                    <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#search"> </use>
+                                </svg>
+                            </button>
+
                             <svg class="search__close">
                                 <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#close"> </use>
                             </svg>
-                        </div>
+                        </form>
 
-                        <a href="#" class="search__icon">
+                        <a class="search__icon">
                             <svg>
                                 <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#search"> </use>
                             </svg>

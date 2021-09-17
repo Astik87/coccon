@@ -41,6 +41,10 @@ use \Bitrix\Main\Localization\Loc;
 			<?= $price['PRINT_PRICE'] ?>
 		</div>
 	</a>
+
+	<a href="<?= $item['DETAIL_PAGE_URL'] ?>" class="more-detailed">
+		Подробнее
+	</a>
 </div>
 
 <? /*

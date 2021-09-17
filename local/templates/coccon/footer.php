@@ -72,7 +72,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 			<h3 class="title">Мы в социальных сетях</h3>
 			<div class="social">
 				<div class="item">
-					<a href="<?= $DATA[0]['DATA_TELEGRAM']['VALUE'] ?>">
+					<a href="<?= $DATA[0]['DATA_TELEGRAM']['VALUE'] ?>" target="_blank">
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH . '/assets/img/sprite.svg#telegram' ?>"> </use>
 						</svg>
@@ -80,7 +80,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 				</div>
 
 				<div class="item">
-					<a href="<?= $DATA[0]['DATA_WHATSAPP']['VALUE'] ?>">
+					<a href="<?= $DATA[0]['DATA_WHATSAPP']['VALUE'] ?>" target="_blank">
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH . '/assets/img/sprite.svg#whatsapp' ?>"> </use>
 						</svg>
@@ -88,7 +88,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 				</div>
 
 				<div class="item">
-					<a href="<?= $DATA[0]['DATA_INSTAGRAM']['VALUE'] ?>"><img src="<?= TEMPLATE_PATH . '/assets/img/instagram.png' ?>"> </img></a>
+					<a href="<?= $DATA[0]['DATA_INSTAGRAM']['VALUE'] ?>" target="_blank"><img src="<?= TEMPLATE_PATH . '/assets/img/instagram.png' ?>"> </img></a>
 				</div>
 			</div>
 		</div>

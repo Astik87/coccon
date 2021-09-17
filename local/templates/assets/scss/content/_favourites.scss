@@ -1,0 +1,20 @@
+.favourites-container {
+	margin-bottom: 100px;
+}
+
+.more-detailed {
+	border: 1px solid rgbA(41, 41, 41, .7);
+	padding: 14px;
+	text-align: center;
+	width: 100%;
+	display: block;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: .3s all;
+
+	&:hover {
+		color: #fff;
+		background-color: #799BC9;
+		border-color: #799BC9;
+	}
+}

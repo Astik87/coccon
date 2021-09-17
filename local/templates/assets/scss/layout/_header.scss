@@ -110,6 +110,10 @@
 		}
 	}
 
+	& .search__icon {
+		cursor: pointer;
+	}
+
 }
 
 .logo {
@@ -139,14 +143,20 @@
 		height: 54px;
 		border-bottom: 1px solid #989898;
 
+		& .search-submit {
+			display: none;
+			border: 0;
+			background-color: #fff;
+		}
 
 		&.active {
 			width: 480px;
-			right: 0;
+			right: -15px;
 			border-radius: 0;
 
 			@media screen and (max-width: 900px) {
 				width: 60vw;
+				right: 0;
 			}
 
 			@media screen and (max-width: 740px) {
@@ -157,10 +167,11 @@
 				width: 95vw;
 			}
 
-			&~.search__icon {
+			& .search-submit {
 				position: absolute;
+				display: block;
 				right: 46px;
-				bottom: -9px;
+				top: 4px;
 				opacity: 0.6;
 			}
 
