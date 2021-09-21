@@ -3,6 +3,10 @@
 	max-width: 1350px;
 	width: 95%;
 
+	@media screen and (max-width: 800px) {
+		margin-top: 40px;
+	}
+
 
 	& .category-items {
 		max-width: 100%;

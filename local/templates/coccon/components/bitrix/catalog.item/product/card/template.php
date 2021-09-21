@@ -53,11 +53,6 @@ if (!$USER->IsAuthorized()) {
 				<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
 			</svg>
 		</span>
-		<a href="#" class="cart">
-			<svg>
-				<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
-			</svg>
-		</a>
 	</div>
 	<a href="<?= $item['DETAIL_PAGE_URL'] ?>">
 		<div class="desc">

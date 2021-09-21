@@ -49,6 +49,7 @@ if (!$USER->IsAuthorized()) {
 ?>
 
 <body>
+
     <div id="panel">
         <? $APPLICATION->ShowPanel(); ?>
     </div>
@@ -152,15 +153,28 @@ if (!$USER->IsAuthorized()) {
                             <span><?= $count ?></span>
                         </div>
                     </a>
-                    <a href="#" class="header__icon cart">
-                        <svg>
-                            <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
-                        </svg>
-
-                        <div class="header-count">
-                            <span>2</span>
-                        </div>
-                    </a>
+                    <? $APPLICATION->IncludeComponent(
+                        "bitrix:sale.basket.basket.line",
+                        "cart",
+                        array(
+                            "HIDE_ON_BASKET_PAGES" => "Y",    // Не показывать на страницах корзины и оформления заказа
+                            "PATH_TO_AUTHORIZE" => "",    // Страница авторизации
+                            "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",    // Страница корзины
+                            "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",    // Страница оформления заказа
+                            "PATH_TO_PERSONAL" => SITE_DIR . "personal/",    // Страница персонального раздела
+                            "PATH_TO_PROFILE" => SITE_DIR . "personal/",    // Страница профиля
+                            "PATH_TO_REGISTER" => SITE_DIR . "login/",    // Страница регистрации
+                            "POSITION_FIXED" => "N",    // Отображать корзину поверх шаблона
+                            "SHOW_AUTHOR" => "N",    // Добавить возможность авторизации
+                            "SHOW_EMPTY_VALUES" => "Y",    // Выводить нулевые значения в пустой корзине
+                            "SHOW_NUM_PRODUCTS" => "Y",    // Показывать количество товаров
+                            "SHOW_PERSONAL_LINK" => "Y",    // Отображать персональный раздел
+                            "SHOW_PRODUCTS" => "Y",    // Показывать список товаров
+                            "SHOW_REGISTRATION" => "Y",    // Добавить возможность регистрации
+                            "SHOW_TOTAL_PRICE" => "Y",    // Показывать общую сумму по товарам
+                        ),
+                        false
+                    ); ?>
 
                     <div class="menu-btn" id="menu-btn">
                         <span></span>

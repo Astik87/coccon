@@ -37,6 +37,10 @@ body {
 	display: block !important;
 }
 
+.h-100 {
+	height: 100%;
+}
+
 .breadcrumbs ul {
 	display: flex;
 	align-items: center;
@@ -95,7 +99,7 @@ body {
 	font-size: 2.6em;
 	@include Forum(400);
 	display: inline-block;
-	padding: 1em 0;
+	padding: 1.09em 0;
 
 	@media screen and (max-width: 991px) {
 		padding: 0;
@@ -141,6 +145,7 @@ body.modal-open {
 	& li {
 		display: flex;
 		margin: 2.5px 0;
+		font-size: 18px;
 
 		&::before {
 			content: '';
@@ -273,5 +278,11 @@ body.modal-open {
 
 	& .headding-wrap {
 		justify-content: start;
+	}
+
+	& span {
+		display: block;
+		font-size: 22px;
+		margin-top: 30px;
 	}
 }

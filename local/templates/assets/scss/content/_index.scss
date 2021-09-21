@@ -99,6 +99,7 @@
 	grid-gap: 30px;
 	width: fit-content;
 	margin-top: 70px;
+	margin: 0 auto;
 
 	@media screen and (max-width: 1200px) {
 		grid-template-columns: 1fr 1fr 1fr;

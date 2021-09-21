@@ -177,3 +177,7 @@ function favourites(e, reload = false) {
         }
     });
 }
+
+function toggleCart() {
+    $('.cart-modal').toggleClass('active');
+}

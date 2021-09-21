@@ -216,10 +216,9 @@ if ($_GET['sort'] == 'catalog_PRICE_asc') {
 		"TOP_ADD_TO_BASKET_ACTION" => "ADD",
 		"SECTION_ADD_TO_BASKET_ACTION" => "ADD",
 		"DETAIL_ADD_TO_BASKET_ACTION" => array(
-			0 => "BUY",
+			0 => "ADD",
 		),
 		"DETAIL_ADD_TO_BASKET_ACTION_PRIMARY" => array(
-			0 => "BUY",
 		),
 		"SEARCH_PAGE_RESULT_COUNT" => "50",
 		"SEARCH_RESTART" => "N",

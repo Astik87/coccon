@@ -2,6 +2,10 @@
 	& .title {
 		@include Forum(400);
 		font-size: 52px;
+
+		@media screen and (max-width: 500px) {
+			font-size: 32px;
+		}
 	}
 
 	& .text {
