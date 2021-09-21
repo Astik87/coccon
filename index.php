@@ -322,7 +322,7 @@ $home_filter = [
 					Кардиганы
 				</div>
 			</div>
-
+		102 - фил
 		</div>
 
 		<div class="category-items">
