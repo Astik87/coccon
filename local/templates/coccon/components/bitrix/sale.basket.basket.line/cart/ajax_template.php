@@ -89,6 +89,13 @@ if ($arParams["SHOW_PRODUCTS"] == "Y") {
 			</div>
 
 			<div class="scrollbar">
+
+				<? if (empty($items)) : ?>
+					<div class="empty">
+						<span>Корзина пуста</span>
+					</div>
+				<? endif; ?>
+
 				<? foreach ($items as $v) : ?>
 
 					<?
