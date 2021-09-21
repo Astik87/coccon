@@ -58,7 +58,7 @@ $APPLICATION->SetTitle("Условия возврата");
 					<li>Срок рассмотрения заявки не превышает 7 (семь) рабочих дней.</li>
 				</ul>
 			</div>
-			<a href="#" class="return-form hover">
+			<a href="<?= CFile::GetPath($DATA[0]['RETURN_BLANK']['VALUE']) ?>" target="_blank" class="return-form hover">
 				<svg>
 					<use xlink:href="<?= TEMPLATE_PATH . '/assets/img/sprite.svg#download-pdf' ?>"> </use>
 				</svg>
