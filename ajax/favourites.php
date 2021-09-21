@@ -49,7 +49,12 @@ if ($action == 'add') {
 if ($action == 'del') {
 	if (!$USER->IsAuthorized()) {
 		if (in_array($productId, $favourites)) {
-			unset($favourites[array_search($productId, $favourites)]);
+			$temp = [];
+			foreach ($favourites as $key => $val) {
+				if ($val != $productId)
+					$temp[] = $val;
+			}
+			$favourites = $temp;
 			setcookie('favourites', json_encode($favourites), time() + (3600 * 24 * 60), "/");
 			$res['result'] = true;
 			$res['count'] = count($favourites);

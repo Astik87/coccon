@@ -77,7 +77,7 @@ if ($arParams["SHOW_PRODUCTS"] == "Y") {
 			<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
 		</svg>
 
-		<div class="header-count" onclick="toggleCart()">
+		<div class="header-count<?= $arResult['NUM_PRODUCTS'] ? "" : " hide-block" ?>" onclick="toggleCart()">
 			<span><?= $arResult['NUM_PRODUCTS'] ?></span>
 		</div>
 
