@@ -524,6 +524,10 @@
 	background-color: #FAFAFA;
 	padding: 70px 0;
 
+	@media screen and (max-width: 500px) {
+		padding: 25px 0;
+	}
+
 	& .product-item {
 		background-color: inherit;
 
@@ -972,6 +976,10 @@
 
 .recommend .products-wrapper {
 	margin-top: 45px;
+
+	@media screen and (max-width: 500px) {
+		margin-top: 10px;
+	}
 }
 
 div.popup-window.popup-window-content-white.popup-window-with-titlebar.bx-green {

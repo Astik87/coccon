@@ -29,7 +29,7 @@ if ($_GET['sort'] == 'catalog_PRICE_asc') {
 		"SEF_MODE" => "Y",
 		"SEF_FOLDER" => "/catalog/",
 		"AJAX_MODE" => "Y",
-		"AJAX_OPTION_JUMP" => "Y",
+		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
 		"AJAX_OPTION_HISTORY" => "Y",
 		"CACHE_TYPE" => "A",
