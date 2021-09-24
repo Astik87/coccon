@@ -24,7 +24,15 @@ $arUrlRewrite=array (
     'PATH' => '/personal/order/index.php',
     'SORT' => 100,
   ),
-  9 => 
+  -1 => 
+  array (
+    'CONDITION' => '/personal/orders/',
+    'RULE' => 'componentName=$1',
+    'ID' => NULL,
+    'PATH' => '/personal/orders/index.php?filter_history=Y',
+    'SORT' => 100,
+  ),
+  11 => 
   array (
     'CONDITION' => '#^/personal/#',
     'RULE' => '',

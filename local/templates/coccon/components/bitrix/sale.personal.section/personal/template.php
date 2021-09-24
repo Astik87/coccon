@@ -2,6 +2,8 @@
 
 use Bitrix\Main\Localization\Loc;
 
+if (!$USER->IsAuthorized())
+	LocalRedirect('/');
 
 if ($arParams["MAIN_CHAIN_NAME"] <> '') {
 	$APPLICATION->AddChainItem(htmlspecialcharsbx($arParams["MAIN_CHAIN_NAME"]), $arResult['SEF_FOLDER']);
@@ -114,22 +116,44 @@ if (empty($availablePages)) {
 <?
 }
 
-// require_once('private.php');
-
-// require_once('orders.php');
-
 ?>
-
 <div class="container personal-wrapper">
 
 	<? $APPLICATION->IncludeComponent(
 		"bitrix:breadcrumb",
 		"main_breadcrumb",
 		array(
-			"PATH" => "",
+			"PATH" => "/personal",
 			"SITE_ID" => "s1",
-			"START_FROM" => "0"
-		)
-	); ?><br>
+			"START_FROM" => "1",
+			"COMPONENT_TEMPLATE" => "main_breadcrumb"
+		),
+		false
+	); ?>
+
+	<div class="tabs__caption" data-id="private">
+		<a href="/personal/private" class="item active">
+			Личные данные
+		</a>
+
+		<a href="/personal/orders" class="item">
+			Мои заказы
+		</a>
+
+		<span class="item">
+			Бонусы
+		</span>
+	</div>
+
+	<div class="tabs__content" id="private">
+		<?
+		require_once('private.php');
+		?>
+	</div>
+
+	<!-- <div class="tabs__content" id="private">
+		<? //require_once('orders.php'); 
+		?>
+	</div> -->
 
 </div>

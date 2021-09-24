@@ -1,1 +1,151 @@
-.personal-wrapper {}
+.tabs__caption {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #DCDCDC;
+
+	@media screen and (max-width: 650px) {
+		justify-content: space-around;
+	}
+
+	@media screen and (max-width: 450px) {
+		flex-direction: column;
+	}
+
+	& .item {
+		display: block;
+		margin-right: 90px;
+		padding-bottom: 10px;
+		position: relative;
+		cursor: pointer;
+
+		@media screen and (max-width: 650px) {
+			margin-right: 0;
+		}
+
+		@media screen and (max-width: 450px) {
+			margin-bottom: 15px;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			left: 50%;
+			bottom: -1px;
+			display: block;
+			width: 0;
+			height: 2px;
+			background-color: #799BC9;
+			transition: .3s all;
+		}
+
+		&:hover::after,
+		&.active::after {
+			left: 0;
+			width: 100%;
+		}
+	}
+}
+
+.tabs__content {
+	margin-top: 50px;
+	margin-bottom: 105px;
+}
+
+.private-wrapper {
+	background-color: #FBFBFB;
+	padding: 35px 10px;
+}
+
+.pers-data {
+	display: flex;
+	align-items: center;
+	padding-left: 15px;
+	margin-bottom: 10px;
+
+	& .ava {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		margin-right: 15px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		overflow: hidden;
+
+		& .hover {
+			opacity: 0;
+			height: 100%;
+			width: 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-color: rgba(121, 155, 201, 0.78);
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	& .name {
+		font-weight: bold;
+		font-size: 22px;
+	}
+}
+
+.data-form {
+	display: flex;
+	align-items: flex-end;
+	flex-wrap: wrap;
+
+	@media screen and (max-width: 1478px) {
+		justify-content: space-around;
+	}
+
+	& .item {
+		display: flex;
+		flex-direction: column;
+		margin: 0 15px;
+		margin-top: 20px;
+		width: 100%;
+		max-width: 345px;
+
+		&.emp {
+			@media screen and (max-width: 1550px) {
+				display: none;
+			}
+		}
+
+		& label {
+			font-size: 16px;
+			color: #5c5c5c;
+			margin-bottom: 10px;
+		}
+
+		& input {
+			width: 100%;
+			padding: 14px 16px;
+			border: 1px solid #E3E3E3;
+			border-radius: 5px;
+			font-size: 18px;
+			color: #292929;
+		}
+	}
+
+	.submit {
+		border: none;
+		padding: 14px 44px;
+		text-align: center;
+
+		@media screen and (max-width: 1478px) {
+			margin: 25px 50px;
+		}
+	}
+}
+
+.bx_profile form {
+	display: none;
+}
+
+.col-sm-12.main-profile-social-block {
+	display: none;
+}

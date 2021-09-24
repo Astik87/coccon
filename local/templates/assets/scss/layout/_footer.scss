@@ -85,7 +85,7 @@ footer {
 .social {
 	display: flex;
 
-	@media screen and (max-width: 500px) {
+	@media screen and (max-width: 600px) {
 		justify-content: space-around;
 	}
 
@@ -94,7 +94,7 @@ footer {
 		height: 28px;
 		margin-right: 30px;
 
-		@media screen and (max-width: 500px) {
+		@media screen and (max-width: 600px) {
 			margin-right: 0;
 		}
 

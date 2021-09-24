@@ -155,6 +155,7 @@
 
 		&.active {
 			width: 480px;
+			top: -15px;
 			right: -15px;
 			border-radius: 0;
 
@@ -389,4 +390,8 @@
 		max-width: 30px;
 		max-height: 30px;
 	}
+}
+
+.phone {
+	margin-top: 2px;
 }
