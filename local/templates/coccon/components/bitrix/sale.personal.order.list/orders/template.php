@@ -573,6 +573,7 @@ foreach ($arResult['ORDERS'] as $key => $value) {
 	foreach ($value['BASKET_ITEMS'] as $id => $item) {
 		$orders[$key]['PRODUCTS'][$id] = [];
 		$orders[$key]['PRODUCTS'][$id]['PRICE'] = (int) $item['BASE_PRICE']; // Стоимость товара
+		$orders[$key]['PRODUCTS'][$id]['NAME'] = $item['NAME']; // Название товара
 		$productInfo = CCatalogSku::GetProductInfo($item['PRODUCT_ID']);
 
 		CModule::IncludeModule("iblock");
@@ -738,7 +739,7 @@ foreach ($arResult['ORDERS'] as $key => $value) {
 							</div>
 							<div class="detail">
 								<p class="artnumber">Артикул: <?= $item['ARTNUMBER'] ?></p>
-								<p class="name"><?= $item['ARTNUMBER'] ?></p>
+								<p class="name"><?= $item['NAME'] ?></p>
 								<p class="color">Цвет: <?= $item['COLOR'] ?></p>
 								<p class="size">Размер: <?= $item['SIZES'] ?></p>
 								<p class="product-price"><?= $item['PRICE'] ?> ₽</p>

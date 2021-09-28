@@ -84,5 +84,6 @@ $APPLICATION->SetTitle("Персональный раздел");
 		)
 	),
 	false
-); ?><br>
+); ?>
+
 <br><? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

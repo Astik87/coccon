@@ -441,7 +441,7 @@
 			{
 				for (k in item.PROPS)
 				{
-					if (item.PROPS.hasOwnProperty(k))
+					if (item.PROPS.hasOwnProperty(k) && BX.type.isNotEmptyString(item.PROPS[k].VALUE))
 					{
 						lcValue = item.PROPS[k].VALUE.toLowerCase();
 
@@ -461,7 +461,7 @@
 			{
 				for (k in item.COLUMN_LIST)
 				{
-					if (item.COLUMN_LIST.hasOwnProperty(k) && BX.type.isString(item.COLUMN_LIST[k].VALUE))
+					if (item.COLUMN_LIST.hasOwnProperty(k) && BX.type.isNotEmptyString(item.COLUMN_LIST[k].VALUE))
 					{
 						lcValue = item.COLUMN_LIST[k].VALUE.toLowerCase();
 

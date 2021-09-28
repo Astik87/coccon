@@ -358,7 +358,6 @@
 		}
 
 		&.active {
-			// transform: translateY(-10px);
 
 			& span:first-child {
 				transform: translateY(10px) rotate(45deg);
@@ -398,6 +397,4 @@
 
 .bx-basket.bx-opener {
 	max-height: 35px;
-	// display: block;
-	// height: max-content;
 }
