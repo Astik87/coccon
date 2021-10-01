@@ -301,102 +301,6 @@ $home_filter = [
 		); ?>
 	</div>
 
-	<!-- <div class="categry-wrapper">
-
-		<div class="category-items">
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Платья
-				</div>
-			</div>
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Кардиганы
-				</div>
-			</div>
-		102 - фил
-		</div>
-
-		<div class="category-items">
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Платья
-				</div>
-			</div>
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Кардиганы
-				</div>
-			</div>
-
-		</div>
-
-		<div class="category-items">
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Платья
-				</div>
-			</div>
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Кардиганы
-				</div>
-			</div>
-
-		</div>
-
-		<div class="category-items">
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Платья
-				</div>
-			</div>
-
-			<div class="item">
-				<div class="img">
-					<img src="<?= TEMPLATE_PATH ?>/assets/img/category/category1.jpg" alt="">
-				</div>
-				<div class="name">
-					Кардиганы
-				</div>
-			</div>
-
-		</div>
-
-		<span class="btn">
-			Больше категорий
-		</span>
-
-	</div> -->
-
 	<? $APPLICATION->IncludeComponent(
 		"bitrix:catalog.section.list",
 		"main_page",
@@ -432,5 +336,4 @@ $home_filter = [
 	); ?>
 
 </section>
-
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

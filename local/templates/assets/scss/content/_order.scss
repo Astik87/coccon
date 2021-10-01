@@ -344,7 +344,8 @@
 		justify-content: center;
 	}
 
-	& input {
+	& input,
+	& div {
 		font-size: 14px;
 		border: 1px solid #E3E3E3;
 		padding: 16px;
@@ -355,10 +356,17 @@
 
 	& .submit {
 		width: 154px;
-		font-size: 16px;
-		font-weight: bold;
-		color: #292929;
-		background-color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+
+		& span {
+			font-size: 16px;
+			font-weight: bold !important;
+			color: #292929;
+			background-color: #fff;
+		}
 	}
 }
 
@@ -434,4 +442,211 @@
 
 .bx-soa-price-free {
 	color: #292929;
+}
+
+.order-main {
+
+	& label {
+		font-size: 16px;
+		color: #5c5c5c;
+		margin-bottom: 10px;
+		font-weight: normal;
+		margin-right: 60px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	& input,
+	textarea,
+	select {
+		padding: 16px;
+		border: 1px solid #E3E3E3;
+		border-radius: 5px;
+	}
+
+	& .head {
+		padding: 22px;
+		font-size: 24px;
+		background-color: #fbfbfb;
+		margin-bottom: 30px;
+	}
+
+	& .contacts-data {
+		margin-bottom: 25px;
+	}
+
+	& .name {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 30px;
+
+		@media screen and (max-width: 1200px) {
+			flex-direction: column;
+			margin-bottom: 0;
+		}
+
+		& .item {
+			display: flex;
+			flex-direction: column;
+			max-width: 516px;
+			width: 100%;
+			margin-right: 30px;
+
+			@media screen and (max-width: 1200px) {
+				max-width: none;
+				margin-top: 20px;
+			}
+
+			&.error {
+				& label {
+					color: red;
+				}
+
+				& input {
+					border-color: red;
+				}
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	& .social-data {
+		display: flex;
+		align-items: start;
+		justify-content: space-between;
+
+		@media screen and (max-width: 1200px) {
+			flex-direction: column;
+		}
+
+		& input {
+			width: 100%;
+		}
+
+		& .item {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			max-width: 314px;
+			margin-top: 0;
+
+			@media screen and (max-width: 1500px) {
+				max-width: 250px;
+			}
+
+			@media screen and (max-width: 1200px) {
+				max-width: none;
+				margin-top: 20px;
+			}
+
+			&.error {
+				& label {
+					color: red;
+				}
+
+				& input {
+					border-color: red;
+				}
+			}
+
+			& .match {
+				display: flex;
+				margin-top: 15px;
+
+				& label {
+					font-size: 16px;
+				}
+
+				& input {
+					width: auto;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+
+	.delivery-data {
+		margin-bottom: 60px;
+
+		.cities {
+			display: flex;
+			justify-content: space-between;
+
+			@media screen and (max-width: 568px) {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			& .item {
+				@media screen and (max-width: 1200px) {
+					margin: 0 10px;
+				}
+
+				@media screen and (max-width: 568px) {
+					text-align: center;
+					margin-top: 25px;
+				}
+			}
+
+			& .title {
+				font-size: 20px;
+				color: #799bc9;
+			}
+
+			& .text {
+				& span {
+					display: block;
+					margin-bottom: 7px;
+				}
+			}
+		}
+
+		.form {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin-top: 40px;
+		}
+
+		& .item {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			max-width: 485px;
+			margin-top: 30px;
+		}
+
+		.comment {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			margin-top: 30px;
+
+			& textarea {
+				height: 110px;
+				resize: none;
+			}
+		}
+	}
+}
+
+.payments {
+	margin-bottom: 20px;
+
+	& label {
+		margin-right: 60px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+#bx-soa-order {
+	padding-bottom: 80px;
 }

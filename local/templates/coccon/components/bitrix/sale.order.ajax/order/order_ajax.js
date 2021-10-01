@@ -144,6 +144,123 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			if (this.params.USER_CONSENT === 'Y') {
 				this.initUserConsent();
 			}
+
+			// Применеие купона и обновление карзины
+			$('.enter-coupon').on('click', function () {
+				let couponVal = $(this).siblings('.enter-coupon-field').val();
+				if (couponVal) {
+					BX.Sale.OrderAjaxComponent.sendRequest('enterCoupon', couponVal);
+					BX.Sale.BasketComponent.sendRequest('recalculateAjax', {
+						'basket[QUANTITY_1020]': 1
+					});
+				}
+			});
+
+			// Способы доставки
+			// this.getAllFormData() все введенные данные
+
+			let deliveries = this.result.DELIVERY;
+
+			$(deliveries).each((i, e) => {
+				let delivItem = $(`<label></label>`);
+				delivItem.html(' ' + e.NAME);
+				let input = $(`<input type="radio" name="delivery" data-id="ID_DELIVERY_ID_${e.ID}">`);
+				input.on('click', function () {
+					console.log(`#${$(this).data('id')}`);
+					$(`#${$(this).data('id')}`).parent().parent().click();
+				});
+				delivItem.prepend(input);
+				if ($(`#ID_DELIVERY_ID_${e.ID}:checked`).val() == e.ID) input.click();
+				$('.delivery .content').prepend(delivItem);
+				$('.delivery .content').on('click', () => {
+					this.show(document.getElementById('bx-soa-delivery'));
+				});
+			});
+
+			$("#forename, #last-name").on('change', () => {
+				let forename = $('#forename').val();
+				let last_name = $('#last-name').val();
+
+				$('#forename').val(forename.trim());
+				$('#last-name').val(last_name.trim());
+
+				$('#soa-property-1').val((forename + ' ' + last_name).trim());
+
+				if (forename == '' || last_name == '') {
+					$('#forename, #last-name').parent().addClass('error');
+					console.log('asdasda');
+				} else {
+					$('#forename, #last-name').parent().removeClass('error');
+				}
+			});
+
+			$("#email").on('change', () => {
+				let email = $('#email').val().trim();
+
+				$('#soa-property-2').val(email);
+
+				if (email == '') {
+					$('#email').parent().addClass('error');
+					console.log('asdasda');
+				} else {
+					$('#email').parent().removeClass('error');
+				}
+			});
+
+			$("#phone").on('change', () => {
+				let phone = $('#phone').val();
+				if ($('#whatsapp').attr('readonly'))
+					$('#whatsapp').val(phone);
+
+				$('#soa-property-3').val(phone);
+			});
+
+			$("#whatsapp").on('change', () => {
+				let whatsapp = $('#whatsapp').val();
+
+				$('#soa-property-20').val(whatsapp);
+			});
+
+			$("#match").on('click', () => {
+				if ($('#whatsapp').attr('readonly'))
+					$('#whatsapp').removeAttr('readonly');
+				else {
+					$('#whatsapp').attr('readonly', 1);
+					$('#whatsapp').val($('#phone').val());
+					$('#soa-property-20').val($('#whatsapp').val());
+				}
+			});
+
+			$("#city, #street, #home, #flat").on('change', () => {
+				let city = $('#city'),
+					street = $('#street'),
+					home = $('#home'),
+					flat = $('#flat');
+
+				let address = city.val() + " " + street.val() + " " + home.val() + " " + flat.val();
+				$('#soa-property-7').val(address);
+			});
+
+			$('#comment').on('change', function () {
+				$('#orderDescription').val($(this).val());
+			});
+
+			let payments = this.paySystemPagination.currentPage;
+			$(payments).each((i, e) => {
+				let delivItem = $(`<label></label>`);
+				delivItem.html(' ' + e.NAME);
+				let input = $(`<input type="radio" name="payment" data-id="ID_PAY_SYSTEM_ID_${e.ID}">`);
+				input.on('click', function () {
+					$(`#${$(this).data('id')}`).parent().parent().click();
+				});
+				delivItem.prepend(input);
+				if ($(`#ID_PAY_SYSTEM_ID_${e.ID}:checked`).val() == e.ID) input.click();
+				$('.payments .content').prepend(delivItem);
+				$('.payments .content').on('click', () => {
+					this.show(document.getElementById('bx-soa-paysystem'));
+				});
+			});
+
 		},
 
 		/**
@@ -239,6 +356,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					}, this)
 				});
 			}
+
 		},
 
 		getData: function (action, actionData) {
@@ -2106,7 +2224,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				firstSection = sections[0],
 				lastSection = sections[sections.length - 1],
 				currentSection = BX.findParent(node, {
-					className: "bx-soa-section"
+					className: "asdas"
 				}),
 				isLastNode = false,
 				buttons = [];
@@ -7883,10 +8001,30 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					tagName: 'DIV',
 					className: 'form-group'
 				});
-				if (errors[i] && errors[i].length)
+				if (errors[i] && errors[i].length) {
 					BX.addClass(inputDiv, 'has-error');
-				else
+					$(`input[data-id="${$(inputs[i]).attr('id')}"]`).parent().addClass('error');
+				} else {
 					BX.removeClass(inputDiv, 'has-error');
+					$(`input[data-id="${$(inputs[i]).attr('id')}"]`).parent().removeClass('error');
+				}
+
+				let id = $(inputs[i]).attr('id');
+				let input = $(`input[data-id=${id}]`);
+				if (input.length == 2) {
+					let name = $(inputs[i]).val().split(' ');
+					$(input[0]).val(name[0]);
+					$(input[1]).val(name[1]);
+				} else if (input.length == 3) {
+					let addres = $(inputs[i]).val().split(' ');
+					$("#city").val(addres[0]);
+					$(input).each((i, e) => {
+						$(e).val(addres[i + 1]);
+					});
+				} else {
+					input.val($(inputs[i]).val());
+				}
+
 			}
 
 			if (errors.length)
@@ -8192,18 +8330,17 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 			let couponInput = BX.create('input', {
 				attrs: {
-					className: 'input',
+					className: 'input enter-coupon-field',
 					type: 'text',
-					placeholder: 'Введите купон'
+					placeholder: 'Введите купон',
 				}
 			});
 
-			let couponSubmit = BX.create('input', {
+			let couponSubmit = BX.create('div', {
 				attrs: {
-					className: 'submit',
-					type: 'submit',
-					placeholder: 'Применить'
-				}
+					className: 'submit enter-coupon'
+				},
+				html: '<span>Применить</span>',
 			});
 
 			coupon.appendChild(couponInput);
@@ -8275,9 +8412,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			// End bonus
 
 
-			if (this.options.showOrderWeight) {
-				this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_WEIGHT_SUM'), total.ORDER_WEIGHT_FORMATED));
-			}
+			// if (this.options.showOrderWeight) {
+			// this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_WEIGHT_SUM'), total.ORDER_WEIGHT_FORMATED));
+			// }
 
 			if (this.options.showTaxList) {
 				for (i = 0; i < total.TAX_LIST.length; i++) {
@@ -8324,9 +8461,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				if (total.DISCOUNT_PERCENT_FORMATED && parseFloat(total.DISCOUNT_PERCENT_FORMATED) > 0)
 					discText += total.DISCOUNT_PERCENT_FORMATED;
 
-				this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText + ':', total.DISCOUNT_PRICE_FORMATED, {
-					highlighted: true
-				}));
+				// this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText + ':', total.DISCOUNT_PRICE_FORMATED, {
+				// 	highlighted: true
+				// }));
 			}
 
 			if (this.options.showPayedFromInnerBudget) {
@@ -8346,28 +8483,32 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_PAYSYSTEM_PRICE'), '~' + total.PAY_SYSTEM_PRICE_FORMATTED));
 			}
 
-			if (!this.result.SHOW_AUTH) {
-				this.totalInfoBlockNode.appendChild(
-					BX.create('DIV', {
-						props: {
-							className: 'bx-soa-cart-total-button-container' + (!showOrderButton ? ' d-block d-sm-none' : '')
-						},
-						children: [
-							BX.create('A', {
-								props: {
-									href: 'javascript:void(0)',
-									className: 'btn btn-primary btn-lg btn-order-save'
-								},
-								html: this.params.MESS_ORDER,
-								events: {
-									click: BX.proxy(this.clickOrderSaveAction, this)
-								}
-							})
+			// if (!this.result.SHOW_AUTH) {
+			this.totalInfoBlockNode.appendChild(
+				BX.create('DIV', {
+					props: {
+						className: 'bx-soa-cart-total-button-container d-block d-sm-none',
+					},
+					children: [
+						BX.create('A', {
+							props: {
+								href: 'javascript:void(0)',
+								className: 'btn btn-primary btn-lg btn-order-save'
+							},
+							html: this.params.MESS_ORDER,
+							events: {
+								click: BX.proxy(this.clickOrderSaveAction, this)
+							}
+						})
 
-						]
-					})
-				);
-			}
+					]
+				})
+			);
+			// }
+
+			this.totalBlockNode.querySelector('.bx-soa-cart-total-button-container');
+			this.mobileTotalBlockNode.querySelector('.bx-soa-cart-total-button-container');
+			this.orderSaveBlockNode.style.display == '';
 
 			this.totalInfoBlockNode.appendChild(BX.create('div', {
 				attrs: {

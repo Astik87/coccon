@@ -346,6 +346,121 @@ if ($request->get('ORDER_ID') <> '') {
 					<span>Бонусные баллы списываются из расчета 1 балл за 1 рубль. Пользователь вправе оплатить Бонусными баллами до 100% стоимости товара.</span>
 				</div>
 
+				<div class="order-main">
+					<div class="contacts-data">
+						<div class="head">1. Контактные данные</div>
+						<div class="content">
+							<div class="name">
+
+								<div class="item forename">
+									<label for="forename">Имя *</label>
+									<input type="text" id="forename" placeholder="Александра" data-id="soa-property-1">
+								</div>
+
+								<div class="item last-name">
+									<label for="last-name">Фамилия *</label>
+									<input type="text" id="last-name" placeholder="Сидорова" data-id="soa-property-1">
+								</div>
+
+							</div>
+
+							<div class="social-data">
+								<div class="item email">
+									<label for="email">E-mail *</label>
+									<input type="email" id="email" placeholder="test@mail.ru" data-id="soa-property-2">
+								</div>
+
+								<div class="item phone">
+									<label for="phone">Номер телефона *</label>
+									<input type="tel" id="phone" placeholder="+_ ___ ___-__-__" data-id="soa-property-3">
+								</div>
+
+								<div class="item whatsapp">
+									<label for="whatsapp">Номер WhatsApp *</label>
+									<input type="tel" id="whatsapp" placeholder="+_ ___ ___-__-__" data-id="soa-property-20">
+									<div class="match">
+										<input type="checkbox" id="match">
+										<label for="match">Номер WhatsApp совпадает с номером</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="delivery">
+						<div class="head">2. Способ доставки</div>
+						<div class="content">
+
+							<div class="delivery-data" id="delivery1">
+								<div class="cities">
+									<div class="item">
+										<div class="title">Казань</div>
+										<div class="text">
+											<span>по городу - 300 руб, за пределами от 500 руб * </span>
+											<span>* Уточняется у менеджера</span>
+										</div>
+									</div>
+
+									<div class="item">
+										<div class="title">Москва</div>
+										<div class="text">
+											<span>в пределах МКАД - 300 руб, далее * </span>
+										</div>
+									</div>
+
+									<div class="item">
+										<div class="title">Санкт-Петербург</div>
+										<div class="text">
+											<span>по городу - 350 руб, за пределами от 500 руб * </span>
+											<span>* Уточняется у менеджера</span>
+										</div>
+									</div>
+								</div>
+								<div class="form">
+									<div class="item">
+										<label for="city">Город *</label>
+										<select id="city">
+											<option>Казань</option>
+											<option>Москва</option>
+											<option>Санкт-Петербург</option>
+										</select>
+									</div>
+
+									<div class="item">
+										<label for="street">Улица *</label>
+										<input type="text" id="street" data-id="soa-property-7">
+									</div>
+
+									<div class="item">
+										<label for="home">Дом *</label>
+										<input type="text" id="home" data-id="soa-property-7">
+									</div>
+
+									<div class="item">
+										<label for="flat">Квартира / офис *</label>
+										<input type="text" id="flat" data-id="soa-property-7">
+									</div>
+
+									<div class="comment">
+										<label for="comment">Комментарий к заказу</label>
+										<textarea name="comment" id="comment" data-id="orderDescription"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="payments">
+						<div class="head">3. Способ оплаты</div>
+
+						<div class="content">
+
+						</div>
+					</div>
+				</div>
+
+				<div id="deliveries"></div>
+
 				<div id="bx-soa-main-notifications">
 					<div class="alert alert-danger" style="display:none"></div>
 					<div data-type="informer" style="display:none"></div>
@@ -366,7 +481,7 @@ if ($request->get('ORDER_ID') <> '') {
 
 				<? if ($arParams['BASKET_POSITION'] === 'before') : ?>
 					<!--	BASKET ITEMS BLOCK	-->
-					<div id="bx-soa-basket" data-visited="false" class="bx-soa-section bx-active hide-block">
+					<div id="bx-soa-basket" data-visited="true" class="bx-soa-section bx-active">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span>
@@ -379,7 +494,7 @@ if ($request->get('ORDER_ID') <> '') {
 				<? endif ?>
 
 				<!--	REGION BLOCK	-->
-				<div id="bx-soa-region" data-visited="false" class="bx-soa-section bx-active">
+				<div id="bx-soa-region" data-visited="true" class="bx-soa-section bx-active hide-block">
 					<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 						<div class="bx-soa-section-title" data-entity="section-title">
 							<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_REGION_BLOCK_NAME'] ?>
@@ -391,7 +506,7 @@ if ($request->get('ORDER_ID') <> '') {
 
 				<? if ($arParams['DELIVERY_TO_PAYSYSTEM'] === 'p2d') : ?>
 					<!--	PAY SYSTEMS BLOCK	-->
-					<div id="bx-soa-paysystem" data-visited="false" class="bx-soa-section bx-active">
+					<div id="bx-soa-paysystem" data-visited="true" class="bx-soa-section bx-active hide-block">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_PAYMENT_BLOCK_NAME'] ?>
@@ -401,7 +516,7 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="bx-soa-section-content"></div>
 					</div>
 					<!--	DELIVERY BLOCK	-->
-					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active" <?= ($hideDelivery ? 'style="display:none"' : '') ?>>
+					<div id="bx-soa-delivery" data-visited="true" class="bx-soa-section bx-active hide-block" <?= ($hideDelivery ? 'style="display:none"' : '') ?>>
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_DELIVERY_BLOCK_NAME'] ?>
@@ -411,7 +526,7 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="bx-soa-section-content"></div>
 					</div>
 					<!--	PICKUP BLOCK	-->
-					<div id="bx-soa-pickup" data-visited="false" class="bx-soa-section" style="display:none">
+					<div id="bx-soa-pickup" data-visited="true" class="bx-soa-section" style="display:none">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span>
@@ -422,7 +537,7 @@ if ($request->get('ORDER_ID') <> '') {
 					</div>
 				<? else : ?>
 					<!--	DELIVERY BLOCK	-->
-					<div id="bx-soa-delivery" data-visited="false" class="bx-soa-section bx-active" <?= ($hideDelivery ? 'style="display:none"' : '') ?>>
+					<div id="bx-soa-delivery" data-visited="true" class="bx-soa-section bx-active hide-block" <?= ($hideDelivery ? 'style="display:none"' : '') ?>>
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_DELIVERY_BLOCK_NAME'] ?>
@@ -432,7 +547,7 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="bx-soa-section-content"></div>
 					</div>
 					<!--	PICKUP BLOCK	-->
-					<div id="bx-soa-pickup" data-visited="false" class="bx-soa-section" style="display:none">
+					<div id="bx-soa-pickup" data-visited="true" class="bx-soa-section" style="display:none">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span>
@@ -442,7 +557,7 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="bx-soa-section-content"></div>
 					</div>
 					<!--	PAY SYSTEMS BLOCK	-->
-					<div id="bx-soa-paysystem" data-visited="false" class="bx-soa-section bx-active">
+					<div id="bx-soa-paysystem" data-visited="true" class="bx-soa-section bx-active hide-block">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_PAYMENT_BLOCK_NAME'] ?>
@@ -453,7 +568,7 @@ if ($request->get('ORDER_ID') <> '') {
 					</div>
 				<? endif ?>
 				<!--	BUYER PROPS BLOCK	-->
-				<div id="bx-soa-properties" data-visited="false" class="bx-soa-section bx-active">
+				<div id="bx-soa-properties" data-visited="true" class="bx-soa-section bx-active hide-block">
 					<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 						<div class="bx-soa-section-title" data-entity="section-title">
 							<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_BUYER_BLOCK_NAME'] ?>
@@ -465,7 +580,7 @@ if ($request->get('ORDER_ID') <> '') {
 
 				<? if ($arParams['BASKET_POSITION'] === 'after') : ?>
 					<!--	BASKET ITEMS BLOCK	-->
-					<div id="bx-soa-basket" data-visited="false" class="bx-soa-section bx-active hide-block">
+					<div id="bx-soa-basket" data-visited="true" class="bx-soa-section bx-active hide-block">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span><?= $arParams['MESS_BASKET_BLOCK_NAME'] ?>
@@ -477,7 +592,7 @@ if ($request->get('ORDER_ID') <> '') {
 				<? endif ?>
 
 				<!--	ORDER SAVE BLOCK	-->
-				<div id="bx-soa-orderSave">
+				<div id="bx-soa-orderSave" class="hide-block">
 					<div class="checkbox">
 						<?
 						if ($arParams['USER_CONSENT'] === 'Y') {
@@ -524,6 +639,7 @@ if ($request->get('ORDER_ID') <> '') {
 				<div class="bx-soa-cart-total">
 
 				</div>
+
 			</div>
 		</div>
 	</form>
