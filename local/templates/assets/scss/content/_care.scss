@@ -1,0 +1,55 @@
+.care-wrapper {
+  margin-bottom: 70px;
+  .about {
+    margin-bottom: 0;
+
+    @media screen and (max-width: 1100px) {
+      flex-direction: column-reverse;
+      margin-top: 60px;
+    }
+  }
+
+  & .title {
+    font-size: 24px;
+    color: #799bc9;
+    margin-bottom: 2px;
+  }
+
+  & .text {
+    max-width: 762px;
+    @media screen and (max-width: 1100px) {
+      margin-top: 30px;
+      text-align: center;
+    }
+  }
+
+  .images {
+    & img {
+      @media screen and (max-width: 1100px) {
+        height: auto;
+      }
+    }
+    & .left {
+      @media screen and (max-width: 1350px) {
+        display: none;
+      }
+    }
+  }
+
+  & .rev {
+    @media screen and (max-width: 1100px) {
+      flex-direction: column;
+    }
+    & .images {
+      margin-right: 52px;
+
+      @media screen and (max-width: 1100px) {
+        margin-right: 0;
+      }
+      & .left {
+        margin-right: 0;
+        margin-left: 30px;
+      }
+    }
+  }
+}
