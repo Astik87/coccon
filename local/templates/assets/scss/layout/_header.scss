@@ -155,6 +155,7 @@
 
 		&.active {
 			width: 480px;
+			top: -15px;
 			right: -15px;
 			border-radius: 0;
 
@@ -181,6 +182,7 @@
 
 			& .search__close {
 				display: block;
+				margin-right: 10px;
 			}
 		}
 	}
@@ -294,7 +296,7 @@
 			width: 95vw;
 		}
 
-		&:last-child {
+		&:nth-last-child(2) {
 			margin-right: 0;
 		}
 
@@ -357,7 +359,6 @@
 		}
 
 		&.active {
-			// transform: translateY(-10px);
 
 			& span:first-child {
 				transform: translateY(10px) rotate(45deg);
@@ -389,4 +390,12 @@
 		max-width: 30px;
 		max-height: 30px;
 	}
+}
+
+.phone {
+	margin-top: 2px;
+}
+
+.bx-basket.bx-opener {
+	max-height: 35px;
 }

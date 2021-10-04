@@ -186,7 +186,7 @@ if ($arParams["SHOW_PRODUCTS"] == "Y") {
 			</div>
 
 			<!-- <div class="making btn"> -->
-			<a class="btn making" href="/personal/order/make/">
+			<a class="btn making" href="/personal/orders/make/">
 				Перейти к оформлению
 			</a>
 			<!-- </div> -->

@@ -136,8 +136,36 @@
             $('#signup').parent().toggle();
         });
 
+        $('input[type="tel"]').inputmask('+9 999 999-99-99');
 
+        $('#ava').on('click', () => {
+            $('#ava-input').click();
+        });
 
+        $('#ava-input').on('change', function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    let src = e.target.result;
+                    $('#ava').css('background-image', `url(${src})`);
+                };
+
+                reader.readAsDataURL($('#ava-input')[0].files[0]);
+            }
+        });
+
+        $('.order-detailed').on('click', function () {
+            if (!$(this).parent().hasClass('active')) {
+                $('.order .active .btn').html('Подробнее');
+                $('.order .active').parent().find('.order-content').slideToggle();
+                $('.order .active').toggleClass('active');
+            }
+            let order = $(this).parent().parent();
+            order.find('.order-content').slideToggle();
+            order.find('.order-head').toggleClass('active');
+            order.find('.btn').html() == 'Свернуть' ? order.find('.btn').html('Подробнее') : order.find('.btn').html('Свернуть');
+        })
 
     })
 }(jQuery);

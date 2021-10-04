@@ -140,7 +140,7 @@ if (!$USER->IsAuthorized()) {
                     </div>
                     <!-- End Search -->
 
-                    <a class="header__icon user" <?= $USER->IsAuthorized() ? 'href="#"' : "" ?>>
+                    <a class="header__icon user" <?= $USER->IsAuthorized() ? 'href="/personal/"' : "" ?>>
                         <svg>
                             <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#woman"> </use>
                         </svg>
@@ -157,10 +157,10 @@ if (!$USER->IsAuthorized()) {
 	"bitrix:sale.basket.basket.line", 
 	"cart", 
 	array(
-		"HIDE_ON_BASKET_PAGES" => "N",
+		"HIDE_ON_BASKET_PAGES" => "Y",
 		"PATH_TO_AUTHORIZE" => "",
 		"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-		"PATH_TO_ORDER" => SITE_DIR."personal/order/make/",
+		"PATH_TO_ORDER" => SITE_DIR."personal/orders/make/",
 		"PATH_TO_PERSONAL" => SITE_DIR."personal/",
 		"PATH_TO_PROFILE" => SITE_DIR."personal/",
 		"PATH_TO_REGISTER" => SITE_DIR."login/",
@@ -177,7 +177,8 @@ if (!$USER->IsAuthorized()) {
 		"SHOW_NOTAVAIL" => "N",
 		"SHOW_IMAGE" => "Y",
 		"SHOW_PRICE" => "Y",
-		"SHOW_SUMMARY" => "Y"
+		"SHOW_SUMMARY" => "Y",
+		"MAX_IMAGE_SIZE" => "70"
 	),
 	false
 ); ?>
