@@ -1,0 +1,179 @@
+.vacancy-wrapper {
+  width: 100%;
+  max-width: 1290px;
+  margin: 100px 0;
+  border-bottom: 1px solid #DFDFDF;
+
+  & .item {
+    border-top: 1px solid #DFDFDF;
+    
+    & .head {
+      font-weight: bold;
+      font-size: 22px;
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      & span {
+        width: 15px;
+        height: 8px;
+        display: flex;
+        justify-content: center;
+        transform: rotate(-180deg);
+        transition: .3s all;
+
+        &.active {
+          transform: rotate(0);
+        }
+
+        &::before,
+        &::after {
+          content: "";
+          display: block;
+          width: 10px;
+          height: 1px;
+          background-color: #799bc9;
+        }
+
+        &::before {
+          transform: rotate(-45deg);
+          margin-right: -2px;
+        }
+
+        &::after {
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    & .content {
+      display: none;
+      padding-bottom: 30px;
+    }
+
+    & .table {
+      display: flex;
+      justify-content: center;
+      border: 1px solid #DFDFDF;
+    }
+
+    & .col:nth-child(2) {
+      border-left: 1px solid #DFDFDF;
+      border-right: 1px solid #DFDFDF;
+    }
+    
+    & .title {
+      padding: 13px 0;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+      background-color: #799bc9;
+    }
+
+    & .text {
+      padding: 15px;
+
+      & li {
+        margin: 5px 0;
+
+        &::before {
+          content: "- ";
+        }
+      }
+    }
+
+    & .btn {
+      display: block;
+      background-color: inherit;
+      padding: 13px 0;
+      text-align: center;
+      border: 1px solid #292929;
+      font-size: 18px;
+      width: 90%;
+      max-width: 330px;
+      color: #292929;
+      margin-top: 30px;
+    }
+
+    & .form {
+      display: none;
+      flex-direction: column;
+      max-width: 830px;
+      margin-top: 30px;
+
+      .vacancy-name {
+        font-size: 22px;
+        margin-bottom: 40px;
+        display: block;
+      }
+
+      & .contacts {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+      }
+
+      & input,
+      & textarea {
+        width: 100%;
+        padding: 16px;
+        border: 1px solid #E3E3E3;
+        font-size: 14px;
+      }
+      
+      & textarea {
+        resize: none;
+        height: 100px;
+      }
+
+      & .name,
+      & .phone {
+        max-width: 400px;
+      }
+
+      & .file {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        cursor: pointer;
+
+        & span {
+          font-size: 15px;
+        }
+
+        & svg {
+          max-height: 15px;
+          max-width: 8px;
+          margin-right: 7px;
+        }
+      }
+
+      & .submit {
+        max-width: 300px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #799bc9;
+        border-radius: 5px;
+        border: 0;
+        margin-top: 30px;
+        cursor: pointer;
+      }
+
+      & label {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        & span {
+          font-size: 16px;
+          color: #5c5c5c;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+}

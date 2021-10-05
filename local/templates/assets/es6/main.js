@@ -183,6 +183,24 @@
             }, 5000);
         }
 
+        $('.vacancy-wrapper .head').on('click', function() {
+            $(this).children('span').toggleClass('active');
+            $(this).siblings('.content').slideToggle();
+        });
+        
+        $('.vacancy-wrapper .file').on('click', function() {
+            console.log($(this).siblings('.profile').click());
+        });
+
+        $('.profile').on('change', function() {
+            $(this).siblings('.file').find('span').html($(this).val());
+        });
+
+        $('.vacancy-wrapper .form-btn').on('click', function() {
+            $(this).siblings('.form').css('display', 'flex');
+            $(this).toggle();
+        });
+
     })
 }(jQuery);
 

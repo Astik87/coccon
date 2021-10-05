@@ -990,3 +990,11 @@ div.popup-window.popup-window-content-white.popup-window-with-titlebar.bx-green 
 div.popup-window-overlay {
 	display: none !important;
 }
+
+.product-item {
+	margin-bottom: 0;
+
+  & .desc {
+    margin-bottom: 0;
+  }
+}

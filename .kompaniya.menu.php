@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Вакансии", 
-		"/", 
+		"/vacancy/", 
 		Array(), 
 		Array(), 
 		"" 
