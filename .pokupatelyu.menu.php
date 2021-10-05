@@ -2,14 +2,14 @@
 $aMenuLinks = Array(
 	Array(
 		"Публичная оферта", 
-		"/public_offer/", 
+		"/public-offer/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Политика конфиденциальности", 
-		"/privacy_policy/", 
+		"/privacy-policy/", 
 		Array(), 
 		Array(), 
 		"" 

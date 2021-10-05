@@ -2310,10 +2310,10 @@ while ($ob = $res->GetNextElement()) {
 			}
 		}
 
-		setInterval(detailScroll, 10);
+		// setInterval(detailScroll, 10);
 
 		detailScroll();
-		// $(window).scroll(detailScroll);
+		$(window).scroll(detailScroll);
 
 		$('.share-modal a').each((i, e) => {
 			$(e).attr('href', $(e).attr('href') + document.location.href);
@@ -2427,18 +2427,6 @@ while ($ob = $res->GetNextElement()) {
 			$(this).parent().toggleClass('active');
 			$(this).siblings('.description-content').slideToggle();
 		});
-
-		function copyStringToClipboard(str) {
-			var el = document.createElement('textarea');
-			el.value = str;
-			el.setAttribute('readonly', '');
-			el.style.position = 'absolute';
-			el.style.left = '-9999px';
-			document.body.appendChild(el);
-			el.select();
-			document.execCommand('copy');
-			document.body.removeChild(el);
-		}
 
 		$('#copy-link').on('click', () => {
 			let link = $('#link-input').val();

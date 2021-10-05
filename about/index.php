@@ -3,44 +3,72 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("О магазине");
 ?>
 
-	<p>Мы рады приветствовать вас на сайте нашей компании.</p>
+<div class="container">
 
-	<p>Наша компания была основана в 1993 году, а наш интернет-магазин стал одним из первых магазинов, осуществляющих on-line продажу одежды в регионе. Компания специализируется на оптовой и розничной продаже одежды как для дома, так и для офиса.</p>
+  <?$APPLICATION->IncludeComponent(
+    "bitrix:breadcrumb",
+    "main_breadcrumb",
+    Array(
+      "PATH" => "",
+      "SITE_ID" => "s1",
+      "START_FROM" => "0"
+    )
+  );?>
 
-	<p>На данный момент мы представляем собой крупную компанию, владеющую интернет&ndash;магазином и имеющую в своей сети единый call-центр, который регулирует всю деятельность магазина, отдел продаж, службу доставки, широкий штат квалифицированных сборщиков, собственный склад c постоянным наличием необходимого запаса товаров.</p>
+  <div class="about-wrapper">
+  
+    <div class="center">
+      <? $APPLICATION->IncludeComponent(
+          "bitrix:main.include",
+          "",
+          array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "../include/about/title.php"
+          )
+        ); ?>
+    </div>
 
-	<p>За это время у нас сложились партнерские отношения с ведущими производителями, позволяющие предлагать высококачественную продукцию по конкурентоспособным ценам.</p>
+    <div class="about">
 
-	<p>Мы можем гордиться тем, что у нас один из самых широких ассортиментов одежды в городе и области. </p>
+      <div class="about-logo">
+        <img src="<?= TEMPLATE_PATH ?>/assets/img/about-logo.png" alt="">
+      </div>
 
-	<h2>Наши возможности</h2>
-	<div class="row">
-		<div class="col-sm-4">
-			<ul>
-				<li><span style="font-size:13px;">Быстрая доставка</span></li>
-				<li><span style="font-size:13px;">Низкие цены</span></li>
-				<li><span style="font-size:13px;">Широкий ассортимент</span></li>
-				<li><span style="font-size:13px;">Бонусы и подарки</span></li>
-			</ul>
-		</div>
-		<div class="col-sm-4">
-			<ul>
-				<li><span style="font-size:13px;">Отличное обслуживаение</span></li>
-				<li><span style="font-size:13px;">Профессиональный менеджеры</span></li>
-				<li><span style="font-size:13px;">Гарантия на все товары</span></li>
-				<li><span style="font-size:13px;">Надежные поставщики</span></li>
-			</ul>
-		</div>
-		<div class="col-sm-4">
-			<ul>
-				<li><span style="font-size:13px;">Сезонные скидки</span></li>
-				<li><span style="font-size:13px;">Программа лояльности</span></li>
-				<li><span style="font-size:13px;">Карты постоянных клиентов</span></li>
-			</ul>
-		</div>
-	</div>
-	<br/>
-	<p>Мы всегда рады общению с нашими клиентами. Если у вас есть какие-либо пожелания, предложения, замечания, касающиеся работы нашего Интернет-магазина - пишите нам, и мы с благодарностью примем ваше мнение во внимание:</p>
-	<p><b>Электронная почта</b>: <a href="mailto:sale@coccon.loc">sale@coccon.loc</a></p>
+      <div class="text">
+        <p>В коллекциях представлены повседневные костюмы, платья, трикотажные изделия, блузы и рубашки, брюки и юбки. Мы самостоятельно разрабатываем лекала, постоянно экспериментируя и совершенствуя крой, с особым вниманием относимся к каждой детали. Благодаря этому у нас есть собственный узнаваемый стиль — это лаконичные модели, которые подчеркивают фигуру и создают гармоничный образ.</p>
+        <p>Мы за то, чтобы образ был стильным и в то же время комфортным. Благодаря своему продуманному и правильному крою, не сковывающему движения, высокому качеству, гармоничному сочетанию легких базовых оттенков и фактур, каждое наше изделие легко впишется в любой гардероб, станет основой для множества стильных образов, актуальных вне сезонов и трендов.</p>
+      </div>
+      <div class="images">
+        <div class="left">
+          <? $APPLICATION->IncludeComponent(
+            "bitrix:main.include",
+            "",
+            array(
+              "AREA_FILE_SHOW" => "file",
+              "AREA_FILE_SUFFIX" => "inc",
+              "EDIT_TEMPLATE" => "",
+              "PATH" => "../include/about/img2.php"
+            )
+          ); ?>
+        </div>
+        <div class="right">
+          <? $APPLICATION->IncludeComponent(
+            "bitrix:main.include",
+            "",
+            array(
+              "AREA_FILE_SHOW" => "file",
+              "AREA_FILE_SUFFIX" => "inc",
+              "EDIT_TEMPLATE" => "",
+              "PATH" => "../include/about/img1.php"
+            )
+          ); ?>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

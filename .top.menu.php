@@ -23,7 +23,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Об уходе", 
-		"/about_care.", 
+		"/care/", 
 		Array(), 
 		Array(), 
 		"" 

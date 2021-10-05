@@ -259,3 +259,19 @@ if (!$USER->IsAuthorized()) {
 
             </div>
         </div>
+
+        <div class="md-wrapper" style="display: none;" id="modal-promocode">
+            <div class="modal-promocode">
+	            <div class="modal-close">
+		            <span></span>
+		            <span></span>
+	            </div>
+                <div class="content">
+                    <div class="title">
+                        Скидка 10% по промокоду
+                    </div>
+                    <span class="code">COCCON10</span>
+                    <span class="btn">Копировать</span>
+                </div>
+            </div>
+        </div>
