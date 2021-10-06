@@ -12,7 +12,7 @@ if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
  */
  
 $strFilesName = $_FILES["profile"]["name"];
-$strContent = chunk_split(base64_encode(file_get_contents($_FILES["profile"]["tmp_name"])));
+$strContent = file_get_contents($_FILES["profile"]["tmp_name"]);
 // $strHeader .= "--".$strSid."\n";  
 // $strHeader .= "Content-Type: application/octet-stream; name='".$strFilesName."'\n";
 // $strHeader .= "Content-Transfer-Encoding: base64\n";
@@ -71,17 +71,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 				"AUTHOR" => $_POST["user_name"],
 				"PHONE" => $_POST["user_phone"],
 				"VACANCY" => $_POST["vacancy"],
-				"PROFILE" => $strContent,
+				// "PROFILE" => $strContent,
 				"EMAIL_TO" => $arParams["EMAIL_TO"],
 				"TEXT" => $_POST["MESSAGE"],
 			);
+
+			if (!empty($_FILES)) {
+				// $filePath = '/upload/to/file.txt';
+				$arParFile = $_FILES['profile'];
+				$arParFile['name'] = "." . $_FILES["profile"]["name"];
+				$arParFile['path'] = "." . $_FILES["profile"]["name"];
+				$fileId = CFile::SaveFile(
+				$arParFile,
+				'mails',  // относительный путь от upload, где будут храниться файлы
+				false,    // ForceMD5
+				false     // SkipExt
+				);
+				$arFields['PROFILE'] = CFile::GetPath($fileId);
+			}
+
 			if(!empty($arParams["EVENT_MESSAGE_ID"]))
 			{
 				foreach($arParams["EVENT_MESSAGE_ID"] as $v)
 					if(intval($v) > 0){
-						$fileId = CFile::SaveFile($_FILES["profile"]);
-						CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v), [$fileId]);
-						CFile::Delete($fileId);
+						CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v), array($fileId));
 					}
 			}
 			else
