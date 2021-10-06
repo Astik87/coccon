@@ -77,6 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 			);
 
 			if (!empty($_FILES)) {
+				// $filePath = '/upload/to/file.txt';
 				$arParFile = $_FILES['profile'];
 				$arParFile['name'] = "." . $_FILES["profile"]["name"];
 				$arParFile['path'] = "." . $_FILES["profile"]["name"];
@@ -86,17 +87,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 				false,    // ForceMD5
 				false     // SkipExt
 				);
+				$arFields['PROFILE'] = CFile::GetPath($fileId);
 			}
 
 			if(!empty($arParams["EVENT_MESSAGE_ID"]))
 			{
 				foreach($arParams["EVENT_MESSAGE_ID"] as $v)
 					if(intval($v) > 0){
-						if (!empty($_FILES)) {
-							CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v), array($fileId));
-							CFile::Delete($fileId);
-						} else
-							CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v));
+						CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v), array($fileId));
+						// if (!empty($_FILES)) {
+						// 	CFile::Delete($fileId);
+						// }
 					}
 			}
 			else
