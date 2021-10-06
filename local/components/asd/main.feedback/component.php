@@ -95,9 +95,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 				foreach($arParams["EVENT_MESSAGE_ID"] as $v)
 					if(intval($v) > 0){
 						CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v), array($fileId));
-						if (!empty($_FILES)) {
-							CFile::Delete($fileId);
-						}
 					}
 			}
 			else
