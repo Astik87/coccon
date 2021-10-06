@@ -57,6 +57,11 @@
       display: flex;
       justify-content: center;
       border: 1px solid #DFDFDF;
+
+      @media screen and (max-width: 992px) {
+        flex-direction: column;
+      }
+
     }
 
     & .col:nth-child(2) {
@@ -113,6 +118,21 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 30px;
+
+        @media screen and (max-width: 840px) {
+          flex-direction: column;
+          margin-bottom: 10px;
+        }
+      }
+
+      & .name,
+      & .phone {
+        max-width: 400px;
+
+        @media screen and (max-width: 840px) {
+          max-width: none;
+          margin-top: 20px;
+        }
       }
 
       & input,
@@ -126,11 +146,6 @@
       & textarea {
         resize: none;
         height: 100px;
-      }
-
-      & .name,
-      & .phone {
-        max-width: 400px;
       }
 
       & .file {
