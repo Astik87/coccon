@@ -8019,7 +8019,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					$(input[0]).val(name[0]);
 					$(input[1]).val(name[1]);
 				} else if (input.length == 3) {
-					let addres = $(inputs[i]).val().split(' ');
+					let addresTemp = $(inputs[i]).val();
+					let addres = [];
+					if(addresTemp) {
+						addres.push(addresTemp.split(', ')[0]);
+						addres.push(addresTemp.split(' ')[2]);
+						addres.push(addresTemp.split(', ')[1].split(' ')[2]);
+						addres.push(addresTemp.split(' ')[5]);
+					}
+
 					$("#city").val(addres[0]);
 					$(input).each((i, e) => {
 						$(e).val(addres[i + 1]);
