@@ -526,9 +526,15 @@ foreach ($arResult['ORDERS'] as $key => $value) {
 	// Способ доставки
 	$orders[$key]['DELIVERY'] = $value['SHIPMENT'][0]['DELIVERY_NAME'];
 
+	$orderId = $orders[$key]['ID'];
+	$saleOrder = Bitrix\Sale\Order::load($orderId);
+	$saleOrderCollection = $saleOrder->getPropertyCollection();
+	$orders[$key]['USER_PHONE'] = $saleOrderCollection->getPhone()->getValue();
+	$orders[$key]['USER_NAME'] = $saleOrderCollection->getPayerName()->getValue();
+	$orders[$key]['USER_EMAIL'] = $saleOrderCollection->getUserEmail()->getValue();
+
+
 	if ($value['ORDER']['DELIVERY_ID'] == 3) { // Если способ доставуи самовывоз
-		$orderId = $orders[$key]['ID'];
-		$saleOrder = Bitrix\Sale\Order::load($orderId);
 		$shipmentCollection = $saleOrder->getShipmentCollection();
 		foreach ($shipmentCollection as $shipment) {
 			if (!$shipment->isSystem()) {
@@ -689,9 +695,9 @@ foreach ($arResult['ORDERS'] as $key => $value) {
 						</div>
 
 						<div class="value">
-							<p><?= $user['name'] ?></p>
-							<p><?= $user['email'] ?></p>
-							<p><?= $user['phone'] ?></p>
+							<p><?= $order['USER_NAME'] ?></p>
+							<p><?= $order['USER_EMAIL'] ?></p>
+							<p><?= $order['USER_PHONE'] ?></p>
 						</div>
 					</div>
 

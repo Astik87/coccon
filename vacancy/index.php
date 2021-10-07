@@ -35,6 +35,8 @@ CModule::IncludeModule("iblock");
 
     <div class="vacancy-wrapper">
 
+    <div id="errors"></div>
+
     <?
     
     $arFilter = array("IBLOCK_ID" => 12, "ACTIVE" => "Y");
@@ -98,23 +100,24 @@ CModule::IncludeModule("iblock");
           <div class="form">
 
             <?$APPLICATION->IncludeComponent(
-            "asd:main.feedback", 
-            ".default", 
-            array(
-              "EMAIL_TO" => "sale@coccon.loc",
-              "EVENT_MESSAGE_ID" => array(
+              "asd:main.feedback", 
+              ".default", 
+              array(
+                "EMAIL_TO" => "astiksheriev@yandex.ru",
+                "EVENT_MESSAGE_ID" => array(
+                  0 => "7",
+                ),
+                "OK_TEXT" => "Спасибо, ваше сообщение принято.",
+                "REQUIRED_FIELDS" => array(
+                  0 => "NAME",
+                  1 => "MESSAGE",
+                ),
+                "USE_CAPTCHA" => "N",
+                "VACANCY" => $arFields["NAME"],
+                "COMPONENT_TEMPLATE" => ".default"
               ),
-              "OK_TEXT" => "Спасибо, ваше сообщение принято.",
-              "REQUIRED_FIELDS" => array(
-                0 => "NAME",
-                1 => "MESSAGE",
-              ),
-              "USE_CAPTCHA" => "Y",
-              "VACANCY" => $arFields['NAME'],
-              "COMPONENT_TEMPLATE" => ".default"
-            ),
-            false
-          );?>
+              false
+            );?>
           </div>
         </div>
       </div>

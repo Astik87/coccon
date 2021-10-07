@@ -93,7 +93,7 @@ $APPLICATION->SetTitle("Контакты");
                 <span>Номер телефона:</span>
               </div>
               <div class="text">
-                +7(939)-333-39-33
+                <a href="tel:+7(939)-333-39-33">+7(939)-333-39-33</a>
               </div>
               
             </div>
@@ -175,7 +175,7 @@ $APPLICATION->SetTitle("Контакты");
                 <span>Номер телефона:</span>
               </div>
               <div class="text">
-                +7(939)-333-39-33
+                <a href="tel:+7(939)-333-39-33">+7(939)-333-39-33</a>
               </div>
               
             </div>
@@ -257,7 +257,7 @@ $APPLICATION->SetTitle("Контакты");
                 <span>Номер телефона:</span>
               </div>
               <div class="text">
-                +7(939)-333-39-33
+                <a href="tel:+7(939)-333-39-33">+7(939)-333-39-33</a>
               </div>
               
             </div>

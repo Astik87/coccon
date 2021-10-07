@@ -172,9 +172,10 @@
             localStorage.setItem('promocode', 1);
         });
 
-        $('#modal-promocode .btn').on('click', () => {
+        $('#modal-promocode .btn').on('click', function() {
             let code = $('#modal-promocode .code').html();
             copyStringToClipboard(code);
+            $(this).html('Готово!');
         });
 
         if (localStorage.getItem('promocode') != 1) {
@@ -200,6 +201,22 @@
             $(this).siblings('.form').css('display', 'flex');
             $(this).toggle();
         });
+        
+        $('.mfeedback > p').each((i, e) => {
+            $('#errors').prepend(e);
+        });
+        
+        if (($('#private .errortext').length == 0) && $('#private .bx_profile font.notetext').length) {
+            $('#private .bx_profile p').html('');
+            $('#private-form .submit').val('Изменения сохранены');
+            $('#private-form .submit').addClass('saved');
+            $('#private-form .submit').attr('disabled', 'disabled');
+            $('#private-form input').on('input', () => {
+                $('#private-form .submit').removeAttr('disabled');
+                $('#private-form .submit').removeClass('saved');
+                $('#private-form .submit').val('Сохранить изменения');
+            });
+        }
 
     })
 }(jQuery);

@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 			else
 				$arResult["ERROR_MESSAGE"][] = GetMessage("MF_CAPTHCA_EMPTY");
 
-		}			
+		}
 		if(empty($arResult["ERROR_MESSAGE"]))
 		{
 			$arFields = Array(

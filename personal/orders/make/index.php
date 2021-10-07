@@ -95,7 +95,7 @@ $arDiscountFields = [
 		"ALLOW_AUTO_REGISTER" => "Y",
 		"ALLOW_NEW_PROFILE" => "N",
 		"ALLOW_USER_PROFILES" => "N",
-		"BASKET_IMAGES_SCALING" => "adaptive",
+		"BASKET_IMAGES_SCALING" => "standard",
 		"BASKET_POSITION" => "after",
 		"COMPATIBLE_MODE" => "Y",
 		"DELIVERIES_PER_PAGE" => "9",
@@ -118,15 +118,13 @@ $arDiscountFields = [
 		"PRODUCT_COLUMNS_HIDDEN" => array(
 		),
 		"PRODUCT_COLUMNS_VISIBLE" => array(
-			0 => "PREVIEW_PICTURE",
-			1 => "PROPS",
 		),
 		"PROPS_FADE_LIST_1" => array(
 		),
 		"PROPS_FADE_LIST_2" => array(
 		),
 		"SEND_NEW_USER_NOTIFY" => "Y",
-		"SERVICES_IMAGES_SCALING" => "adaptive",
+		"SERVICES_IMAGES_SCALING" => "standard",
 		"SET_TITLE" => "Y",
 		"SHOW_BASKET_HEADERS" => "N",
 		"SHOW_COUPONS" => "Y",
@@ -139,7 +137,7 @@ $arDiscountFields = [
 		"SHOW_MAP_IN_PROPS" => "N",
 		"SHOW_NEAREST_PICKUP" => "N",
 		"SHOW_NOT_CALCULATED_DELIVERIES" => "L",
-		"SHOW_ORDER_BUTTON" => "always",
+		"SHOW_ORDER_BUTTON" => "final_step",
 		"SHOW_PAY_SYSTEM_INFO_NAME" => "Y",
 		"SHOW_PAY_SYSTEM_LIST_NAMES" => "Y",
 		"SHOW_PICKUP_MAP" => "Y",

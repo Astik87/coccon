@@ -4,6 +4,10 @@
   margin: 100px 0;
   border-bottom: 1px solid #DFDFDF;
 
+  & #errors {
+    margin-bottom: 30px;
+  }
+
   & .item {
     border-top: 1px solid #DFDFDF;
     
@@ -62,6 +66,10 @@
         flex-direction: column;
       }
 
+      & .col {
+        width: 33.333%;
+      }
+
     }
 
     & .col:nth-child(2) {
@@ -82,6 +90,7 @@
 
       & li {
         margin: 5px 0;
+        font-size: 18px;
 
         &::before {
           content: "- ";

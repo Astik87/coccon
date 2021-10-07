@@ -161,6 +161,7 @@ input[type="search"]::-webkit-search-results-decoration {
 #wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 100%;
 
   // font-family: '',sans-serif;

@@ -48,6 +48,14 @@
       text-align: center;
     }
 
+    & a {
+      transition: .3s all;
+
+      &:hover {
+        color: #799bc9;
+      }
+    }
+
     & .item {
       @media screen and (max-width: 568px){
         width: 100%;
@@ -146,6 +154,7 @@
 
     & .title {
       margin-bottom: 10px;
+      font-size: 26px;
     }
 
     & .text {

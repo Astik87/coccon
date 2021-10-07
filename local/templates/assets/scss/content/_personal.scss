@@ -61,6 +61,14 @@
 	align-items: center;
 	padding-left: 15px;
 	margin-bottom: 10px;
+	position: relative;
+
+	& .logout {
+		position: absolute;
+		right: 25px;
+		top: 0;
+		font-size: 16px;
+	}
 
 	& .ava {
 		width: 80px;
@@ -138,6 +146,12 @@
 
 		@media screen and (max-width: 1478px) {
 			margin: 25px 50px;
+		}
+
+		&.saved {
+			background-color: #fff;
+			color: #799bc9;
+			border: 1px solid #799BC9;
 		}
 	}
 }

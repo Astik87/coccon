@@ -28,7 +28,6 @@ if ($arParams['SHOW_PRIVATE_PAGE'] !== 'Y' && $arParams['USE_PRIVATE_PAGE_TO_AUT
 // if ($arParams['SET_TITLE'] == 'Y') {
 // 	$APPLICATION->SetTitle(Loc::getMessage("SPS_TITLE_PRIVATE"));
 // }
-
 if (!$USER->IsAuthorized() || $arResult['SHOW_LOGIN_FORM'] === 'Y') {
 	if ($arParams['USE_PRIVATE_PAGE_TO_AUTH'] !== 'Y') {
 		ob_start();
@@ -115,9 +114,9 @@ $rsUser = CUser::GetByID($USER->GetID());
 $rsUser = $rsUser->Fetch();
 
 ?>
-
 <div class="private-wrapper">
 	<div class="pers-data">
+		<a href="/personal?logout=Y" class="logout hover">Выход</a>
 		<div class="ava" id="ava" style="background-image: url(<?= $USER->GetParam('PERSONAL_PHOTO') ? CFile::GetPath($USER->GetParam('PERSONAL_PHOTO')) : TEMPLATE_PATH . '/assets/img/ava.png' ?>);">
 			<div class="hover" style="background-image: url(<?= TEMPLATE_PATH ?>/assets/img/ava_hover.png);">
 			</div>
@@ -127,37 +126,38 @@ $rsUser = $rsUser->Fetch();
 			<?= $USER->GetFullName() ?>
 		</div>
 	</div>
-
 	<form class="data-form" id="private-form" name="form1" action="/personal/private?login=yes" method="post" enctype="multipart/form-data" role="form">
 		<input type="hidden" name="sessid" id="sessid" value="<?= bitrix_sessid() ?>">
 		<input type="hidden" name="lang" value="s1">
 		<input type="hidden" name="ID" value="<?= $USER->GetID() ?>">
 		<input type="hidden" name="LOGIN" value="<?= $USER->GetLogin() ?>">
 		<div class="item">
-			<label for="">E-mail</label>
-			<input name="EMAIL" type="email" value="<?= $USER->GetEmail() ?>">
-		</div>
-		<div class="item">
 			<label for="">ФИО</label>
 			<input name="name" type="text" value="<?= $USER->GetFullName() . " " . $rsUser['SECOND_NAME'] ?>">
 		</div>
-
+		
 		<div class="item">
 			<label for="">Телефон</label>
 			<input name="PERSONAL_PHONE" type="tel" value="<?= $rsUser['PERSONAL_PHONE'] ?>">
 		</div>
+		
+		<div class="item">
+			<label for="">E-mail</label>
+			<input name="EMAIL" type="email" value="<?= $USER->GetEmail() ?>">
+		</div>
 
 		<div class="item emp"></div>
+
+		<div class="item">
+			<label for="">Дата рождения</label>
+			<input type="date" name="date" value="<?= implode('-', array_reverse(explode('.', $rsUser['PERSONAL_BIRTHDAY']))) ?>">
+		</div>
 
 		<div class="item">
 			<label for="">Пароль</label>
 			<input name="NEW_PASSWORD" type="password">
 		</div>
 
-		<div class="item">
-			<label for="">Дата рождения</label>
-			<input type="date" name="date" value="<?= implode('-', array_reverse(explode('.', $rsUser['PERSONAL_BIRTHDAY']))) ?>">
-		</div>
 
 		<div class="item">
 			<label for="">Повторите пароль</label>

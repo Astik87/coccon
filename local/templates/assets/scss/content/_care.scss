@@ -5,14 +5,15 @@
 
     @media screen and (max-width: 1100px) {
       flex-direction: column-reverse;
-      margin-top: 60px;
+      margin-top: 30px;
     }
   }
 
   & .title {
     font-size: 24px;
     color: #799bc9;
-    margin-bottom: 2px;
+    display: block;
+    margin-bottom: 20px;
   }
 
   & .text {
@@ -20,6 +21,10 @@
     @media screen and (max-width: 1100px) {
       margin-top: 30px;
       text-align: center;
+    }
+
+    & li {
+      margin-bottom: 15px;
     }
   }
 

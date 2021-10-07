@@ -1,5 +1,6 @@
 body {
 	color: #292929;
+	height: calc(100vh - 81px);
 }
 
 .scrollbar {
@@ -99,7 +100,7 @@ body {
 	font-size: 2.6em;
 	@include Forum(400);
 	display: inline-block;
-	padding: 1.09em 0;
+	padding: 1.25em 0;
 
 	@media screen and (max-width: 991px) {
 		padding: 0;
@@ -224,6 +225,7 @@ body.modal-open {
 			&.error {
 				& label {
 					color: #e94158;
+					font-size: 14px;
 				}
 
 				& input {
@@ -262,7 +264,7 @@ body.modal-open {
 			display: block;
 			padding: 12px 0;
 			text-align: center;
-			background-color: inherit;
+			background-color: #fff;
 			color: #799bc9;
 			border: 1px solid rgba(121, 155, 201, .5)
 		}

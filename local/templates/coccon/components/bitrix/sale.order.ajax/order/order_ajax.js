@@ -3,7 +3,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 (function () {
 	'use strict';
 
-	/**
+	/** 
 	 * Show empty default property value to multiple properties without default values
 	 */
 	if (BX.Sale && BX.Sale.Input && BX.Sale.Input.Utils) {
@@ -237,7 +237,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					home = $('#home'),
 					flat = $('#flat');
 
-				let address = city.val() + " " + street.val() + " " + home.val() + " " + flat.val();
+				let address = city.val() + ", ул. " + street.val() + " " + home.val();
+				if (flat.val() != '')
+					address += ", кв. " + flat.val();
+
 				$('#soa-property-7').val(address);
 			});
 
@@ -8807,4 +8810,4 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		}
 
 	};
-})();
+})(); 
