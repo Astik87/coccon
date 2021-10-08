@@ -42,7 +42,6 @@ while ($obj = $res->GetNextElement()) {
 }
 
 ?>
-
 <div class="bx-filter <?= $templateData["TEMPLATE_CLASS"] ?> <? if ($arParams["FILTER_VIEW_MODE"] == "HORIZONTAL") echo "bx-filter-horizontal" ?>">
 	<div class="bx-filter-section container-fluid">
 		<? foreach ($arResult["HIDDEN"] as $arItem) : ?>
@@ -211,6 +210,9 @@ while ($obj = $res->GetNextElement()) {
 
 					<div class="bx-filter-block" data-role="bx_filter_block">
 						<div class="row bx-filter-parameters-box-container">
+						<div class="bx-filter-select-container">
+	<div class="hide-block" data-role="currentOption"></div>
+</div>
 							<?
 							$arCur = current($arItem["VALUES"]);
 							switch ($arItem["DISPLAY_TYPE"]) {

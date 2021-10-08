@@ -532,6 +532,15 @@ foreach ($arResult['ORDERS'] as $key => $value) {
 	$orders[$key]['USER_PHONE'] = $saleOrderCollection->getPhone()->getValue();
 	$orders[$key]['USER_NAME'] = $saleOrderCollection->getPayerName()->getValue();
 	$orders[$key]['USER_EMAIL'] = $saleOrderCollection->getUserEmail()->getValue();
+	
+	$orders[$key]['scores'] = 0;
+
+	foreach($saleOrder->getPaymentCollection() as $payment) {
+		if ($payment->getPaymentSystemId() == 9 && $payment->isPaid()) {
+			$orders[$key]['scores'] += $payment->getSum();
+		}
+	}
+
 
 
 	if ($value['ORDER']['DELIVERY_ID'] == 3) { // Если способ доставуи самовывоз
@@ -718,7 +727,7 @@ foreach ($arResult['ORDERS'] as $key => $value) {
 
 						<div class="value">
 							<p>Заказ: <?= $order['PRICE'] ?></p>
-							<p>Списано бонусов: 150</p>
+							<p>Списано бонусов: <?= $order['scores'] ?></p>
 							<p>Доставка: <?= $order['DELIVERY_PRICE'] != '' ? $order['DELIVERY_PRICE'] : '0 ₽' ?></p>
 						</div>
 					</div>

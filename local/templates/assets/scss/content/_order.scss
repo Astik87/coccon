@@ -12,6 +12,7 @@
 
 .bx-soa-cart-total {
 	padding-bottom: 25px;
+	position: relative;
 }
 
 #bx-soa-total-mobile {
@@ -272,7 +273,6 @@
 }
 
 #bx-soa-total {
-	height: 540px;
 
 	@media screen and (max-width: 991px) {
 		display: none;
@@ -300,7 +300,7 @@
 
 	&:last-child {
 		position: absolute;
-		bottom: 5px;
+		bottom: -115px;
 		border-bottom: 0;
 
 		& a {
@@ -312,10 +312,6 @@
 			top: 0;
 			left: 0;
 			bottom: 0;
-		}
-
-		.bx-soa-cart-total-fixed & {
-			bottom: -115px;
 		}
 	}
 

@@ -27,9 +27,9 @@ $APPLICATION->AddChainItem('Мои заказы', '/personal/orders');
 			Мои заказы
 		</a>
 
-		<span class="item">
+		<a href="/personal/account" class="item">
 			Бонусы
-		</span>
+		</a>
 	</div>
 
 	<div class="tabs__content" id="private">

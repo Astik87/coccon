@@ -140,9 +140,9 @@ if (empty($availablePages)) {
 			Мои заказы
 		</a>
 
-		<span class="item">
+		<a href="/personal/account" class="item">
 			Бонусы
-		</span>
+		</a>
 	</div>
 
 	<div class="tabs__content" id="private">

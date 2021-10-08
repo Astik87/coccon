@@ -8402,15 +8402,32 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				attrs: {
 					className: 'title',
 				},
-				html: '<span class="subtitle">Количество бонусов</span>' +
-					'<span class="use">Использовать</span>'
+				html: '<span class="subtitle">Количество бонусов</span>'
 			});
+
+			let usePayCurrentAcc = $('<span class="use" id="USE_PAY_CURRENT_ACCOUNT">Использовать</span>');
+
+			if($('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox:checked').length)
+				usePayCurrentAcc.html('Отмена');
+
+			usePayCurrentAcc.on('click', function() {
+				$('#bx-soa-paysystem .bx-soa-section-title-container').click();
+				$('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox').parent().click();
+				
+				if($('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox:checked').length) {
+					$(this).html('Отмена');
+				} else {
+					$(this).html('Использовать');
+				}
+			});
+
+			bonusTitle.appendChild(usePayCurrentAcc[0]);
 
 			let bonusCount = BX.create('span', {
 				attrs: {
 					className: 'count',
 				},
-				text: '150'
+				text: this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] || '0'
 			});
 
 			bonusLeft.appendChild(bonusSvg);
@@ -8479,7 +8496,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 			if (this.options.showPayedFromInnerBudget) {
 				this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_IT'), total.ORDER_TOTAL_PRICE_FORMATED));
-				this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_PAYED'), total.PAYED_FROM_ACCOUNT_FORMATED));
+				// this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_PAYED'), total.PAYED_FROM_ACCOUNT_FORMATED));
 				this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_LEFT_TO_PAY'), total.ORDER_TOTAL_LEFT_TO_PAY_FORMATED, {
 					total: true
 				}));

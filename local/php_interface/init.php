@@ -1,5 +1,7 @@
 <?php
 
+use Bitrix\Main\Loader;
+
 Define("TEMPLATE_PATH", "/local/templates");
 
 function debuger($var, $all = false, $die = false)
@@ -70,4 +72,42 @@ class MailEventHandler
         return CFormResult::GetFileByHash($query["rid"], $query["hash"]);
     }
 
+}
+
+AddEventHandler("sale", "OnSaleStatusOrder", "OrderComplete");
+function OrderComplete($orderID, &$arFields)
+{
+    Loader::includeModule("sale");
+    if ($arFields == 'F') { 
+        $order = \Bitrix\Sale\Order::load($orderID);
+
+        $scores = 0;
+
+        foreach($order->getBasket() as $item) {
+            $id = $item->getField('PRODUCT_ID');
+            $count = $item->getField('QUANTITY');
+
+            $rsOffers = CIBlockElement::GetList(
+                array(), // Свойства, по которым идет сортировка
+                array('IBLOCK_ID' => 3, 'ID' => $id, "ACTIVE" => "Y"), // Фильтрация
+                false,
+                false,
+                array("ID", "IBLOCK_ID", "PROPERTY_SCORES") // Свойства, которые нужно получить.
+            );
+
+            $offer = $rsOffers->GetNext();
+            $scores += $offer['PROPERTY_SCORES_VALUE'] * $count;
+        }
+
+        $orderUser = $order->getUserId();
+
+      	CSaleUserAccount::UpdateAccount(
+                    $orderUser,
+                    $scores,
+                    "RUB",
+                    false,
+                    $orderID,
+                    false
+                );
+    }
 }

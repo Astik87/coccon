@@ -1,0 +1,6 @@
+<?
+$sSectionName = "Баллы";
+$arDirProperties = array(
+
+);
+?>

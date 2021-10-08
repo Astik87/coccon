@@ -20,6 +20,17 @@ $result['BASKET_ITEM_RENDER_DATA'] = array();
 
 foreach ($this->basketItems as $row)
 {
+
+	$rsOffers = CIBlockElement::GetList(
+		array(), // Свойства, по которым идет сортировка
+		array('IBLOCK_ID' => 3, 'ID' => $row['PRODUCT_ID'], "ACTIVE" => "Y"), // Фильтрация
+		false,
+		false,
+		array("ID", "IBLOCK_ID", "PROPERTY_SCORES") // Свойства, которые нужно получить.
+	  );
+
+	$scores = $rsOffers->GetNext()['PROPERTY_SCORES_VALUE'] * $row['QUANTITY'];
+
 	$rowData = array(
 		'ID' => $row['ID'],
 		'PRODUCT_ID' => $row['PRODUCT_ID'],
@@ -57,6 +68,7 @@ foreach ($this->basketItems as $row)
 		'SKU_BLOCK_LIST' => array(),
 		'COLUMN_LIST' => array(),
 		'SHOW_LABEL' => false,
+		'SCORES' => $scores,
 		'LABEL_VALUES' => array(),
 		'BRAND' => isset($row[$this->arParams['BRAND_PROPERTY'].'_VALUE'])
 			? $row[$this->arParams['BRAND_PROPERTY'].'_VALUE']

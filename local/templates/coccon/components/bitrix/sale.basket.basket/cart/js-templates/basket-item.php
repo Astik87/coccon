@@ -38,6 +38,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
 }
 ?>
 
+
 <script id="basket-item-template" type="text/html">
 	<tr class="basket-items-list-item-container{{#SHOW_RESTORE}} basket-items-list-item-container-expend{{/SHOW_RESTORE}}" id="basket-item-{{ID}}" data-entity="basket-item" data-id="{{ID}}">
 		{{#SHOW_RESTORE}}
@@ -338,7 +339,7 @@ if (!empty($arParams['LABEL_PROP_POSITION'])) {
 				<span class="scores-text">
 					<span>Начислим</span>
 					<span class="scores-val">
-						<span>15</span>
+						<span>{{SCORES}}</span>
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#scores"> </use>
 						</svg>

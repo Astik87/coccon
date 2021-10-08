@@ -1,0 +1,65 @@
+#account {
+
+    & .account {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+
+        & svg {
+            fill: #799bc9;
+            max-width: 35px;
+            max-height: 35px;
+            margin-right: 10px;
+        }
+    }
+
+    & .table {
+        width: 100%;
+        font-size: 18px;
+        border-collapse: collapse;
+        border-bottom: 0;
+        border-radius: 5px;
+        
+        & .head {
+            color: #fff;
+            background-color: #799bc9;
+            border: 0;
+        }
+        
+        & tr:first-child td:first-child { border-top-left-radius: 10px; }
+        & tr:first-child td:last-child { border-top-right-radius: 10px; }
+        & tr:last-child td:first-child { border-bottom-left-radius: 10px; }
+        & tr:last-child td:last-child { border-bottom-right-radius: 10px; }
+
+        & tr {
+            border: 1px solid #DCDCDC;
+            border-top: 0;
+        }
+
+        & td {
+            padding: 20px;
+            min-width: 250px;
+
+            @media screen and (max-width: 1200px) {
+                min-width: 50px;
+            }
+
+            @media screen and (max-width: 768px) {
+                &.order-id {
+                    display: none;
+                }
+            }
+            
+            @media screen and (max-width: 420px) {
+                &.status {
+                    display: none;
+                }
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+        }
+    }
+}
