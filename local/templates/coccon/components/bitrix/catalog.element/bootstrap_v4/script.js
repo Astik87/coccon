@@ -2119,7 +2119,7 @@
 				};
 
 			var i, offerGroupNode;
-
+				
 			for (i = 0; i < this.offers.length; i++) {
 				boolOneSearch = true;
 
@@ -2233,6 +2233,16 @@
 				BX.onCustomEvent('onCatalogElementChangeOffer', [eventData]);
 				eventData = null;
 			}
+
+			$(window.productsCountKeys).each((i, e) => {
+				let count = window.productsCount[e][this.offers[this.offerNum].ID];
+				if (count > 0) {
+					$(`#store_${e} .availability`).html('в наличии ' + count + 'шт.');
+				} else {
+					$(`#store_${e} .availability`).html('предзаказ');
+				}
+			})
+
 		},
 		changeSkuDescription: function (index) {
 			var currentDetailText = '';
