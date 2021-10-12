@@ -646,3 +646,70 @@
 #bx-soa-order {
 	padding-bottom: 80px;
 }
+
+.delivery-data.stores {
+	padding: 0;
+	margin-top: 40px;
+
+	& .table {
+		max-width: none;
+
+		& .head {
+			font-size: 18px;
+
+			& td {
+				padding: 15px 23px;
+			}
+		}
+
+		& .checkbox {
+			width: 30px;
+			height: 30px;
+			border: 1px solid #DFDFDF;
+			color: #fff;
+			cursor: pointer;
+
+			&.active {
+				background-color: #799bc9;
+				position: relative;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					display: block;
+					height: 2px;
+					background-color: #fff;
+					bottom: 9px;
+				}
+
+				&::before {
+					width: 10px;
+					left: 3px;
+					transform: rotate(45deg);
+				}
+				
+				&::after {
+					width: 18px;
+					right: 2px;
+					bottom: 12px;
+					transform: rotate(-45deg);
+				}
+			}
+		}
+	}
+}
+
+.pre-order {
+	position: relative;
+	& td {
+		opacity: .5;
+	}
+
+	&::after {
+		content: "Предзаказ";
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+	}
+}

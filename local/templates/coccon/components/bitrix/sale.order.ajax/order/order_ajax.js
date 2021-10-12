@@ -168,6 +168,16 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				input.on('click', function () {
 					console.log(`#${$(this).data('id')}`);
 					$(`#${$(this).data('id')}`).parent().parent().click();
+					$('.delivery-data').css('display', 'none');
+					
+					let contentId = '';
+					if ($(this).data('id') == 'ID_DELIVERY_ID_2')
+						contentId = '#delivery1';
+					if ($(this).data('id') == 'ID_DELIVERY_ID_3')
+						contentId = '#delivery2';
+
+					$(`.delivery-data${contentId}`).css('display', 'block');
+
 				});
 				delivItem.prepend(input);
 				if ($(`#ID_DELIVERY_ID_${e.ID}:checked`).val() == e.ID) input.click();
@@ -263,6 +273,58 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					this.show(document.getElementById('bx-soa-paysystem'));
 				});
 			});
+
+			if ($('input[data-id="ID_DELIVERY_ID_3"]:checked').length) {
+				let storeInput = BX('BUYER_STORE');
+				let storeId = $(storeInput).val();
+				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+					fullRecalculation: 'Y',
+					store: storeId
+				 });
+			}
+
+			let storeInput = BX('BUYER_STORE');
+
+			for (let key in this.result.STORE_LIST) {
+				let storeId = key;
+				if (!storeId) 
+					continue;
+
+				let store = this.result.STORE_LIST[storeId];
+
+				let tr = $('<tr></tr>');
+				tr.append(`<td>${store.TITLE}<br>${store.ADDRESS}</td>`);
+				tr.append(`<td>${store.SCHEDULE}</td>`);
+				let span = $(`<span class="checkbox" data-id="${storeId}"></span>`);
+				if ($(storeInput).val() == storeId) {
+					span.addClass('active');
+				}
+				span.on('click', function() {
+					if ($(this).hasClass('active'))
+						return;
+					
+					$('#delivery2 .table .checkbox').removeClass('active');
+					$(this).addClass('active');
+					
+					let id = $(this).data('id');
+
+					let storeInput = BX('BUYER_STORE');
+
+					$(storeInput).val(id);
+
+					if ($('input[data-id="ID_DELIVERY_ID_3"]:checked').length) {
+						let storeInput = BX('BUYER_STORE');
+						let storeId = $(storeInput).val();
+						BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+							fullRecalculation: 'Y',
+							store: storeId
+						 });
+					}
+
+				});
+				tr.append($(`<td></td>`).append(span));
+				$('#delivery2 .table').append(tr);
+			}
 
 		},
 
@@ -438,6 +500,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				this.editOrder();
 				this.mapsReady && this.initMaps();
 				BX.saleOrderAjax && BX.saleOrderAjax.initDeferredControl();
+			}
+
+			if ($('input[data-id="ID_DELIVERY_ID_3"]:checked').length) {
+				let storeInput = BX('BUYER_STORE');
+				let storeId = $(storeInput).val();
+				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+					fullRecalculation: 'Y',
+					store: storeId
+				 });
 			}
 
 			return true;
@@ -6629,7 +6700,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					selectedStore = buyerStoreInput.value = currentStore.ID;
 					found = true;
 				}
-
+				console.log('asdasd');
 				storeNode = this.createPickUpItem(currentStore, {
 					selected: currentStore.ID == selectedStore
 				});
@@ -6910,6 +6981,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				storeInput.setAttribute('value', storeItemId);
 				this.maps && this.maps.selectBalloon(storeItemId);
+
+				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+					fullRecalculation: 'Y',
+					store: storeItemId
+			 	});
 			}
 		},
 

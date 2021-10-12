@@ -447,6 +447,17 @@ if ($request->get('ORDER_ID') <> '') {
 									</div>
 								</div>
 							</div>
+
+							<div class="delivery-data stores" id="delivery2">
+								<table class="table">
+									<tr class="head">
+										<td>Адрес</td>
+										<td>Режим работы</td>
+										<td></td>
+									</tr>
+
+								</table>
+							</div>
 						</div>
 					</div>
 
@@ -547,7 +558,7 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="bx-soa-section-content"></div>
 					</div>
 					<!--	PICKUP BLOCK	-->
-					<div id="bx-soa-pickup" data-visited="true" class="bx-soa-section" style="display:none">
+					<div id="bx-soa-pickup" data-visited="true" class="bx-soa-section hide-block" style="display:none">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span>
