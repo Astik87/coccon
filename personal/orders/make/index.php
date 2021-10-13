@@ -85,7 +85,7 @@ $arDiscountFields = [
 	); ?>
 
 	<? $APPLICATION->IncludeComponent(
-	"bitrix:sale.order.ajax", 
+	"asd:sale.order.ajax", 
 	"order", 
 	array(
 		"ACTION_VARIABLE" => "soa-action",
