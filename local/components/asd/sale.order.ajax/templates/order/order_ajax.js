@@ -8934,7 +8934,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		initBasketItemChageQuantity: function () {
 			var ctx = this;
 			BX.addCustomEvent('OnBasketChange', function () {
-				ctx.sendRequest('refreshOrderAjax', null);
+				ctx.sendRequest('refreshOrderAjax', {});
 			});
 		}
 
