@@ -8531,7 +8531,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				attrs: {
 					className: 'count',
 				},
-				text: this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] || '0'
+				text: this.result.CURRENT_BUDGET_FORMATED ? this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] : '0'
 			});
 
 			bonusLeft.appendChild(bonusSvg);
@@ -8539,14 +8539,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			bonus.appendChild(bonusLeft);
 			bonus.appendChild(bonusCount);
 
+			console.log(this.totalInfoBlockNode);
+
 			this.totalInfoBlockNode.appendChild(bonus);
-
-			// End bonus
-
-
-			// if (this.options.showOrderWeight) {
-			// this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_WEIGHT_SUM'), total.ORDER_WEIGHT_FORMATED));
-			// }
 
 			if (this.options.showTaxList) {
 				for (i = 0; i < total.TAX_LIST.length; i++) {
