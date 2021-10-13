@@ -66,6 +66,53 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		/**
 		 * Initialization of sale.order.ajax component js
 		 */
+		renderDeliveries: function (parameters) {
+			$('.deliveryItem').remove();
+			let deliveries = this.result.DELIVERY;
+
+			$(deliveries).each((i, e) => {
+				let delivItem = $(`<label></label>`);
+				delivItem.addClass('deliveryItem');
+				delivItem.html(' ' + e.NAME);
+				let input = $(`<input type="radio" name="delivery" data-id="ID_DELIVERY_ID_${e.ID}">`);
+				input.on('click', function () {
+					$(`#${$(this).data('id')}`).parent().parent().click();
+					$('.delivery-data').css('display', 'none');
+					
+					let contentId = false;
+					if ($(this).data('id') != 'ID_DELIVERY_ID_3') {
+						contentId = '#delivery1';
+
+						$(contentId).attr('class', 'delivery-data');
+
+						if ($(this).data('id') == 'ID_DELIVERY_ID_14') {
+							$(contentId).addClass('sdek-pickup');
+							$(contentId).addClass('del1');
+						} else if ($(this).data('id') == 'ID_DELIVERY_ID_15') {
+							$(contentId).addClass('sdek-postamat');
+							$(contentId).addClass('del1');
+						} else if ($(this).data('id') != 'ID_DELIVERY_ID_2') {
+							$(contentId).addClass('del1');
+						}
+					} else {
+						contentId = '#delivery2';
+					}
+
+					if (contentId) 
+						$(`.delivery-data${contentId}`).css('display', 'block');
+					
+					$('#city').change();
+
+				});
+				delivItem.prepend(input);
+				if ($(`#ID_DELIVERY_ID_${e.ID}:checked`).val() == e.ID) input.click();
+				$('.delivery .content').prepend(delivItem);
+				$('.delivery .content').on('click', () => {
+					this.show(document.getElementById('bx-soa-delivery'));
+				});
+			});
+		},
+
 		init: function (parameters) {
 			this.initializePrimaryFields();
 
@@ -159,33 +206,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			// Способы доставки
 			// this.getAllFormData() все введенные данные
 
-			let deliveries = this.result.DELIVERY;
-
-			$(deliveries).each((i, e) => {
-				let delivItem = $(`<label></label>`);
-				delivItem.html(' ' + e.NAME);
-				let input = $(`<input type="radio" name="delivery" data-id="ID_DELIVERY_ID_${e.ID}">`);
-				input.on('click', function () {
-					console.log(`#${$(this).data('id')}`);
-					$(`#${$(this).data('id')}`).parent().parent().click();
-					$('.delivery-data').css('display', 'none');
-					
-					let contentId = '';
-					if ($(this).data('id') == 'ID_DELIVERY_ID_2')
-						contentId = '#delivery1';
-					if ($(this).data('id') == 'ID_DELIVERY_ID_3')
-						contentId = '#delivery2';
-
-					$(`.delivery-data${contentId}`).css('display', 'block');
-
-				});
-				delivItem.prepend(input);
-				if ($(`#ID_DELIVERY_ID_${e.ID}:checked`).val() == e.ID) input.click();
-				$('.delivery .content').prepend(delivItem);
-				$('.delivery .content').on('click', () => {
-					this.show(document.getElementById('bx-soa-delivery'));
-				});
-			});
+			this.renderDeliveries();
 
 			$("#forename, #last-name").on('change', () => {
 				let forename = $('#forename').val();
@@ -198,7 +219,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				if (forename == '' || last_name == '') {
 					$('#forename, #last-name').parent().addClass('error');
-					console.log('asdasda');
 				} else {
 					$('#forename, #last-name').parent().removeClass('error');
 				}
@@ -211,7 +231,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				if (email == '') {
 					$('#email').parent().addClass('error');
-					console.log('asdasda');
 				} else {
 					$('#email').parent().removeClass('error');
 				}
@@ -246,6 +265,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					street = $('#street'),
 					home = $('#home'),
 					flat = $('#flat');
+
+				if (!city.val() || $('input[name="delivery"]:checked').data('id') != 'ID_DELIVERY_ID_2') {
+					city = $('#delivery1 .bx-ui-sls-fake');
+				}
 
 				let address = city.val() + ", ул. " + street.val() + " " + home.val();
 				if (flat.val() != '')
@@ -510,6 +533,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					store: storeId
 				 });
 			}
+
+			// $('.bx-selected').removeClass('bx-selected');
 
 			return true;
 		},
@@ -4795,7 +4820,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				labelHtml = '<label class="bx-soa-custom-label" for="soa-property-' + parseInt(locationId) + '">' +
 					(currentProperty.REQUIRED == 'Y' ? '<span class="bx-authform-starrequired">*</span> ' : '') +
-					BX.util.htmlspecialchars(currentProperty.NAME) +
+					'Город' +
 					(currentProperty.DESCRIPTION.length ? ' <small>(' + BX.util.htmlspecialchars(currentProperty.DESCRIPTION) + ')</small>' : '') +
 					'</label>';
 
@@ -4813,6 +4838,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					html: labelHtml + currentLocation.HTML
 				});
 				node.appendChild(insertedLoc);
+
+				$('#delivery1 .bx-soa-location-input-container').remove();
+				$('#delivery1 .form .item:first-child').prepend(insertedLoc);
+
 				node.appendChild(BX.create('INPUT', {
 					props: {
 						type: 'hidden',
@@ -6700,7 +6729,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					selectedStore = buyerStoreInput.value = currentStore.ID;
 					found = true;
 				}
-				console.log('asdasd');
 				storeNode = this.createPickUpItem(currentStore, {
 					selected: currentStore.ID == selectedStore
 				});

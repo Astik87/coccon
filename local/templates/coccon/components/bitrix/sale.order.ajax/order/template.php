@@ -426,6 +426,17 @@ if ($request->get('ORDER_ID') <> '') {
 										</select>
 									</div>
 
+
+									<div class="item sdek-pickup-btn">
+										<label for=""></label>
+										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('14','PVZ'); return false;">Выбрать пункт самовывоза</div>
+									</div>
+									
+									<div class="item sdek-postamat-btn">
+										<label for=""></label>
+										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('15','PVZ'); return false;">Выбрать постамат</div>
+									</div>
+
 									<div class="item">
 										<label for="street">Улица *</label>
 										<input type="text" id="street" data-id="soa-property-7">
