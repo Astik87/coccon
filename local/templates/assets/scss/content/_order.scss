@@ -685,11 +685,9 @@
 }
 
 #delivery1 {
-	& .sdek-pickup-btn {
-		display: none;
-	}
-	
-	& .sdek-postamat-btn {
+	& .sdek-pickup-btn,
+	& .sdek-postamat-btn,
+	& .bxb-pickup-btn {
 		display: none;
 	}
 
@@ -727,6 +725,27 @@
 				justify-content: space-around;
 				
 				& .SDEK_selectPVZ {
+					padding: 16px;
+    			margin-bottom: 7px;
+    			font-size: 18px;
+				}
+			}
+		}
+	}
+	
+	&.bxb {
+		& .item {
+			display: none;
+
+			&:first-child {
+				display: block;
+			}
+			
+			&.bxb-pickup-btn {
+				display: flex;
+				justify-content: space-around;
+				
+				& .btn {
 					padding: 16px;
     			margin-bottom: 7px;
     			font-size: 18px;

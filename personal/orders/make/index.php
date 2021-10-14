@@ -85,7 +85,7 @@ $arDiscountFields = [
 	); ?>
 
 	<? $APPLICATION->IncludeComponent(
-	"asd:sale.order.ajax", 
+	"bitrix:sale.order.ajax", 
 	"order", 
 	array(
 		"ACTION_VARIABLE" => "soa-action",
@@ -137,7 +137,7 @@ $arDiscountFields = [
 		"SHOW_MAP_IN_PROPS" => "N",
 		"SHOW_NEAREST_PICKUP" => "N",
 		"SHOW_NOT_CALCULATED_DELIVERIES" => "L",
-		"SHOW_ORDER_BUTTON" => "final_step",
+		"SHOW_ORDER_BUTTON" => "always",
 		"SHOW_PAY_SYSTEM_INFO_NAME" => "Y",
 		"SHOW_PAY_SYSTEM_LIST_NAMES" => "Y",
 		"SHOW_PICKUP_MAP" => "Y",

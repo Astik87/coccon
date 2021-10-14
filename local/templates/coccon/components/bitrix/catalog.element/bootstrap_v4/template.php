@@ -656,7 +656,7 @@ if (!$USER->IsAuthorized()) {
 					<?php
 					if (Loc::getMessage('CATALOG_QUANTITY')) {
 					?>
-						<div class="count-title">Колличество:</div>
+						<div class="count-title">Количество:</div>
 					<?php
 					}
 					?>

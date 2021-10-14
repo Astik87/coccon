@@ -69,6 +69,10 @@
 			font-size: 1.9em;
 			font-weight: 350;
 			margin-bottom: 2.5em;
+
+			@media screen and (max-width: 780px) {
+				display: block;
+			}
 		}
 
 		& .link {

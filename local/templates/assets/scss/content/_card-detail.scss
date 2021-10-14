@@ -145,7 +145,7 @@
 	}
 
 	@media screen and (max-width: 630px) {
-		width: 300px;
+		width: 290px;
 	}
 
 	& .slide {
@@ -1005,9 +1005,10 @@ div.popup-window-overlay {
 	padding: 60px;
 	max-width: 95%;
 	max-height: 95%;
+	font-size: 18px;
 
-	@media screen and (max-width: 576px) {
-		padding: 20px;
+	@media screen and (max-width: 768px) {
+		padding: 40px 20px;
 	}
 
 	& .title {

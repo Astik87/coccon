@@ -436,6 +436,11 @@ if ($request->get('ORDER_ID') <> '') {
 										<label for=""></label>
 										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('15','PVZ'); return false;">Выбрать постамат</div>
 									</div>
+									
+									<div class="item bxb-pickup-btn">
+										<label for=""></label>
+										<div class="bxb-btn btn">Выбрать пункт самовывоза</div>
+									</div>
 
 									<div class="item">
 										<label for="street">Улица *</label>
@@ -478,6 +483,10 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="content">
 
 						</div>
+					</div>
+
+					<div id="errors">
+						
 					</div>
 				</div>
 

@@ -91,6 +91,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						} else if ($(this).data('id') == 'ID_DELIVERY_ID_15') {
 							$(contentId).addClass('sdek-postamat');
 							$(contentId).addClass('del1');
+						} else if ($(this).data('id') == 'ID_DELIVERY_ID_17' || $(this).data('id') == 'ID_DELIVERY_ID_19') {
+							$(contentId).addClass('bxb');
+							$(contentId).addClass('del1');
 						} else if ($(this).data('id') != 'ID_DELIVERY_ID_2') {
 							$(contentId).addClass('del1');
 						}
@@ -110,6 +113,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				$('.delivery .content').on('click', () => {
 					this.show(document.getElementById('bx-soa-delivery'));
 				});
+			});
+
+			$('.bxb-pickup-btn').on('click', () => {
+				$('.bx-soa-pp-desc-container .bxblink').click();
 			});
 		},
 
@@ -851,6 +858,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				if (!!border)
 					BX.addClass(node, 'bx-step-error');
+
+				$('#errors').html('');
+				$('#errors').append(errorContainer);
+
 			}
 		},
 
@@ -1883,6 +1894,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		 * Order saving action with validation. Doesn't send request while have errors
 		 */
 		clickOrderSaveAction: function (event) {
+			if (this.result.ERROR.length)
+				return false;
 			if (this.isValidForm()) {
 				this.allowOrderSave();
 
@@ -8531,7 +8544,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				attrs: {
 					className: 'count',
 				},
-				text: this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] || '0'
+				text: this.result.CURRENT_BUDGET_FORMATED ? this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] : '0'
 			});
 
 			bonusLeft.appendChild(bonusSvg);
@@ -8539,14 +8552,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			bonus.appendChild(bonusLeft);
 			bonus.appendChild(bonusCount);
 
-			this.totalInfoBlockNode.appendChild(bonus);
-
-			// End bonus
-
-
-			// if (this.options.showOrderWeight) {
-			// this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_WEIGHT_SUM'), total.ORDER_WEIGHT_FORMATED));
-			// }
+			this.totalInfoBlockNode.appendChild(bonus)
 
 			if (this.options.showTaxList) {
 				for (i = 0; i < total.TAX_LIST.length; i++) {

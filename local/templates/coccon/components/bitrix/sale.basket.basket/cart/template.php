@@ -185,7 +185,6 @@ if (empty($arResult['ERROR_MESSAGE'])) {
 		<?
 		}
 		?>
-		<?= 'asdasd' ?>
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="alert alert-warning alert-dismissable" id="basket-warning" style="display: none;">
