@@ -21,42 +21,7 @@ if($arResult["OK_MESSAGE"] <> '')
 	?><div class="mf-ok-text"><?=$arResult["OK_MESSAGE"]?></div><?
 }
 ?>
-
-<form action="<?=POST_FORM_ACTION_URI?>" method="POST" enctype="multipart/form-data">
-<?=bitrix_sessid_post()?>
-	<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
-
-            <div class="contacts">
-              <label class="name">
-                <span>ФИО *</span>
-                <input type="text" name="user_name" placeholder="Иванова Светлана Сергеевна ">
-              </label>
-              
-              <label class="phone">
-                <span>Номер телефона *</span>
-                <input type="tel" name="user_phone" placeholder="+_ ___ ___-__-__ ">
-              </label>
-            </div>
-            <div class="message">
-              <label>
-                <span>Сообщение *</span>
-                <textarea name="MESSAGE"></textarea>
-              </label>
-            </div>
-
-            <div class="file">
-              <svg>
-                <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#file"> </use>
-              </svg>
-              <span>Прикрепите Ваше резюме</span>
-            </div>
-			
-			<input type="file" name="profile" class="hide-block profile">
-			<input type="hidden" name="vacancy" value="<?= $arParams['VACANCY'] ?>">
-			<input type="hidden" name="PARAMS_HASH" value="<?=$arResult["PARAMS_HASH"]?>">
-			<input class="submit" type="submit" name="submit" value="Отправить резюме">
-</form>
-
+</div>
 <?/*
 <form action="<?=POST_FORM_ACTION_URI?>" method="POST">
 <?=bitrix_sessid_post()?>

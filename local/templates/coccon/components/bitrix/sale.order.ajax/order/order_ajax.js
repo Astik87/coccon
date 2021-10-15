@@ -8601,7 +8601,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				// this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText + ':', total.DISCOUNT_PRICE_FORMATED, {
 				// 	highlighted: true
-				// }));
+				// })); 
 			}
 
 			if (this.options.showPayedFromInnerBudget) {

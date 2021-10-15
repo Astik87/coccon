@@ -20,42 +20,95 @@ if($arResult["OK_MESSAGE"] <> '')
 {
 	?><div class="mf-ok-text"><?=$arResult["OK_MESSAGE"]?></div><?
 }
+
 ?>
 
-<form action="<?=POST_FORM_ACTION_URI?>" method="POST" enctype="multipart/form-data">
+<form action="<?=POST_FORM_ACTION_URI?>" method="POST" enctype="multipart/form-data" id="shopper-form">
 <?=bitrix_sessid_post()?>
-	<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
-
-            <div class="contacts">
+            <div class="one-line">
               <label class="name">
                 <span>ФИО *</span>
-                <input type="text" name="user_name" placeholder="Иванова Светлана Сергеевна ">
+                <input type="text" name="user_name">
               </label>
               
-              <label class="phone">
-                <span>Номер телефона *</span>
-                <input type="tel" name="user_phone" placeholder="+_ ___ ___-__-__ ">
-              </label>
-            </div>
-            <div class="message">
-              <label>
-                <span>Сообщение *</span>
-                <textarea name="MESSAGE"></textarea>
+              <label class="activity">
+                <span>Род деятельности *</span>
+                <input type="text" name="activity">
               </label>
             </div>
 
-            <div class="file">
-              <svg>
-                <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#file"> </use>
-              </svg>
-              <span>Прикрепите Ваше резюме</span>
-            </div>
-			
-			<input type="file" name="profile" class="hide-block profile">
-			<input type="hidden" name="vacancy" value="<?= $arParams['VACANCY'] ?>">
+						<div class="one-line off">
+							<label class="channel">
+                <span>Канал продаж *</span>
+                <input type="text" name="channel">
+              </label>
+
+							<div class="offline-wrap">
+                <span>Наличие оффлайн магазина:</span>
+								<label class="offline">
+									Да
+									<span class="checkbox active" id="offline1"></span>
+									<input type="radio" checked name="offline" value="Да" class="hide-block">
+								</label>
+								<label class="offline">
+									Нет
+									<span class="checkbox" id="offline0"></span>
+									<input type="radio" name="offline" value="Нет" class="hide-block">
+								</label>
+							</div>
+						</div>
+
+						<div class="one-line">
+							<label class="website">
+                <span>Адрес сайта *</span>
+                <input type="text" name="website">
+              </label>
+
+							<label class="instagram">
+                <span> Адрес инстаграм аккаунта *</span>
+                <input type="text" name="instagram">
+              </label>
+						</div>
+
+						<div class="one-line">
+							<label class="website">
+                <span>Телефон *</span>
+                <input type="tel" name="user_phone" placeholder="+_ ___ ___-__-__">
+              </label>
+
+							<label class="email">
+                <span> E-mail *</span>
+                <input type="email" name="user_email">
+              </label>
+						</div>
 			<input type="hidden" name="PARAMS_HASH" value="<?=$arResult["PARAMS_HASH"]?>">
-			<input class="submit" type="submit" name="submit" value="Отправить резюме">
+			<input class="submit" type="submit" name="submit" value="Отправить">
 </form>
+
+<script>
+	$('.offline').on('click', function() {
+		$('.offline .active').removeClass('active');
+		$(this).find('.checkbox').addClass('active');
+	});
+
+	$('#shopper-form').ajaxForm({
+		url: '<?=POST_FORM_ACTION_URI?>',
+    type: 'post',
+    success: d => {
+			let res = JSON.parse(d);
+
+			$('.error').removeClass('error');
+
+			if (!res.result) {
+				for(let name in res.errors) {
+					$(`input[name="${name}"]`).parent().addClass('error');
+				}
+			} else {
+				$('.shopper-modal').css('display', 'flex');;
+			}
+		}
+	});
+</script>
 
 <?/*
 <form action="<?=POST_FORM_ACTION_URI?>" method="POST">
