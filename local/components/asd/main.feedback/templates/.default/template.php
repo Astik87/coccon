@@ -1,5 +1,5 @@
 <?
-if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /**
  * Bitrix vars
  *
@@ -11,53 +11,63 @@ if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
  */
 ?>
 <div class="mfeedback">
-<?if(!empty($arResult["ERROR_MESSAGE"]))
-{
-	foreach($arResult["ERROR_MESSAGE"] as $v)
-		ShowError($v);
-}
-if($arResult["OK_MESSAGE"] <> '')
-{
-	?><div class="mf-ok-text"><?=$arResult["OK_MESSAGE"]?></div><?
-}
-?>
+	<? if (!empty($arResult["ERROR_MESSAGE"])) {
+		foreach ($arResult["ERROR_MESSAGE"] as $v)
+			ShowError($v);
+	}
+	if ($arResult["OK_MESSAGE"] <> '') {
+	?><div class="mf-ok-text"><?= $arResult["OK_MESSAGE"] ?></div><?
+																															}
+																																?>
 
-<form action="<?=POST_FORM_ACTION_URI?>" method="POST" enctype="multipart/form-data">
-<?=bitrix_sessid_post()?>
-	<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
+	<form action="<?= POST_FORM_ACTION_URI ?>" method="POST" enctype="multipart/form-data">
+		<?= bitrix_sessid_post() ?>
+		<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
 
-            <div class="contacts">
-              <label class="name">
-                <span>ФИО *</span>
-                <input type="text" name="user_name" placeholder="Иванова Светлана Сергеевна ">
-              </label>
-              
-              <label class="phone">
-                <span>Номер телефона *</span>
-                <input type="tel" name="user_phone" placeholder="+_ ___ ___-__-__ ">
-              </label>
-            </div>
-            <div class="message">
-              <label>
-                <span>Сообщение *</span>
-                <textarea name="MESSAGE"></textarea>
-              </label>
-            </div>
+		<div class="contacts">
+			<label class="name">
+				<span>ФИО *</span>
+				<input type="text" name="user_name" placeholder="Иванова Светлана Сергеевна ">
+			</label>
 
-            <div class="file">
-              <svg>
-                <use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#file"> </use>
-              </svg>
-              <span>Прикрепите Ваше резюме</span>
-            </div>
-			
-			<input type="file" name="profile" class="hide-block profile">
-			<input type="hidden" name="vacancy" value="<?= $arParams['VACANCY'] ?>">
-			<input type="hidden" name="PARAMS_HASH" value="<?=$arResult["PARAMS_HASH"]?>">
-			<input class="submit" type="submit" name="submit" value="Отправить резюме">
-</form>
+			<label class="phone">
+				<span>Номер телефона *</span>
+				<input type="tel" name="user_phone" placeholder="+_ ___ ___-__-__ ">
+			</label>
+		</div>
+		<div class="message">
+			<label>
+				<span>Сообщение *</span>
+				<textarea name="MESSAGE"></textarea>
+			</label>
+		</div>
 
-<?/*
+		<div class="file">
+			<svg>
+				<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#file"> </use>
+			</svg>
+			<span>Прикрепите Ваше резюме</span>
+		</div>
+
+		<input type="file" name="profile" class="hide-block profile">
+		<input type="hidden" name="vacancy" value="<?= $arParams['VACANCY'] ?>">
+		<input type="hidden" name="PARAMS_HASH" value="<?= $arResult["PARAMS_HASH"] ?>">
+		<input class="submit" type="submit" name="submit" value="Отправить резюме">
+	</form>
+
+	<? if (!empty($_POST) && ($arResult["OK_MESSAGE"] <> '' || !empty($arResult["ERROR_MESSAGE"]))) : ?>
+		<script>
+			setTimeout(() => {
+				$("#vac_<?= $arParams['VACANCY_ID'] ?> .content").toggle();
+				$("#vac_<?= $arParams['VACANCY_ID'] ?> .form-btn").click();
+				$([document.documentElement, document.body]).animate({
+					scrollTop: $("#vac_<?= $arParams['VACANCY_ID'] ?> form").offset().top
+				}, 400);
+			}, 100);
+		</script>
+	<? endif; ?>
+
+	<?/*
 <form action="<?=POST_FORM_ACTION_URI?>" method="POST">
 <?=bitrix_sessid_post()?>
 	<div class="mf-name">

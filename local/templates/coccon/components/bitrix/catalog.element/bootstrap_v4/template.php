@@ -18,22 +18,21 @@ use Bitrix\Main\Localization\Loc;
 $productsCount = [];
 $stores = [];
 
-$select_fields = Array();
-$filter = Array("ACTIVE" => "Y");
-$resStore = CCatalogStore::GetList(array(),$filter,false,false,$select_fields);
+$select_fields = array();
+$filter = array("ACTIVE" => "Y");
+$resStore = CCatalogStore::GetList(array(), $filter, false, false, $select_fields);
 $i = 0;
-while($sklad = $resStore->Fetch())
-{
+while ($sklad = $resStore->Fetch()) {
 	$stores[$i]['ID'] = $sklad['ID'];
 	$stores[$i]['TITLE'] = $sklad['TITLE'] . '<br>' . $sklad['ADDRESS'];
 	$stores[$i]['SCHEDULE'] = $sklad['SCHEDULE'];
 	$i++;
 }
 
-foreach($arResult['OFFERS'] as $product) {
-	foreach($stores as $store) {
-		$arFilter = Array("PRODUCT_ID"=>$product['ID'],"STORE_ID"=>$store['ID']);
-		$storesAmount = CCatalogStoreProduct::GetList(Array(),$arFilter,false,false,Array());
+foreach ($arResult['OFFERS'] as $product) {
+	foreach ($stores as $store) {
+		$arFilter = array("PRODUCT_ID" => $product['ID'], "STORE_ID" => $store['ID']);
+		$storesAmount = CCatalogStoreProduct::GetList(array(), $arFilter, false, false, array());
 		$productsCount[$store['ID']][$product['ID']] = $storesAmount->GetNext()['AMOUNT'];
 	}
 }
@@ -673,7 +672,7 @@ if (!$USER->IsAuthorized()) {
 					</div>
 					<span class="inventory-balances hover">
 						Остатки по складам
-				</span>
+					</span>
 				<?php
 				}
 				?>
@@ -2292,7 +2291,7 @@ while ($ob = $res->GetNextElement()) {
 		</div>
 
 		<div class="title">Остатки по складам</div>
-		
+
 		<table class="table">
 
 			<tr class="head">
@@ -2301,16 +2300,16 @@ while ($ob = $res->GetNextElement()) {
 				<td>Режим работы</td>
 			</tr>
 
-			<? foreach($stores as $store): ?>
+			<? foreach ($stores as $store) : ?>
 				<tr id="store_<?= $store['ID'] ?>">
-					<td>
-						<?= $store['TITLE'] ?>
+					<td data-schedule="<?= $store['SCHEDULE'] ?>">
+						<?= $store['TITLE'] ?> <br>
 					</td>
 					<td class="availability">в наличии</td>
 					<td><?= $store['SCHEDULE'] ?></td>
 				</tr>
 			<? endforeach; ?>
-			
+
 		</table>
 	</div>
 </div>
@@ -2378,23 +2377,6 @@ while ($ob = $res->GetNextElement()) {
 
 		$('.share-modal a').each((i, e) => {
 			$(e).attr('href', $(e).attr('href') + document.location.href);
-		});
-
-		// Product Slider
-		$('#slider').not('.slick-initialized').slick({
-			slidesToShow: 1,
-			slidesToScroll: 1,
-			arrows: false,
-			asNavFor: '#slider-nav',
-		});
-
-		$('#slider-nav').not('.slick-initialized').slick({
-			slidesToShow: 2,
-			slidesToScroll: 1,
-			vertical: true,
-			asNavFor: '#slider',
-			nextArrow: $('.next-arrow'),
-			prevArrow: $('.prev-arrow')
 		});
 
 		// Catalog comment rrating 
@@ -2482,12 +2464,12 @@ while ($ob = $res->GetNextElement()) {
 			$('#share-modal').toggle();
 			$('body').css('overflow-y', 'auto');
 		});
-		
+
 		$('#stores-modal .modal-close').on('click', () => {
 			$('#stores-modal').toggleClass('active');
 			$('body').css('overflow-y', 'auto');
 		});
-		
+
 		$('.inventory-balances').on('click', () => {
 			$('#stores-modal').toggleClass('active');
 			$('body').css('overflow-y', 'hidden');
@@ -2523,6 +2505,22 @@ while ($ob = $res->GetNextElement()) {
 		});
 
 	};
+	// Product Slider
+	$('#slider').not('.slick-initialized').slick({
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: false,
+		asNavFor: '#slider-nav',
+	});
+
+	$('#slider-nav').not('.slick-initialized').slick({
+		slidesToShow: 2,
+		slidesToScroll: 1,
+		vertical: true,
+		asNavFor: '#slider',
+		nextArrow: $('.next-arrow'),
+		prevArrow: $('.prev-arrow')
+	});
 </script>
 
 <?

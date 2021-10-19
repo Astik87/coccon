@@ -2,7 +2,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 (function () {
 	'use strict';
- 
+
 	/** 
 	 * Show empty default property value to multiple properties without default values
 	 */
@@ -78,7 +78,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				input.on('click', function () {
 					$(`#${$(this).data('id')}`).parent().parent().click();
 					$('.delivery-data').css('display', 'none');
-					
+
 					let contentId = false;
 					if ($(this).data('id') != 'ID_DELIVERY_ID_3') {
 						contentId = '#delivery1';
@@ -101,9 +101,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						contentId = '#delivery2';
 					}
 
-					if (contentId) 
+					if (contentId)
 						$(`.delivery-data${contentId}`).css('display', 'block');
-					
+
 					$('#city').change();
 
 				});
@@ -310,32 +310,32 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 					fullRecalculation: 'Y',
 					store: storeId
-				 });
+				});
 			}
 
 			let storeInput = BX('BUYER_STORE');
 
 			for (let key in this.result.STORE_LIST) {
 				let storeId = key;
-				if (!storeId) 
+				if (!storeId)
 					continue;
 
 				let store = this.result.STORE_LIST[storeId];
 
 				let tr = $('<tr></tr>');
-				tr.append(`<td>${store.TITLE}<br>${store.ADDRESS}</td>`);
+				tr.append(`<td data-schedule="${store.SCHEDULE}">${store.TITLE}<br>${store.ADDRESS}<br></td>`);
 				tr.append(`<td>${store.SCHEDULE}</td>`);
 				let span = $(`<span class="checkbox" data-id="${storeId}"></span>`);
 				if ($(storeInput).val() == storeId) {
 					span.addClass('active');
 				}
-				span.on('click', function() {
+				span.on('click', function () {
 					if ($(this).hasClass('active'))
 						return;
-					
+
 					$('#delivery2 .table .checkbox').removeClass('active');
 					$(this).addClass('active');
-					
+
 					let id = $(this).data('id');
 
 					let storeInput = BX('BUYER_STORE');
@@ -348,7 +348,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 							fullRecalculation: 'Y',
 							store: storeId
-						 });
+						});
 					}
 
 				});
@@ -538,7 +538,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 					fullRecalculation: 'Y',
 					store: storeId
-				 });
+				});
 			}
 
 			// $('.bx-selected').removeClass('bx-selected');
@@ -7026,7 +7026,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 					fullRecalculation: 'Y',
 					store: storeItemId
-			 	});
+				});
 			}
 		},
 
@@ -8138,7 +8138,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				} else if (input.length == 3) {
 					let addresTemp = $(inputs[i]).val();
 					let addres = [];
-					if(addresTemp) {
+					if (addresTemp) {
 						addres.push(addresTemp.split(', ')[0]);
 						addres.push(addresTemp.split(' ')[2]);
 						addres.push(addresTemp.split(', ')[1].split(' ')[2]);
@@ -8524,14 +8524,14 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 			let usePayCurrentAcc = $('<span class="use" id="USE_PAY_CURRENT_ACCOUNT">Использовать</span>');
 
-			if($('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox:checked').length)
+			if ($('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox:checked').length)
 				usePayCurrentAcc.html('Отмена');
 
-			usePayCurrentAcc.on('click', function() {
+			usePayCurrentAcc.on('click', function () {
 				$('#bx-soa-paysystem .bx-soa-section-title-container').click();
 				$('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox').parent().click();
-				
-				if($('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox:checked').length) {
+
+				if ($('input[name="PAY_CURRENT_ACCOUNT"].bx-soa-pp-company-checkbox:checked').length) {
 					$(this).html('Отмена');
 				} else {
 					$(this).html('Использовать');
@@ -8945,4 +8945,4 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		}
 
 	};
-})(); 
+})();

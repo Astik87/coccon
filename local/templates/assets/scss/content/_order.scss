@@ -273,6 +273,7 @@
 }
 
 #bx-soa-total {
+	height: 600px;
 
 	@media screen and (max-width: 991px) {
 		display: none;
@@ -685,6 +686,7 @@
 }
 
 #delivery1 {
+
 	& .sdek-pickup-btn,
 	& .sdek-postamat-btn,
 	& .bxb-pickup-btn {
@@ -698,20 +700,20 @@
 			&:first-child {
 				display: block;
 			}
-			
+
 			&.sdek-pickup-btn {
 				display: flex;
 				justify-content: space-around;
-				
+
 				& .SDEK_selectPVZ {
 					padding: 16px;
-    			margin-bottom: 7px;
-    			font-size: 18px;
+					margin-bottom: 7px;
+					font-size: 18px;
 				}
 			}
 		}
 	}
-	
+
 	&.sdek-postamat {
 		& .item {
 			display: none;
@@ -719,20 +721,20 @@
 			&:first-child {
 				display: block;
 			}
-			
+
 			&.sdek-postamat-btn {
 				display: flex;
 				justify-content: space-around;
-				
+
 				& .SDEK_selectPVZ {
 					padding: 16px;
-    			margin-bottom: 7px;
-    			font-size: 18px;
+					margin-bottom: 7px;
+					font-size: 18px;
 				}
 			}
 		}
 	}
-	
+
 	&.bxb {
 		& .item {
 			display: none;
@@ -740,15 +742,15 @@
 			&:first-child {
 				display: block;
 			}
-			
+
 			&.bxb-pickup-btn {
 				display: flex;
 				justify-content: space-around;
-				
+
 				& .btn {
 					padding: 16px;
-    			margin-bottom: 7px;
-    			font-size: 18px;
+					margin-bottom: 7px;
+					font-size: 18px;
 				}
 			}
 		}
@@ -761,8 +763,9 @@
 }
 
 #delivery1.del1 {
+
 	& .cities,
-	& .form .item:first-child > label,
+	& .form .item:first-child>label,
 	& select {
 		display: none;
 	}
@@ -817,7 +820,7 @@
 					left: 3px;
 					transform: rotate(45deg);
 				}
-				
+
 				&::after {
 					width: 18px;
 					right: 2px;
@@ -831,6 +834,7 @@
 
 .pre-order {
 	position: relative;
+
 	& td {
 		opacity: .5;
 	}
@@ -840,5 +844,36 @@
 		position: absolute;
 		bottom: 20px;
 		right: 20px;
+	}
+}
+
+#delivery2 {
+	&.stores {
+		max-width: none;
+
+		& td {
+			max-width: 33.33%;
+			white-space: normal;
+
+			@media screen and (max-width: 1150px) and (min-width: 992px) {
+				&:nth-child(2) {
+					display: none;
+				}
+
+				&:first-child::after {
+					content: attr(data-schedule);
+				}
+			}
+
+			@media screen and (max-width: 680px) {
+				&:nth-child(2) {
+					display: none;
+				}
+
+				&:first-child:after {
+					content: attr(data-schedule);
+				}
+			}
+		}
 	}
 }

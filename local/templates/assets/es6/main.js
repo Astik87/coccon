@@ -172,7 +172,7 @@
             localStorage.setItem('promocode', 1);
         });
 
-        $('#modal-promocode .btn').on('click', function() {
+        $('#modal-promocode .btn').on('click', function () {
             let code = $('#modal-promocode .code').html();
             copyStringToClipboard(code);
             $(this).html('Готово!');
@@ -184,28 +184,24 @@
             }, 5000);
         }
 
-        $('.vacancy-wrapper .head').on('click', function() {
+        $('.vacancy-wrapper .head').on('click', function () {
             $(this).children('span').toggleClass('active');
             $(this).siblings('.content').slideToggle();
         });
-        
-        $('.vacancy-wrapper .file').on('click', function() {
+
+        $('.vacancy-wrapper .file').on('click', function () {
             console.log($(this).siblings('.profile').click());
         });
 
-        $('.profile').on('change', function() {
+        $('.profile').on('change', function () {
             $(this).siblings('.file').find('span').html($(this).val());
         });
 
-        $('.vacancy-wrapper .form-btn').on('click', function() {
+        $('.vacancy-wrapper .form-btn').on('click', function () {
             $(this).siblings('.form').css('display', 'flex');
             $(this).toggle();
         });
-        
-        $('.mfeedback > p').each((i, e) => {
-            $('#errors').prepend(e);
-        });
-        
+
         if (($('#private .errortext').length == 0) && $('#private .bx_profile font.notetext').length) {
             $('#private .bx_profile p').html('');
             $('#private-form .submit').val('Изменения сохранены');

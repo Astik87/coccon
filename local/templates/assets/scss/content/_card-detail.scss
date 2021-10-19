@@ -994,9 +994,9 @@ div.popup-window-overlay {
 .product-item {
 	margin-bottom: 0;
 
-  & .desc {
-    margin-bottom: 0;
-  }
+	& .desc {
+		margin-bottom: 0;
+	}
 }
 
 .stores {
@@ -1006,9 +1006,15 @@ div.popup-window-overlay {
 	max-width: 95%;
 	max-height: 95%;
 	font-size: 18px;
+	overflow: auto;
+
 
 	@media screen and (max-width: 768px) {
 		padding: 40px 20px;
+	}
+
+	@media screen and (max-width: 568px) {
+		padding: 40px 10px;
 	}
 
 	& .title {
@@ -1033,12 +1039,20 @@ div.popup-window-overlay {
 		max-width: 100%;
 		max-height: 75vh;
 		display: block;
-		overflow: auto;
 
 		& td {
 			padding: 15px 23px;
 			border: 1px solid #DFDFDF;
-			white-space: nowrap;
+
+			@media screen and (max-width: 568px) {
+				&:first-child::after {
+					content: attr(data-schedule);
+				}
+
+				&:last-child {
+					display: none;
+				}
+			}
 		}
 	}
 
