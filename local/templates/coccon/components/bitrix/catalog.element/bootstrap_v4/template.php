@@ -18,21 +18,37 @@ use Bitrix\Main\Localization\Loc;
 $productsCount = [];
 $stores = [];
 
+<<<<<<< HEAD
 $select_fields = array();
 $filter = array("ACTIVE" => "Y");
 $resStore = CCatalogStore::GetList(array(), $filter, false, false, $select_fields);
 $i = 0;
 while ($sklad = $resStore->Fetch()) {
+=======
+$select_fields = Array();
+$filter = Array("ACTIVE" => "Y");
+$resStore = CCatalogStore::GetList(array(),$filter,false,false,$select_fields);
+$i = 0;
+while($sklad = $resStore->Fetch())
+{
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 	$stores[$i]['ID'] = $sklad['ID'];
 	$stores[$i]['TITLE'] = $sklad['TITLE'] . '<br>' . $sklad['ADDRESS'];
 	$stores[$i]['SCHEDULE'] = $sklad['SCHEDULE'];
 	$i++;
 }
 
+<<<<<<< HEAD
 foreach ($arResult['OFFERS'] as $product) {
 	foreach ($stores as $store) {
 		$arFilter = array("PRODUCT_ID" => $product['ID'], "STORE_ID" => $store['ID']);
 		$storesAmount = CCatalogStoreProduct::GetList(array(), $arFilter, false, false, array());
+=======
+foreach($arResult['OFFERS'] as $product) {
+	foreach($stores as $store) {
+		$arFilter = Array("PRODUCT_ID"=>$product['ID'],"STORE_ID"=>$store['ID']);
+		$storesAmount = CCatalogStoreProduct::GetList(Array(),$arFilter,false,false,Array());
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 		$productsCount[$store['ID']][$product['ID']] = $storesAmount->GetNext()['AMOUNT'];
 	}
 }
@@ -672,7 +688,11 @@ if (!$USER->IsAuthorized()) {
 					</div>
 					<span class="inventory-balances hover">
 						Остатки по складам
+<<<<<<< HEAD
 					</span>
+=======
+				</span>
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 				<?php
 				}
 				?>
@@ -2291,7 +2311,11 @@ while ($ob = $res->GetNextElement()) {
 		</div>
 
 		<div class="title">Остатки по складам</div>
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 		<table class="table">
 
 			<tr class="head">
@@ -2300,16 +2324,27 @@ while ($ob = $res->GetNextElement()) {
 				<td>Режим работы</td>
 			</tr>
 
+<<<<<<< HEAD
 			<? foreach ($stores as $store) : ?>
 				<tr id="store_<?= $store['ID'] ?>">
 					<td data-schedule="<?= $store['SCHEDULE'] ?>">
 						<?= $store['TITLE'] ?> <br>
+=======
+			<? foreach($stores as $store): ?>
+				<tr id="store_<?= $store['ID'] ?>">
+					<td>
+						<?= $store['TITLE'] ?>
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 					</td>
 					<td class="availability">в наличии</td>
 					<td><?= $store['SCHEDULE'] ?></td>
 				</tr>
 			<? endforeach; ?>
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 		</table>
 	</div>
 </div>
@@ -2463,6 +2498,16 @@ while ($ob = $res->GetNextElement()) {
 		$('#share-modal .modal-close').on('click', () => {
 			$('#share-modal').toggle();
 			$('body').css('overflow-y', 'auto');
+		});
+		
+		$('#stores-modal .modal-close').on('click', () => {
+			$('#stores-modal').toggleClass('active');
+			$('body').css('overflow-y', 'auto');
+		});
+		
+		$('.inventory-balances').on('click', () => {
+			$('#stores-modal').toggleClass('active');
+			$('body').css('overflow-y', 'hidden');
 		});
 
 		$('#stores-modal .modal-close').on('click', () => {

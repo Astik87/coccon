@@ -994,9 +994,15 @@ div.popup-window-overlay {
 .product-item {
 	margin-bottom: 0;
 
+<<<<<<< HEAD
 	& .desc {
 		margin-bottom: 0;
 	}
+=======
+  & .desc {
+    margin-bottom: 0;
+  }
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 }
 
 .stores {
@@ -1006,17 +1012,23 @@ div.popup-window-overlay {
 	max-width: 95%;
 	max-height: 95%;
 	font-size: 18px;
+<<<<<<< HEAD
 	overflow: auto;
 
+=======
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 
 	@media screen and (max-width: 768px) {
 		padding: 40px 20px;
 	}
 
+<<<<<<< HEAD
 	@media screen and (max-width: 568px) {
 		padding: 40px 10px;
 	}
 
+=======
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 	& .title {
 		display: block;
 		font-size: 30px;
@@ -1039,10 +1051,15 @@ div.popup-window-overlay {
 		max-width: 100%;
 		max-height: 75vh;
 		display: block;
+<<<<<<< HEAD
+=======
+		overflow: auto;
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 
 		& td {
 			padding: 15px 23px;
 			border: 1px solid #DFDFDF;
+<<<<<<< HEAD
 
 			@media screen and (max-width: 420px) {
 				padding: 15px;
@@ -1057,6 +1074,9 @@ div.popup-window-overlay {
 					display: none;
 				}
 			}
+=======
+			white-space: nowrap;
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 		}
 	}
 

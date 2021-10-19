@@ -78,7 +78,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				input.on('click', function () {
 					$(`#${$(this).data('id')}`).parent().parent().click();
 					$('.delivery-data').css('display', 'none');
+<<<<<<< HEAD
 
+=======
+					
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 					let contentId = false;
 					if ($(this).data('id') != 'ID_DELIVERY_ID_3') {
 						contentId = '#delivery1';
@@ -101,9 +105,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						contentId = '#delivery2';
 					}
 
+<<<<<<< HEAD
 					if (contentId)
 						$(`.delivery-data${contentId}`).css('display', 'block');
 
+=======
+					if (contentId) 
+						$(`.delivery-data${contentId}`).css('display', 'block');
+					
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 					$('#city').change();
 
 				});
@@ -310,25 +320,38 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 					fullRecalculation: 'Y',
 					store: storeId
+<<<<<<< HEAD
 				});
+=======
+				 });
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 			}
 
 			let storeInput = BX('BUYER_STORE');
 
 			for (let key in this.result.STORE_LIST) {
 				let storeId = key;
+<<<<<<< HEAD
 				if (!storeId)
+=======
+				if (!storeId) 
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 					continue;
 
 				let store = this.result.STORE_LIST[storeId];
 
 				let tr = $('<tr></tr>');
+<<<<<<< HEAD
 				tr.append(`<td data-schedule="${store.SCHEDULE}">${store.TITLE}<br>${store.ADDRESS}<br></td>`);
+=======
+				tr.append(`<td>${store.TITLE}<br>${store.ADDRESS}</td>`);
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 				tr.append(`<td>${store.SCHEDULE}</td>`);
 				let span = $(`<span class="checkbox" data-id="${storeId}"></span>`);
 				if ($(storeInput).val() == storeId) {
 					span.addClass('active');
 				}
+<<<<<<< HEAD
 				span.on('click', function () {
 					if ($(this).hasClass('active'))
 						return;
@@ -336,6 +359,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					$('#delivery2 .table .checkbox').removeClass('active');
 					$(this).addClass('active');
 
+=======
+				span.on('click', function() {
+					if ($(this).hasClass('active'))
+						return;
+					
+					$('#delivery2 .table .checkbox').removeClass('active');
+					$(this).addClass('active');
+					
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 					let id = $(this).data('id');
 
 					let storeInput = BX('BUYER_STORE');
@@ -348,7 +380,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 							fullRecalculation: 'Y',
 							store: storeId
+<<<<<<< HEAD
 						});
+=======
+						 });
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 					}
 
 				});
@@ -538,7 +574,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 					fullRecalculation: 'Y',
 					store: storeId
+<<<<<<< HEAD
 				});
+=======
+				 });
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 			}
 
 			// $('.bx-selected').removeClass('bx-selected');
@@ -7026,7 +7066,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
 					fullRecalculation: 'Y',
 					store: storeItemId
+<<<<<<< HEAD
 				});
+=======
+			 	});
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 			}
 		},
 

@@ -20,9 +20,15 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 																															}
 																																?>
 
+<<<<<<< HEAD
 	<form action="<?= POST_FORM_ACTION_URI ?>" method="POST" enctype="multipart/form-data">
 		<?= bitrix_sessid_post() ?>
 		<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
+=======
+<form action="<?=POST_FORM_ACTION_URI?>" method="POST" enctype="multipart/form-data">
+<?=bitrix_sessid_post()?>
+	<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
+>>>>>>> 6484ccaad4b7f7345b17f57215042fd16c1e7de1
 
 		<div class="contacts">
 			<label class="name">
