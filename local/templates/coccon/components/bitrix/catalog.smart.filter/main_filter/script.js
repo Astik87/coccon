@@ -351,10 +351,12 @@ JCSmartFilter.prototype.selectDropDownItem = function (element, controlId) {
 		className: "bx-filter-select-container"
 	}, false);
 
-	
+
 	var currentOption = wrapContainer.querySelector('[data-role="currentOption"]');
-	currentOption.innerHTML = element.innerHTML;
-	BX.PopupWindowManager.getCurrentPopup().close();
+	if (currentOption) {
+		currentOption.innerHTML = element.innerHTML;
+		BX.PopupWindowManager.getCurrentPopup().close();
+	}
 };
 
 BX.namespace("BX.Iblock.SmartFilter");
