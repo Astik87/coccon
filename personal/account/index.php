@@ -5,6 +5,7 @@ $APPLICATION->SetTitle("Корзина");
 
 
 $balance = \CSaleUserAccount::getList(array(), array('USER_ID' => $USER->GetID()))->Fetch();
+$APPLICATION->AddChainItem('Бонусы', '/account/');
 
 CModule::IncludeModule("sale");
 

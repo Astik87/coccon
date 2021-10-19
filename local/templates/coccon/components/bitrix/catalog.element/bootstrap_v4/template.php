@@ -14,6 +14,30 @@ use Bitrix\Main\Localization\Loc;
  * @var string $templateFolder
  */
 
+
+$productsCount = [];
+$stores = [];
+
+$select_fields = Array();
+$filter = Array("ACTIVE" => "Y");
+$resStore = CCatalogStore::GetList(array(),$filter,false,false,$select_fields);
+$i = 0;
+while($sklad = $resStore->Fetch())
+{
+	$stores[$i]['ID'] = $sklad['ID'];
+	$stores[$i]['TITLE'] = $sklad['TITLE'] . '<br>' . $sklad['ADDRESS'];
+	$stores[$i]['SCHEDULE'] = $sklad['SCHEDULE'];
+	$i++;
+}
+
+foreach($arResult['OFFERS'] as $product) {
+	foreach($stores as $store) {
+		$arFilter = Array("PRODUCT_ID"=>$product['ID'],"STORE_ID"=>$store['ID']);
+		$storesAmount = CCatalogStoreProduct::GetList(Array(),$arFilter,false,false,Array());
+		$productsCount[$store['ID']][$product['ID']] = $storesAmount->GetNext()['AMOUNT'];
+	}
+}
+
 $this->setFrameMode(true);
 
 $templateLibrary = array('popup', 'fx');
@@ -271,6 +295,12 @@ if (!$USER->IsAuthorized()) {
 
 
 ?>
+
+<script>
+	window.productsCountKeys = <?= json_encode(array_keys($productsCount)) ?>;
+	window.productsCount = <?= json_encode($productsCount) ?>;
+</script>
+
 <div class="container element-container">
 
 	<? $APPLICATION->IncludeComponent(
@@ -540,7 +570,7 @@ if (!$USER->IsAuthorized()) {
 																?>
 																		<li class="product-item-scu-item-color-container" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
 																			<div class="product-item-scu-item-color-block">
-																				<div class="product-item-scu-item-color" title="<?= $value['NAME'] ?>" style="background-image: url('<?= $colors[$value['XML_ID']] ?>');">
+																				<div class="product-item-scu-item-color" title="<?= $value['NAME'] ?>" style="background-image: url('<?= $colors[$value['XML_ID']] ?? $value['PICT']['SRC'] ?>');">
 																				</div>
 																			</div>
 																		</li>
@@ -626,7 +656,7 @@ if (!$USER->IsAuthorized()) {
 					<?php
 					if (Loc::getMessage('CATALOG_QUANTITY')) {
 					?>
-						<div class="count-title">Колличество:</div>
+						<div class="count-title">Количество:</div>
 					<?php
 					}
 					?>
@@ -641,9 +671,9 @@ if (!$USER->IsAuthorized()) {
 						</div>
 
 					</div>
-					<a href="#" class="inventory-balances hover hide-block">
+					<span class="inventory-balances hover">
 						Остатки по складам
-					</a>
+				</span>
 				<?php
 				}
 				?>
@@ -2254,6 +2284,37 @@ while ($ob = $res->GetNextElement()) {
 
 ?>
 
+<div class="md-wrapper" id="stores-modal">
+	<div class="stores" title="Вы можете оформить \n доставку из другого города, где данный товар есть в наличии">
+		<div class="modal-close">
+			<span></span>
+			<span></span>
+		</div>
+
+		<div class="title">Остатки по складам</div>
+		
+		<table class="table">
+
+			<tr class="head">
+				<td>Адрес</td>
+				<td>Наличие</td>
+				<td>Режим работы</td>
+			</tr>
+
+			<? foreach($stores as $store): ?>
+				<tr id="store_<?= $store['ID'] ?>">
+					<td>
+						<?= $store['TITLE'] ?>
+					</td>
+					<td class="availability">в наличии</td>
+					<td><?= $store['SCHEDULE'] ?></td>
+				</tr>
+			<? endforeach; ?>
+			
+		</table>
+	</div>
+</div>
+
 <script>
 	function shareInstagram() {
 		$('#copy-link').click();
@@ -2420,6 +2481,16 @@ while ($ob = $res->GetNextElement()) {
 		$('#share-modal .modal-close').on('click', () => {
 			$('#share-modal').toggle();
 			$('body').css('overflow-y', 'auto');
+		});
+		
+		$('#stores-modal .modal-close').on('click', () => {
+			$('#stores-modal').toggleClass('active');
+			$('body').css('overflow-y', 'auto');
+		});
+		
+		$('.inventory-balances').on('click', () => {
+			$('#stores-modal').toggleClass('active');
+			$('body').css('overflow-y', 'hidden');
 		});
 
 		// Product description

@@ -146,8 +146,6 @@ $rsUser = $rsUser->Fetch();
 			<input name="EMAIL" type="email" value="<?= $USER->GetEmail() ?>">
 		</div>
 
-		<div class="item emp"></div>
-
 		<div class="item">
 			<label for="">Дата рождения</label>
 			<input type="date" name="date" value="<?= implode('-', array_reverse(explode('.', $rsUser['PERSONAL_BIRTHDAY']))) ?>">
@@ -166,6 +164,8 @@ $rsUser = $rsUser->Fetch();
 
 		<input type="file" name="PERSONAL_PHOTO" id="ava-input" class="hide-block">
 
-		<input type="submit" name="save" value="Сохранить изменения" class="btn submit">
+		<div class="submit-wrap">
+			<input type="submit" name="save" value="Сохранить изменения" class="btn submit">
+		</div>
 	</form>
 </div>

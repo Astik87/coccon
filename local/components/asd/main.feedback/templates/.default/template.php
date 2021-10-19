@@ -24,7 +24,7 @@ if($arResult["OK_MESSAGE"] <> '')
 
 <form action="<?=POST_FORM_ACTION_URI?>" method="POST" enctype="multipart/form-data">
 <?=bitrix_sessid_post()?>
-	<span class="vacancy-name">Вакансия менеджер интернет-магазина</span>
+	<span class="vacancy-name">Вакансия <?= $arParams['VACANCY'] ?></span>
 
             <div class="contacts">
               <label class="name">

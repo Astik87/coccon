@@ -5,12 +5,14 @@
         align-items: center;
         margin-bottom: 30px;
         font-weight: bold;
+        font-size: 30px;
 
         & svg {
             fill: #799bc9;
             max-width: 35px;
             max-height: 35px;
             margin-right: 10px;
+            margin-top: -4px;
         }
     }
 
