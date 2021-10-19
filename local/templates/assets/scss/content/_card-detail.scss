@@ -1044,6 +1044,10 @@ div.popup-window-overlay {
 			padding: 15px 23px;
 			border: 1px solid #DFDFDF;
 
+			@media screen and (max-width: 420px) {
+				padding: 15px;
+			}
+
 			@media screen and (max-width: 568px) {
 				&:first-child::after {
 					content: attr(data-schedule);

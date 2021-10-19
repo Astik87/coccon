@@ -855,6 +855,10 @@
 			max-width: 33.33%;
 			white-space: normal;
 
+			&:last-child {
+				display: table-cell;
+			}
+
 			@media screen and (max-width: 1150px) and (min-width: 992px) {
 				&:nth-child(2) {
 					display: none;
