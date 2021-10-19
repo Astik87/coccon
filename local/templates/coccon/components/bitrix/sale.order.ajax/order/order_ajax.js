@@ -2,7 +2,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 (function () {
 	'use strict';
-
+ 
 	/** 
 	 * Show empty default property value to multiple properties without default values
 	 */
@@ -66,6 +66,60 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		/**
 		 * Initialization of sale.order.ajax component js
 		 */
+		renderDeliveries: function (parameters) {
+			$('.deliveryItem').remove();
+			let deliveries = this.result.DELIVERY;
+
+			$(deliveries).each((i, e) => {
+				let delivItem = $(`<label></label>`);
+				delivItem.addClass('deliveryItem');
+				delivItem.html(' ' + e.NAME);
+				let input = $(`<input type="radio" name="delivery" data-id="ID_DELIVERY_ID_${e.ID}">`);
+				input.on('click', function () {
+					$(`#${$(this).data('id')}`).parent().parent().click();
+					$('.delivery-data').css('display', 'none');
+					
+					let contentId = false;
+					if ($(this).data('id') != 'ID_DELIVERY_ID_3') {
+						contentId = '#delivery1';
+
+						$(contentId).attr('class', 'delivery-data');
+
+						if ($(this).data('id') == 'ID_DELIVERY_ID_14') {
+							$(contentId).addClass('sdek-pickup');
+							$(contentId).addClass('del1');
+						} else if ($(this).data('id') == 'ID_DELIVERY_ID_15') {
+							$(contentId).addClass('sdek-postamat');
+							$(contentId).addClass('del1');
+						} else if ($(this).data('id') == 'ID_DELIVERY_ID_17' || $(this).data('id') == 'ID_DELIVERY_ID_19') {
+							$(contentId).addClass('bxb');
+							$(contentId).addClass('del1');
+						} else if ($(this).data('id') != 'ID_DELIVERY_ID_2') {
+							$(contentId).addClass('del1');
+						}
+					} else {
+						contentId = '#delivery2';
+					}
+
+					if (contentId) 
+						$(`.delivery-data${contentId}`).css('display', 'block');
+					
+					$('#city').change();
+
+				});
+				delivItem.prepend(input);
+				if ($(`#ID_DELIVERY_ID_${e.ID}:checked`).val() == e.ID) input.click();
+				$('.delivery .content').prepend(delivItem);
+				$('.delivery .content').on('click', () => {
+					this.show(document.getElementById('bx-soa-delivery'));
+				});
+			});
+
+			$('.bxb-pickup-btn').on('click', () => {
+				$('.bx-soa-pp-desc-container .bxblink').click();
+			});
+		},
+
 		init: function (parameters) {
 			this.initializePrimaryFields();
 
@@ -159,23 +213,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			// Способы доставки
 			// this.getAllFormData() все введенные данные
 
-			let deliveries = this.result.DELIVERY;
-
-			$(deliveries).each((i, e) => {
-				let delivItem = $(`<label></label>`);
-				delivItem.html(' ' + e.NAME);
-				let input = $(`<input type="radio" name="delivery" data-id="ID_DELIVERY_ID_${e.ID}">`);
-				input.on('click', function () {
-					console.log(`#${$(this).data('id')}`);
-					$(`#${$(this).data('id')}`).parent().parent().click();
-				});
-				delivItem.prepend(input);
-				if ($(`#ID_DELIVERY_ID_${e.ID}:checked`).val() == e.ID) input.click();
-				$('.delivery .content').prepend(delivItem);
-				$('.delivery .content').on('click', () => {
-					this.show(document.getElementById('bx-soa-delivery'));
-				});
-			});
+			this.renderDeliveries();
 
 			$("#forename, #last-name").on('change', () => {
 				let forename = $('#forename').val();
@@ -188,7 +226,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				if (forename == '' || last_name == '') {
 					$('#forename, #last-name').parent().addClass('error');
-					console.log('asdasda');
 				} else {
 					$('#forename, #last-name').parent().removeClass('error');
 				}
@@ -201,7 +238,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				if (email == '') {
 					$('#email').parent().addClass('error');
-					console.log('asdasda');
 				} else {
 					$('#email').parent().removeClass('error');
 				}
@@ -237,6 +273,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					home = $('#home'),
 					flat = $('#flat');
 
+				if (!city.val() || $('input[name="delivery"]:checked').data('id') != 'ID_DELIVERY_ID_2') {
+					city = $('#delivery1 .bx-ui-sls-fake');
+				}
+
 				let address = city.val() + ", ул. " + street.val() + " " + home.val();
 				if (flat.val() != '')
 					address += ", кв. " + flat.val();
@@ -263,6 +303,58 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					this.show(document.getElementById('bx-soa-paysystem'));
 				});
 			});
+
+			if ($('input[data-id="ID_DELIVERY_ID_3"]:checked').length) {
+				let storeInput = BX('BUYER_STORE');
+				let storeId = $(storeInput).val();
+				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+					fullRecalculation: 'Y',
+					store: storeId
+				 });
+			}
+
+			let storeInput = BX('BUYER_STORE');
+
+			for (let key in this.result.STORE_LIST) {
+				let storeId = key;
+				if (!storeId) 
+					continue;
+
+				let store = this.result.STORE_LIST[storeId];
+
+				let tr = $('<tr></tr>');
+				tr.append(`<td>${store.TITLE}<br>${store.ADDRESS}</td>`);
+				tr.append(`<td>${store.SCHEDULE}</td>`);
+				let span = $(`<span class="checkbox" data-id="${storeId}"></span>`);
+				if ($(storeInput).val() == storeId) {
+					span.addClass('active');
+				}
+				span.on('click', function() {
+					if ($(this).hasClass('active'))
+						return;
+					
+					$('#delivery2 .table .checkbox').removeClass('active');
+					$(this).addClass('active');
+					
+					let id = $(this).data('id');
+
+					let storeInput = BX('BUYER_STORE');
+
+					$(storeInput).val(id);
+
+					if ($('input[data-id="ID_DELIVERY_ID_3"]:checked').length) {
+						let storeInput = BX('BUYER_STORE');
+						let storeId = $(storeInput).val();
+						BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+							fullRecalculation: 'Y',
+							store: storeId
+						 });
+					}
+
+				});
+				tr.append($(`<td></td>`).append(span));
+				$('#delivery2 .table').append(tr);
+			}
 
 		},
 
@@ -439,6 +531,17 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				this.mapsReady && this.initMaps();
 				BX.saleOrderAjax && BX.saleOrderAjax.initDeferredControl();
 			}
+
+			if ($('input[data-id="ID_DELIVERY_ID_3"]:checked').length) {
+				let storeInput = BX('BUYER_STORE');
+				let storeId = $(storeInput).val();
+				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+					fullRecalculation: 'Y',
+					store: storeId
+				 });
+			}
+
+			// $('.bx-selected').removeClass('bx-selected');
 
 			return true;
 		},
@@ -755,6 +858,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				if (!!border)
 					BX.addClass(node, 'bx-step-error');
+
+				$('#errors').html('');
+				$('#errors').append(errorContainer);
+
 			}
 		},
 
@@ -1787,6 +1894,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		 * Order saving action with validation. Doesn't send request while have errors
 		 */
 		clickOrderSaveAction: function (event) {
+			if (this.result.ERROR.length)
+				return false;
 			if (this.isValidForm()) {
 				this.allowOrderSave();
 
@@ -4724,7 +4833,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				labelHtml = '<label class="bx-soa-custom-label" for="soa-property-' + parseInt(locationId) + '">' +
 					(currentProperty.REQUIRED == 'Y' ? '<span class="bx-authform-starrequired">*</span> ' : '') +
-					BX.util.htmlspecialchars(currentProperty.NAME) +
+					'Город' +
 					(currentProperty.DESCRIPTION.length ? ' <small>(' + BX.util.htmlspecialchars(currentProperty.DESCRIPTION) + ')</small>' : '') +
 					'</label>';
 
@@ -4742,6 +4851,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					html: labelHtml + currentLocation.HTML
 				});
 				node.appendChild(insertedLoc);
+
+				$('#delivery1 .bx-soa-location-input-container').remove();
+				$('#delivery1 .form .item:first-child').prepend(insertedLoc);
+
 				node.appendChild(BX.create('INPUT', {
 					props: {
 						type: 'hidden',
@@ -6629,7 +6742,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					selectedStore = buyerStoreInput.value = currentStore.ID;
 					found = true;
 				}
-
 				storeNode = this.createPickUpItem(currentStore, {
 					selected: currentStore.ID == selectedStore
 				});
@@ -6910,6 +7022,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				storeInput.setAttribute('value', storeItemId);
 				this.maps && this.maps.selectBalloon(storeItemId);
+
+				BX.Sale.BasketComponent.sendRequest('refreshAjax', {
+					fullRecalculation: 'Y',
+					store: storeItemId
+			 	});
 			}
 		},
 
@@ -8427,7 +8544,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				attrs: {
 					className: 'count',
 				},
-				text: this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] || '0'
+				text: this.result.CURRENT_BUDGET_FORMATED ? this.result.CURRENT_BUDGET_FORMATED.split(' ')[0] : '0'
 			});
 
 			bonusLeft.appendChild(bonusSvg);
@@ -8435,14 +8552,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			bonus.appendChild(bonusLeft);
 			bonus.appendChild(bonusCount);
 
-			this.totalInfoBlockNode.appendChild(bonus);
-
-			// End bonus
-
-
-			// if (this.options.showOrderWeight) {
-			// this.totalInfoBlockNode.appendChild(this.createTotalUnit(BX.message('SOA_SUM_WEIGHT_SUM'), total.ORDER_WEIGHT_FORMATED));
-			// }
+			this.totalInfoBlockNode.appendChild(bonus)
 
 			if (this.options.showTaxList) {
 				for (i = 0; i < total.TAX_LIST.length; i++) {
@@ -8491,7 +8601,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 				// this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText + ':', total.DISCOUNT_PRICE_FORMATED, {
 				// 	highlighted: true
-				// }));
+				// })); 
 			}
 
 			if (this.options.showPayedFromInnerBudget) {

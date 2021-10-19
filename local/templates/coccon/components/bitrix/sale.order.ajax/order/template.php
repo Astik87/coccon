@@ -426,6 +426,22 @@ if ($request->get('ORDER_ID') <> '') {
 										</select>
 									</div>
 
+
+									<div class="item sdek-pickup-btn">
+										<label for=""></label>
+										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('14','PVZ'); return false;">Выбрать пункт самовывоза</div>
+									</div>
+									
+									<div class="item sdek-postamat-btn">
+										<label for=""></label>
+										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('15','PVZ'); return false;">Выбрать постамат</div>
+									</div>
+									
+									<div class="item bxb-pickup-btn">
+										<label for=""></label>
+										<div class="bxb-btn btn">Выбрать пункт самовывоза</div>
+									</div>
+
 									<div class="item">
 										<label for="street">Улица *</label>
 										<input type="text" id="street" data-id="soa-property-7">
@@ -447,6 +463,17 @@ if ($request->get('ORDER_ID') <> '') {
 									</div>
 								</div>
 							</div>
+
+							<div class="delivery-data stores" id="delivery2">
+								<table class="table">
+									<tr class="head">
+										<td>Адрес</td>
+										<td>Режим работы</td>
+										<td></td>
+									</tr>
+
+								</table>
+							</div>
 						</div>
 					</div>
 
@@ -456,6 +483,10 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="content">
 
 						</div>
+					</div>
+
+					<div id="errors">
+						
 					</div>
 				</div>
 
@@ -547,7 +578,7 @@ if ($request->get('ORDER_ID') <> '') {
 						<div class="bx-soa-section-content"></div>
 					</div>
 					<!--	PICKUP BLOCK	-->
-					<div id="bx-soa-pickup" data-visited="true" class="bx-soa-section" style="display:none">
+					<div id="bx-soa-pickup" data-visited="true" class="bx-soa-section hide-block" style="display:none">
 						<div class="bx-soa-section-title-container d-flex justify-content-between align-items-center flex-nowrap">
 							<div class="bx-soa-section-title" data-entity="section-title">
 								<span class="bx-soa-section-title-count"></span>

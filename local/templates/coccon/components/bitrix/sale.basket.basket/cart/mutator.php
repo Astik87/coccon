@@ -18,8 +18,22 @@ $mobileColumns = array_fill_keys($mobileColumns, true);
 
 $result['BASKET_ITEM_RENDER_DATA'] = array();
 
+
 foreach ($this->basketItems as $row)
 {
+	$preorder = '';	
+	if( $this->request->get('store') )
+	{
+		$store = $this->request->get('store');
+		$prodId = $row['PRODUCT_ID'];
+		$arFilter = Array("PRODUCT_ID"=>$prodId,"STORE_ID"=>$store);
+		$storesAmount = CCatalogStoreProduct::GetList(Array(),$arFilter,false,false,Array());
+		$productsCount = $storesAmount->GetNext()['AMOUNT'];
+
+		if ($productsCount < $row['QUANTITY']) {
+			$preorder = ' pre-order';
+		}
+	}
 
 	$rsOffers = CIBlockElement::GetList(
 		array(), // Свойства, по которым идет сортировка
@@ -69,6 +83,7 @@ foreach ($this->basketItems as $row)
 		'COLUMN_LIST' => array(),
 		'SHOW_LABEL' => false,
 		'SCORES' => $scores,
+		'PRE_ORDER' => $preorder,
 		'LABEL_VALUES' => array(),
 		'BRAND' => isset($row[$this->arParams['BRAND_PROPERTY'].'_VALUE'])
 			? $row[$this->arParams['BRAND_PROPERTY'].'_VALUE']

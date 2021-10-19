@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Оптовым покупателям", 
-		"/", 
+		"/shopper", 
 		Array(), 
 		Array(), 
 		"" 
