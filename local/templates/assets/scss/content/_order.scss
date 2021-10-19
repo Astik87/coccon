@@ -881,3 +881,11 @@
 		}
 	}
 }
+
+
+#bx-soa-total-mobile {
+	& .bx-soa-cart-total {
+		position: initial;
+		width: auto !important;
+	}
+}
