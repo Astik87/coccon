@@ -214,6 +214,15 @@
             });
         }
 
+        $('.bonus-wrapper .detaile, .bonus-wrapper .back').on('click', function () {
+            $(this).parent().parent().find('.content .text').css('width', ($('.blocks').innerWidth() - 70) + "px");
+            $(this).parent().parent().toggleClass('active');
+        });
+
+        $('.bonus-wrapper .modal-close').on('click', function () {
+            $('.bonus-wrapper .item.active').removeClass('active');
+        });
+
     })
 }(jQuery);
 

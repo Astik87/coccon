@@ -88,6 +88,7 @@
 				max-width: 37px;
 				height: .5em;
 				margin-left: 10px;
+				fill: #fff;
 			}
 
 		}
@@ -332,59 +333,61 @@
 }
 
 .modal-promocode {
-  width: 95%;
-  height: 95%;
-  max-height: 720px;
-  max-width: 480px;
-  display: flex;
-  align-items: center;
-  position: fixed;
-  background-image: url(../img/promo_bg.jpg);
+	width: 95%;
+	height: 95%;
+	max-height: 720px;
+	max-width: 480px;
+	display: flex;
+	align-items: center;
+	position: fixed;
+	background-image: url(../img/promo_bg.jpg);
 
-  .modal-close {
-	border-radius: 50%;
-	border: 1px solid #292929;
-	width: 26px;
-	height: 26px;
-	& span {
-		width: 15px;
-		background-color: #292929;
+	.modal-close {
+		border-radius: 50%;
+		border: 1px solid #292929;
+		width: 26px;
+		height: 26px;
+
+		& span {
+			width: 15px;
+			background-color: #292929;
+		}
+	}
+
+	& .content {
+		background-color: rgba(121, 155, 201, 0.8);
+		color: #fff;
+		padding: 25px 19px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		align-items: center;
+	}
+
+	& .title {
+		@include Forum(400);
+		font-size: 40px;
+	}
+
+	& .code {
+		font-weight: bold;
+		font-size: 34px;
+		text-transform: uppercase;
+		margin: 15px 0;
+	}
+
+	& .btn {
+		padding: 10px;
+		text-align: center;
+		width: 220px;
+		border: 1px solid #fff;
+		border-radius: 5px;
+		background-color: initial;
 	}
 }
 
-  & .content {
-    background-color: rgba(121, 155, 201, 0.8);
-    color: #fff;
-    padding: 25px 19px;
-    text-align: center;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	align-items: center;
-  }
-
-  & .title {
-    @include Forum(400);
-	font-size: 40px;
-  }
-
-  & .code {
-    font-weight: bold;
-    font-size: 34px;
-    text-transform: uppercase;
-    margin: 15px 0;
-  }
-
-  & .btn {
-    padding: 10px;
-    text-align: center;
-    width: 220px;
-    border: 1px solid #fff;
-    border-radius: 5px;
-	background-color: initial;
-  }
-}
-
-a:hover, a:focus {
+a:hover,
+a:focus {
 	text-decoration: none;
 }

@@ -1,0 +1,162 @@
+.bonus-wrapper {
+	padding-bottom: 100px;
+	min-height: 220px;
+
+	& .blocks {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		margin-top: 80px;
+
+		@media screen and (max-width: 1520px) {
+			flex-wrap: wrap;
+			max-width: 1000px;
+			margin: 0 auto;
+			margin-top: 80px;
+		}
+
+		@media screen and (max-width: 1030px) {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		& .item {
+			display: flex;
+			justify-content: space-between;
+			max-width: 490px;
+			min-height: 220px;
+			width: 100%;
+			height: 100%;
+
+			@media screen and (max-width: 1520px) {
+				margin-bottom: 30px;
+			}
+
+			& .center-content {
+				max-width: 768px;
+				padding-bottom: 35px;
+				text-align: center;
+				position: relative;
+				padding-top: 10px;
+				max-width: 95vw;
+				max-height: 95vh;
+				overflow: auto;
+			}
+
+			& .content {
+				width: 0;
+				overflow: hidden;
+				position: absolute;
+				min-height: 220px;
+				transition: all .6s;
+
+				&-mobile {
+					display: none;
+				}
+
+				& .title {
+					white-space: nowrap;
+
+					@media screen and (max-width: 1520px) {
+						margin-top: 18px;
+					}
+				}
+			}
+
+			@media screen and (min-width: 1519px) {
+				&:nth-child(2) .content {
+					left: 50%;
+				}
+
+				&:last-child .content {
+					left: 100%;
+				}
+			}
+
+			@media screen and (max-width: 1520px) {
+				&:nth-child(2n) .content {
+					left: 100%;
+				}
+
+				&:last-child .content {
+					left: 0;
+				}
+			}
+
+
+			&.active .content {
+				width: 100%;
+				left: 0;
+
+				@media screen and (max-width: 1030px) {
+					display: none;
+				}
+
+				&-mobile {
+					@media screen and (max-width: 1030px) {
+						display: block;
+					}
+				}
+			}
+		}
+
+		& .title {
+			font-weight: bold;
+			margin-left: 35px;
+			margin-top: 35px;
+		}
+
+		& .text {
+			margin: 0 35px;
+		}
+
+		& .detaile,
+		& .back {
+			display: flex;
+			align-items: center;
+			color: #799bc9;
+			font-size: 16px;
+			margin-left: 35px;
+			margin-bottom: 35px;
+			cursor: pointer;
+			width: fit-content;
+			white-space: nowrap;
+
+			& svg {
+				width: 25px;
+				max-height: 14px;
+				margin-left: 10px;
+				fill: #799bc9;
+			}
+		}
+
+		& .back {
+			margin-top: 11px;
+
+			@media screen and (max-width: 1520px) {
+				margin-bottom: 0;
+			}
+
+			& svg {
+				transform: rotate(180deg);
+				margin-left: 0;
+				margin-right: 10px;
+			}
+		}
+
+		& .left {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+		}
+
+		& .right {
+			width: 100%;
+			max-width: 165px;
+			display: flex;
+			align-items: flex-end;
+		}
+
+	}
+}
