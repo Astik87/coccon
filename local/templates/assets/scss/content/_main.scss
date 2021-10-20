@@ -3,6 +3,10 @@ body {
 	height: calc(100vh - 81px);
 }
 
+#panel #bx-panel.bx-panel-fixed {
+	top: 81px !important;
+}
+
 .scrollbar {
 
 	/* width */
