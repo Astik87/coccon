@@ -64,39 +64,61 @@ $this->setFrameMode(true);
 
 ?>
 
+<?
+
+$res = [];
+
+foreach ($arResult['SECTIONS'] as $key => $section) {
+	if ($section['DEPTH_LEVEL'] == 1) {
+		$res[$key] = [
+			'NAME' => $section['NAME'],
+			'URL' => $section['SECTION_PAGE_URL']
+		];
+	} else if ($section['DEPTH_LEVEL'] == 2) {
+		$i = $key;
+		$par = null;
+		while ($arResult['SECTIONS'][$i]['DEPTH_LEVEL'] == 2) {
+			$par = $i;
+			$i--;
+		}
+		if (is_array($res[$i])) {
+			$res[$i]['CHILDREN'][] = [
+				'NAME' => $section['NAME'],
+				'URL' => $section['SECTION_PAGE_URL']
+			];
+		} else {
+			$res[$i] = ["NAME" => $res[$i], 'CHILDREN' => [
+				'NAME' => $section['NAME'],
+				'URL' => $section['SECTION_PAGE_URL']
+			]];
+		}
+	}
+}
+
+?>
 <div id="sitebar">
 	<ul class="catalogs">
 
-		<? $i = 0; ?>
-		<? while ($arResult['SECTIONS'][$i]) : ?>
-
-			<? if ($arResult['SECTIONS'][$i]['DEPTH_LEVEL'] == 1 && $arResult['SECTIONS'][$i + 1]['DEPTH_LEVEL'] != 2) : ?>
-				<li><a href="<?= $arResult['SECTIONS'][$i]['SECTION_PAGE_URL'] ?>" class="hover"><?= $arResult['SECTIONS'][$i]['NAME'] ?></a></li>
-				<? $i++; ?>
-			<? endif; ?>
-
-			<? if ($arResult['SECTIONS'][$i]['DEPTH_LEVEL'] == 2) : ?>
-
+		<? foreach ($res as $item) : ?>
+			<? if (is_array($item['CHILDREN'])) : ?>
 				<li>
 					<span class="title hover">
-						<?= $arResult['SECTIONS'][$i - 1]['NAME'] ?>
+						<?= $item['NAME'] ?>
 						<svg>
 							<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#br-vector"> </use>
 						</svg>
 					</span>
 					<ul>
-
-						<? while ($arResult['SECTIONS'][$i]['DEPTH_LEVEL'] == 2) : ?>
-							<li><a href="<?= $arResult['SECTIONS'][$i]['SECTION_PAGE_URL'] ?>" class="hover"><?= $arResult['SECTIONS'][$i]['NAME'] ?></a></li>
-							<? $i++; ?>
-						<? endwhile; ?>
-
+						<? foreach ($item['CHILDREN'] as $child) : ?>
+							<li><a href="<?= $child['URL'] ?>" class="hover"><?= $child['NAME'] ?></a></li>
+						<? endforeach ?>
 					</ul>
 				</li>
+			<? else : ?>
+				<li><a href="<?= $item['URL'] ?>" class="hover"><?= $item['NAME'] ?></a></li>
+			<? endif ?>
+		<? endforeach; ?>
 
-			<? endif; ?>
-			<? $i++; ?>
-		<? endwhile; ?>
 	</ul>
 </div>
 

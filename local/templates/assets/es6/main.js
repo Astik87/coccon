@@ -2,6 +2,13 @@
 ! function (e) {
     e(function () {
 
+        $(document).mouseup(function (e) {
+            var container = $(".cart-modal");
+            if (container.has(e.target).length === 0) {
+                container.removeClass('active');
+            }
+        });
+
         // Menu
         $('#menu-btn').on('click', function () {
             $(this).toggleClass('active');
@@ -263,6 +270,7 @@ function favourites(e, reload = false) {
 }
 
 function toggleCart() {
+    $('#menu').hide();
     $('.cart-modal').toggleClass('active');
 }
 

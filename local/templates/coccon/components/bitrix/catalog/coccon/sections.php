@@ -81,7 +81,7 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 			"bootstrap_v4",
 			$sectionListParams,
 			$component,
-			($arParams["SHOW_TOP_ELEMENTS"] !== "N" ? array("HIDE_ICONS" => "Y") : array())
+			array("HIDE_ICONS" => "Y")
 		);
 		?>
 
