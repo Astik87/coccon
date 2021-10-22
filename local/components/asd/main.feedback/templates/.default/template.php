@@ -51,17 +51,18 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
 		<input type="file" name="profile" class="hide-block profile">
 		<input type="hidden" name="vacancy" value="<?= $arParams['VACANCY'] ?>">
+		<input type="hidden" name="vacancy_id" value="<?= $arParams['VACANCY_ID'] ?>">
 		<input type="hidden" name="PARAMS_HASH" value="<?= $arResult["PARAMS_HASH"] ?>">
 		<input class="submit" type="submit" name="submit" value="Отправить резюме">
 	</form>
 
-	<? if (!empty($_POST) && ($arResult["OK_MESSAGE"] <> '' || !empty($arResult["ERROR_MESSAGE"]))) : ?>
+	<? if (!empty($_POST) && $arResult["PARAMS_HASH"] == $_POST['PARAMS_HASH']) : ?>
 		<script>
 			setTimeout(() => {
-				$("#vac_<?= $arParams['VACANCY_ID'] ?> .content").toggle();
-				$("#vac_<?= $arParams['VACANCY_ID'] ?> .form-btn").click();
+				$("#vac_<?= $_POST['vacancy_id'] ?> > .content").toggle();
+				$("#vac_<?= $_POST['vacancy_id'] ?> > .content > .form-btn").click();
 				$([document.documentElement, document.body]).animate({
-					scrollTop: $("#vac_<?= $arParams['VACANCY_ID'] ?> form").offset().top
+					scrollTop: $("#vac_<?= $_POST['vacancy_id'] ?> > .content > .form").offset().top - 100
 				}, 400);
 			}, 100);
 		</script>

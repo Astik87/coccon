@@ -346,7 +346,11 @@ if ($carrTitle) $APPLICATION->AddChainItem($carrTitle, "/catalog/");
 		</div>
 	</div>
 </div>
-
+<script>
+	$([document.documentElement, document.body]).animate({
+		scrollTop: $(".products-wrapper").offset().top - 100
+	}, 400);
+</script>
 <? /*
 <div class="row mb-4 <?= $arParams["TEMPLATE_THEME"] ?>">
 	<div class="<?= $contentBlockClass ?>">

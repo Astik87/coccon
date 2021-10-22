@@ -17,6 +17,10 @@ $templateData = array(
 	'TEMPLATE_CLASS' => 'bx-' . $arParams['TEMPLATE_THEME']
 );
 
+if ($_GET['sort'] == 'SHOW_COUNTER') {
+	unset($_GET['sort']);
+}
+
 if (isset($templateData['TEMPLATE_THEME'])) {
 	$this->addExternalCss($templateData['TEMPLATE_THEME']);
 }
@@ -210,9 +214,9 @@ while ($obj = $res->GetNextElement()) {
 
 					<div class="bx-filter-block" data-role="bx_filter_block">
 						<div class="row bx-filter-parameters-box-container">
-						<div class="bx-filter-select-container">
-	<div class="hide-block" data-role="currentOption"></div>
-</div>
+							<div class="bx-filter-select-container">
+								<div class="hide-block" data-role="currentOption"></div>
+							</div>
 							<?
 							$arCur = current($arItem["VALUES"]);
 							switch ($arItem["DISPLAY_TYPE"]) {
@@ -626,9 +630,16 @@ while ($obj = $res->GetNextElement()) {
 			?>
 			<div>
 				<span class="bx-filter-container-modef"></span>
-				<div class="bx-filter-parameters-box-title" onclick="smartFilter.hideFilterProps(this)">
-					<span class="bx-filter-parameters-box-hint hover"><?= $title ?>
-						<i data-role="prop_angle" class="fa fa-angle-down sotr_icon"></i>
+				<div class="bx-filter-parameters-box-title">
+					<span class="bx-filter-parameters-box-hint hover">
+						<span class="filter-title" onclick="smartFilter.hideFilterProps($(this).parent().parent())"><?= $title ?></span>
+						<? if ($title == 'По популярности') : ?>
+							<i data-role="prop_angle" class="fa fa-angle-down sotr_icon"></i>
+						<? else : ?>
+							<svg class="filter-clear-icon" data-cat="SORT">
+								<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#filter-clear"> </use>
+							</svg>
+						<? endif; ?>
 					</span>
 				</div>
 
@@ -748,6 +759,10 @@ while ($obj = $res->GetNextElement()) {
 	var smartFilter = new JCSmartFilter('<? echo CUtil::JSEscape($arResult["FORM_ACTION"]) ?>', '<?= CUtil::JSEscape($arParams["FILTER_VIEW_MODE"]) ?>', <?= CUtil::PhpToJSObject($arResult["JS_FILTER_PARAMS"]) ?>);
 	$('.filter-clear-icon').on('click', function() {
 		let catId = $(this).data('cat');
+		if (catId == 'SORT') {
+			$('input[value="SHOW_COUNTER"]').click();
+			return;
+		}
 		$(`#c${catId} input`).each((i, e) => {
 
 			if ($(e).attr('type') == 'radio') {

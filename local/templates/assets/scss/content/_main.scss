@@ -185,7 +185,8 @@ body.modal-open {
 	overflow-x: hidden;
 
 	@media screen and (max-width: 500px) {
-		padding: 60px 15px;
+		padding: 30px 15px;
+		font-size: 48px;
 	}
 
 	& .remember {
@@ -284,11 +285,39 @@ body.modal-open {
 
 	& .headding-wrap {
 		justify-content: start;
+
+		& .catalog-head {
+			max-width: 100%;
+			word-wrap: break-word;
+		}
+	}
+
+	& .breadcrumbs li {
+		max-width: 100%;
+		word-wrap: break-word;
 	}
 
 	& span {
 		display: block;
 		font-size: 22px;
 		margin-top: 30px;
+	}
+}
+
+.bx-pagination-container {
+	& ul li.bx-active span {
+		background: #799bc9 !important;
+	}
+}
+
+.bx-pagination {
+	margin-top: 30px;
+
+
+	@media screen and (max-width: 410px) {
+		& ul::after {
+			content: "";
+			width: 100%;
+		}
 	}
 }

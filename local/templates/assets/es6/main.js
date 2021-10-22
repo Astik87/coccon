@@ -270,7 +270,10 @@ function favourites(e, reload = false) {
 }
 
 function toggleCart() {
-    $('#menu').hide();
+    if ($('.menu .header__icons--mobil').css('display') == 'none') {
+        $('#menu-btn').removeClass('active');
+        $('#menu').hide();
+    }
     $('.cart-modal').toggleClass('active');
 }
 

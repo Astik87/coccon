@@ -2119,7 +2119,7 @@
 				};
 
 			var i, offerGroupNode;
-				
+
 			for (i = 0; i < this.offers.length; i++) {
 				boolOneSearch = true;
 
@@ -2962,6 +2962,7 @@
 				this.initPopupWindow();
 
 				if (arResult.STATUS === 'OK') {
+					console.log('asdasdasd');
 					BX.onCustomEvent('OnBasketChange');
 					switch (this.productType) {
 						case 1: // product
