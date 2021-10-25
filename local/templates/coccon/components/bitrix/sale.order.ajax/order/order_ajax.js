@@ -204,6 +204,13 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 			this.renderDeliveries();
 
+			$('#bx-soa-order-form').keydown(function(event) {
+				if (event.keyCode == 13) {
+					event.preventDefault();
+					return false;
+				}
+			});
+
 			$("#forename, #last-name").on('change', () => {
 				let forename = $('#forename').val();
 				let last_name = $('#last-name').val();

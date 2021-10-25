@@ -2530,7 +2530,7 @@ while ($ob = $res->GetNextElement()) {
 		});
 		$('#comment-list img').on('click', function() {
 			let src = $(this).attr('src');
-			$('#img-full-screen-modal img').attr('src', src);
+			$('#img-full-screen-modal .img-full-screen').css('background-image', `url(${src})`);
 			$('#img-full-screen-modal').css('display', 'flex');
 		});
 
