@@ -2962,7 +2962,7 @@
 				this.initPopupWindow();
 
 				if (arResult.STATUS === 'OK') {
-					console.log('asdasdasd');
+					$('.product-item-detail-buy-button span').html('Добавлено в корзину');
 					BX.onCustomEvent('OnBasketChange');
 					switch (this.productType) {
 						case 1: // product
