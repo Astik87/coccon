@@ -632,7 +632,7 @@ while ($obj = $res->GetNextElement()) {
 				<span class="bx-filter-container-modef"></span>
 				<div class="bx-filter-parameters-box-title">
 					<span class="bx-filter-parameters-box-hint hover">
-						<span class="filter-title" onclick="smartFilter.hideFilterProps($(this).parent().parent())"><?= $title ?></span>
+						<span class="filter-title" style="max-width: none;" onclick="smartFilter.hideFilterProps($(this).parent().parent())"><?= $title ?></span>
 						<? if ($title == 'По популярности') : ?>
 							<i data-role="prop_angle" class="fa fa-angle-down sotr_icon"></i>
 						<? else : ?>
