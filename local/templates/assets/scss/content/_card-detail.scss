@@ -119,6 +119,7 @@
 	height: 800px;
 	display: flex;
 	align-items: center;
+	position: relative;
 
 	@media screen and (max-width: 1200px) {
 		width: 600px;
@@ -151,6 +152,7 @@
 	& .slide {
 		height: 800px;
 		width: 100%;
+		position: relative;
 
 		@media screen and (max-width: 1200px) {
 			height: 700px;
