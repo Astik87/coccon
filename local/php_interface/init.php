@@ -152,3 +152,9 @@ function retailCrmBeforeOrderSend($order, $arFields)
     return $order;
     //либо return false; и тогда данные отправлены в систему не будут
 }
+
+AddEventHandler("main", "OnBeforeUserUpdate", "OnBeforeUserUpdateHandler");
+function OnBeforeUserUpdateHandler(&$arFields)
+{
+    $arFields["LOGIN"] = $arFields["EMAIL"];
+}
