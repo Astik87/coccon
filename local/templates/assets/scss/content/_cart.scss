@@ -65,11 +65,19 @@
 	}
 }
 
+.cart-modal .scrollbar {
+	margin-top: 25px;
+}
+
 .cart-item {
 	display: flex;
 	font-size: 18px;
 	padding: 25px 0;
 	border-bottom: 1px solid #E3E3E3;
+
+	&:first-child {
+		padding-top: 0;
+	}
 
 	& .count {
 		width: auto;

@@ -23,7 +23,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Бонусная система", 
-		"/", 
+		"/bonus/", 
 		Array(), 
 		Array(), 
 		"" 

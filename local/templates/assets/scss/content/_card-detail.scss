@@ -1104,11 +1104,11 @@ div.popup-window-overlay {
 	display: none;
 
 	& .img-full-screen {
-		max-width: 95%;
+		max-width: 568px;
 		max-height: 95%;
 		position: relative;
 		min-width: 300px;
-		width: 100%;
+		width: 95%;
 		height: 95%;
 		background-repeat: no-repeat;
 		background-size: cover;
