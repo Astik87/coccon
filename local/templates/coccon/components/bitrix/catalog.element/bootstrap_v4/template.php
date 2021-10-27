@@ -691,38 +691,29 @@ if (!$USER->IsAuthorized()) {
 				<div class="product-item-detail-price-current mb-1" id="<?= $itemIds['PRICE_ID'] ?>"><?= $price['PRINT_PRICE'] ?></div>
 
 
-				<div data-entity="main-button-container" class="mb-3">
-					<div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" style="display: <?= ($actualItem['CAN_BUY'] ? '' : 'none') ?>;">
-						<?php
-						if ($showAddBtn) {
-						?>
-							<a class="btn <?= $showButtonClassName ?> product-item-detail-buy-button" id="<?= $itemIds['ADD_BASKET_LINK'] ?>" href="javascript:void(0);">
-								<svg>
-									<use xlink:href="/local/templates/assets/img/sprite.svg#shopping-bags"> </use>
-								</svg>
-								<span>Добавить в корзину</span>
-							</a>
-						<?php
-						}
-
-						if ($showBuyBtn) {
-						?>
-							<a class="btn <?= $buyButtonClassName ?> product-item-detail-buy-button" id="<?= $itemIds['BUY_LINK'] ?>" href="javascript:void(0);">
-								<svg>
-									<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
-								</svg>
-								Добавить в корзину
-							</a>
-						<?php
-						}
-						?>
+				<div class="add-to-cart">
+					<div data-entity="main-button-container" class="mb-3">
+						<div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" style="display: <?= ($actualItem['CAN_BUY'] ? '' : 'none') ?>;">
+							<?php
+							if ($showAddBtn) {
+							?>
+								<a class="btn <?= $showButtonClassName ?> product-item-detail-buy-button" id="<?= $itemIds['ADD_BASKET_LINK'] ?>" href="javascript:void(0);">
+									<svg>
+										<use xlink:href="/local/templates/assets/img/sprite.svg#shopping-bags"> </use>
+									</svg>
+									<span>Добавить в корзину</span>
+								</a>
+							<?php
+							}
+							?>
+						</div>
 					</div>
-				</div>
 
-				<div class="favourites <?= $class ?>" data-a="<?= $action ?>" data-id="<?= $arResult['ID'] ?>" onclick="favourites(this)">
-					<svg>
-						<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
-					</svg>
+					<div class="favourites <?= $class ?>" data-a="<?= $action ?>" data-id="<?= $arResult['ID'] ?>" onclick="favourites(this)">
+						<svg>
+							<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
+						</svg>
+					</div>
 				</div>
 			</div>
 
@@ -2360,7 +2351,7 @@ while ($ob = $res->GetNextElement()) {
 
 		function detailScroll() {
 			if (!$('.element-container').length) return false;
-			let left = $('.element-container').offset().left + $('.element-container').width() - $('.detail').width() - 25;
+			let left = $('.element-container').offset().left + $('.element-container').width() - $('.detail').width() - 40;
 			if (!$('.detail').hasClass('absolute')) $('.detail').css('left', left);
 			let detailHeight = $('.detail').height();
 			let containerHeight = $('.element-container').height();
@@ -2379,7 +2370,7 @@ while ($ob = $res->GetNextElement()) {
 			if (detailHeight + detailOffset.top >= maxTop && !$('.detail').hasClass('absolute')) {
 				$('.detail').removeClass('fixed');
 				$('.detail').css('left', 'auto');
-				$('.detail').css('right', '15px');
+				$('.detail').css('right', '0');
 				$('.detail').addClass('absolute');
 			}
 

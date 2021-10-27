@@ -14,6 +14,7 @@
 
 .element-container {
 	position: relative;
+	padding: 0;
 }
 
 // Slider & Slider nav
@@ -114,7 +115,7 @@
 }
 
 #slider {
-	width: 700px;
+	width: 720px;
 	margin: 0 auto;
 	height: 800px;
 	display: flex;
@@ -262,7 +263,7 @@
 
 .detail {
 	width: 100%;
-	max-width: 400px;
+	max-width: 440px;
 	margin-left: 40px;
 	height: fit-content;
 
@@ -383,12 +384,18 @@
 .price {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	// justify-content: space-between;
 	flex-shrink: 0;
 
 	@media screen and (max-width: 430px) {
 		flex-wrap: wrap;
 		justify-content: space-around;
+	}
+
+	& .add-to-cart {
+		display: flex;
+		align-items: center;
 	}
 
 	& .favourites {
