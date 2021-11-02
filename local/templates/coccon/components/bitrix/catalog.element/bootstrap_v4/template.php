@@ -14,7 +14,6 @@ use Bitrix\Main\Localization\Loc;
  * @var string $templateFolder
  */
 
-
 $productsCount = [];
 $stores = [];
 
@@ -438,9 +437,17 @@ if (!$USER->IsAuthorized()) {
 			foreach ($offer['MORE_PHOTO'] as $img) {
 				if (in_array($img['SRC'], $images)) continue;
 
-				$images[] = $img['SRC'];
+				// debuger($offer);
+
+				$images[] = [
+					'SRC' => $img['SRC'],
+					'COLOR' => $offer['PROPERTIES']['COLOR_REF']['VALUE']
+				];
 			}
 		}
+
+		// debuger($images);
+
 		?>
 
 		<!-- Product images slider -->
@@ -458,8 +465,8 @@ if (!$USER->IsAuthorized()) {
 
 					<? foreach ($images as $img) : ?>
 
-						<div class="slide">
-							<img src="<?= $img ?>" alt="">
+						<div class="slide" data-color="<?= $img['COLOR'] ?>">
+							<img src="<?= $img['SRC'] ?>" alt="">
 						</div>
 
 					<? endforeach; ?>
@@ -479,11 +486,12 @@ if (!$USER->IsAuthorized()) {
 
 				<? foreach ($images as $img) : ?>
 
-					<div class="slide">
-						<img src="<?= $img ?>" alt="">
+					<div class="slide" data-color="<?= $img['COLOR'] ?>">
+						<img src="<?= $img['SRC'] ?>" alt="">
 					</div>
 
 				<? endforeach; ?>
+
 
 			</div>
 			<!-- End Slider -->
@@ -537,6 +545,10 @@ if (!$USER->IsAuthorized()) {
 													<?= htmlspecialcharsEx($skuProperty['NAME']) ?>:
 													<? if ($key == "SIZES_CLOTHES") : ?>
 
+														<span id="current-size">
+
+														</span>
+
 														<div class="size-table-link hover" id="size-table-link">
 															<svg>
 																<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#ruler"> </use>
@@ -567,7 +579,7 @@ if (!$USER->IsAuthorized()) {
 
 																	if ($skuProperty['SHOW_MODE'] === 'PICT') {
 																?>
-																		<li class="product-item-scu-item-color-container" title="<?= $value['NAME'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
+																		<li class="product-item-scu-item-color-container" title="<?= $value['NAME'] ?>" data-xml="<?= $value['XML_ID'] ?>" data-treevalue="<?= $propertyId ?>_<?= $value['ID'] ?>" data-onevalue="<?= $value['ID'] ?>">
 																			<div class="product-item-scu-item-color-block">
 																				<div class="product-item-scu-item-color" title="<?= $value['NAME'] ?>" style="background-image: url('<?= $colors[$value['XML_ID']] ?? $value['PICT']['SRC'] ?>');">
 																				</div>
@@ -682,38 +694,29 @@ if (!$USER->IsAuthorized()) {
 				<div class="product-item-detail-price-current mb-1" id="<?= $itemIds['PRICE_ID'] ?>"><?= $price['PRINT_PRICE'] ?></div>
 
 
-				<div data-entity="main-button-container" class="mb-3">
-					<div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" style="display: <?= ($actualItem['CAN_BUY'] ? '' : 'none') ?>;">
-						<?php
-						if ($showAddBtn) {
-						?>
-							<a class="btn <?= $showButtonClassName ?> product-item-detail-buy-button" id="<?= $itemIds['ADD_BASKET_LINK'] ?>" href="javascript:void(0);">
-								<svg>
-									<use xlink:href="/local/templates/assets/img/sprite.svg#shopping-bags"> </use>
-								</svg>
-								Добавить в корзину
-							</a>
-						<?php
-						}
-
-						if ($showBuyBtn) {
-						?>
-							<a class="btn <?= $buyButtonClassName ?> product-item-detail-buy-button" id="<?= $itemIds['BUY_LINK'] ?>" href="javascript:void(0);">
-								<svg>
-									<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#shopping-bags"> </use>
-								</svg>
-								Добавить в корзину
-							</a>
-						<?php
-						}
-						?>
+				<div class="add-to-cart">
+					<div data-entity="main-button-container" class="mb-3">
+						<div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>" style="display: <?= ($actualItem['CAN_BUY'] ? '' : 'none') ?>;">
+							<?php
+							if ($showAddBtn) {
+							?>
+								<a class="btn <?= $showButtonClassName ?> product-item-detail-buy-button" id="<?= $itemIds['ADD_BASKET_LINK'] ?>" href="javascript:void(0);">
+									<svg>
+										<use xlink:href="/local/templates/assets/img/sprite.svg#shopping-bags"> </use>
+									</svg>
+									<span>Добавить в корзину</span>
+								</a>
+							<?php
+							}
+							?>
+						</div>
 					</div>
-				</div>
 
-				<div class="favourites <?= $class ?>" data-a="<?= $action ?>" data-id="<?= $arResult['ID'] ?>" onclick="favourites(this)">
-					<svg>
-						<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
-					</svg>
+					<div class="favourites <?= $class ?>" data-a="<?= $action ?>" data-id="<?= $arResult['ID'] ?>" onclick="favourites(this)">
+						<svg>
+							<use xlink:href="<?= TEMPLATE_PATH ?>/assets/img/sprite.svg#heart"> </use>
+						</svg>
+					</div>
 				</div>
 			</div>
 
@@ -2314,6 +2317,18 @@ while ($ob = $res->GetNextElement()) {
 	</div>
 </div>
 
+<div class="md-wrapper" id="img-full-screen-modal">
+	<div class="img-full-screen">
+		<div class="modal-close">
+			<span></span>
+			<span></span>
+		</div>
+
+		<img src="" alt="">
+
+	</div>
+</div>
+
 <script>
 	function shareInstagram() {
 		$('#copy-link').click();
@@ -2325,7 +2340,13 @@ while ($ob = $res->GetNextElement()) {
 			let title = $('.product-item-scu-item-color-container.selected').attr('title');
 
 			$('#current-color').html(title);
-		})
+		});
+
+		$('.product-item-scu-item-list').on('click', function() {
+			let title = $('.product-item-scu-item-text-container.selected .size').parent().attr('title');
+
+			$('#current-size').html(' ' + title);
+		});
 
 		$('.product-item-scu-item-list').click();
 	}
@@ -2339,7 +2360,7 @@ while ($ob = $res->GetNextElement()) {
 
 		function detailScroll() {
 			if (!$('.element-container').length) return false;
-			let left = $('.element-container').offset().left + $('.element-container').width() - $('.detail').width() - 25;
+			let left = $('.element-container').offset().left + $('.element-container').width() - $('.detail').width() - 40;
 			if (!$('.detail').hasClass('absolute')) $('.detail').css('left', left);
 			let detailHeight = $('.detail').height();
 			let containerHeight = $('.element-container').height();
@@ -2358,7 +2379,7 @@ while ($ob = $res->GetNextElement()) {
 			if (detailHeight + detailOffset.top >= maxTop && !$('.detail').hasClass('absolute')) {
 				$('.detail').removeClass('fixed');
 				$('.detail').css('left', 'auto');
-				$('.detail').css('right', '15px');
+				$('.detail').css('right', '0');
 				$('.detail').addClass('absolute');
 			}
 
@@ -2504,22 +2525,44 @@ while ($ob = $res->GetNextElement()) {
 			return false;
 		});
 
+		$('#img-full-screen-modal .modal-close').on('click', () => {
+			$('#img-full-screen-modal').css('display', 'none');
+		});
+		$('#comment-list img').on('click', function() {
+			let src = $(this).attr('src');
+			$('#img-full-screen-modal .img-full-screen').css('background-image', `url(${src})`);
+			$('#img-full-screen-modal').css('display', 'flex');
+		});
+
 	};
 	// Product Slider
 	$('#slider').not('.slick-initialized').slick({
+		infinite: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		fade: true,
 		arrows: false,
 		asNavFor: '#slider-nav',
 	});
 
 	$('#slider-nav').not('.slick-initialized').slick({
+		infinite: true,
 		slidesToShow: 2,
 		slidesToScroll: 1,
 		vertical: true,
+		centerMode: false,
+		focusOnSelect: true,
 		asNavFor: '#slider',
 		nextArrow: $('.next-arrow'),
 		prevArrow: $('.prev-arrow')
+	});
+
+	$('.product-item-scu-item-color-container').on('click', function() {
+		let slides = $(`.slide[data-color="${$(this).data('xml')}"]`);
+		let count = slides.length;
+		let index = $(slides[count - 1]).data('slick-index');
+		console.log(index);
+		$('#slider').slick('slickGoTo', "" + index);
 	});
 </script>
 

@@ -324,7 +324,7 @@ if ($request->get('ORDER_ID') <> '') {
 						"SET_TITLE" => "Y",
 						"SHOW_DISCOUNT_PERCENT" => "Y",
 						"SHOW_FILTER" => "N",
-						"SHOW_RESTORE" => "Y",
+						"SHOW_RESTORE" => "N",
 						"TEMPLATE_THEME" => "blue",
 						"TOTAL_BLOCK_DISPLAY" => array(
 							0 => "top",
@@ -431,12 +431,12 @@ if ($request->get('ORDER_ID') <> '') {
 										<label for=""></label>
 										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('14','PVZ'); return false;">Выбрать пункт самовывоза</div>
 									</div>
-									
+
 									<div class="item sdek-postamat-btn">
 										<label for=""></label>
 										<div class="SDEK_selectPVZ btn btn-default" onclick="IPOLSDEK_pvz.selectPVZ('15','PVZ'); return false;">Выбрать постамат</div>
 									</div>
-									
+
 									<div class="item bxb-pickup-btn">
 										<label for=""></label>
 										<div class="bxb-btn btn">Выбрать пункт самовывоза</div>
@@ -486,7 +486,7 @@ if ($request->get('ORDER_ID') <> '') {
 					</div>
 
 					<div id="errors">
-						
+
 					</div>
 				</div>
 
@@ -841,6 +841,10 @@ if ($request->get('ORDER_ID') <> '') {
 						bx_counter_waiter(++i)
 					}, 100);
 			})();
+
+			// $(document).ready(function() {
+
+			// });
 		</script>
 <?
 	}

@@ -115,7 +115,8 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 						"TEMPLATE_THEME" => "blue",
 						"XML_EXPORT" => "N",
 						"AJAX_OPTION_HISTORY" => "Y",
-						"AJAX_OPTION_JUMP" => "N",
+						"AJAX_OPTION_JUMP" => "Y",
+						'HIDE_NOT_AVAILABLE' => 'N',
 						"INSTANT_RELOAD" => "Y"
 						// "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 						// "IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -130,7 +131,6 @@ if ($sectionListParams["COUNT_ELEMENTS"] === "Y") {
 						// "XML_EXPORT" => "N",
 						// "SECTION_TITLE" => "NAME",
 						// "SECTION_DESCRIPTION" => "DESCRIPTION",
-						// 'HIDE_NOT_AVAILABLE' => $arParams["HIDE_NOT_AVAILABLE"],
 						// "TEMPLATE_THEME" => $arParams["TEMPLATE_THEME"],
 						// 'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
 						// 'CURRENCY_ID' => $arParams['CURRENCY_ID'],

@@ -49,7 +49,7 @@
 
 .basket-item-amount-filed {
 	border: none;
-	width: 16px;
+	max-width: 30px;
 	font-weight: normal;
 }
 
@@ -301,7 +301,7 @@
 
 	&:last-child {
 		position: absolute;
-		bottom: -115px;
+		top: 100%;
 		border-bottom: 0;
 
 		& a {
@@ -616,6 +616,16 @@
 			width: 100%;
 			max-width: 485px;
 			margin-top: 30px;
+
+			&.error {
+				& label {
+					color: red;
+				}
+
+				& input {
+					border-color: red;
+				}
+			}
 
 			& .bx-soa-location-input-container {
 

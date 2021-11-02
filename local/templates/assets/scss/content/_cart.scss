@@ -11,6 +11,21 @@
 	padding: 0 20px;
 	padding-bottom: 25px;
 
+	& .color,
+	& .size,
+	& .product-name {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 75%;
+		height: 25px;
+		display: block !important;
+	}
+
+	& .artnumber {
+		text-align: left;
+	}
+
 	& .empty {
 		display: flex;
 		justify-content: center;
@@ -22,6 +37,7 @@
 
 	& .scrollbar {
 		overflow-y: scroll;
+		overflow-x: hidden;
 		max-height: 402px;
 	}
 
@@ -49,11 +65,19 @@
 	}
 }
 
+.cart-modal .scrollbar {
+	margin-top: 25px;
+}
+
 .cart-item {
 	display: flex;
 	font-size: 18px;
 	padding: 25px 0;
 	border-bottom: 1px solid #E3E3E3;
+
+	&:first-child {
+		padding-top: 0;
+	}
 
 	& .count {
 		width: auto;
@@ -93,13 +117,14 @@
 		& img {
 			height: 100%;
 			object-fit: contain;
+			min-width: 85px;
 		}
 	}
 
 	& .cart-detail {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
+		width: 60%;
 		max-width: 290px;
 		max-height: 150px;
 		line-height: 19px;

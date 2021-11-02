@@ -231,6 +231,16 @@ JCSmartFilter.prototype.bindUrlToButton = function (buttonId, url) {
 	}
 };
 
+// JCSmartFilter.prototype.reloadAjax = function () {
+// 	$.get(
+// 		'/catalog/?set_filter=y&arrFilter_23_2047402582=Y',
+// 		function (data) {
+// 			$('.catalog-list').html($(data).find('.catalog-list').html());
+// 		}
+// 	);
+// 	history.pushState(null, null, '/catalog/?set_filter=y&arrFilter_23_2047402582=Y');
+// }
+
 JCSmartFilter.prototype.gatherInputsValues = function (values, elements) {
 	if (elements) {
 		for (var i = 0; i < elements.length; i++) {

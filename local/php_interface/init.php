@@ -110,16 +110,16 @@ function OrderComplete($orderID, &$arFields)
 function retailCrmApiResult($methodApi, $res, $code)
 {
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
-    $connection = Bitrix\Main\Application::getConnection();
+    // require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
+    // $connection = Bitrix\Main\Application::getConnection();
 
     // Подготовка строки для использования в sql-запросе
-    $login = 'admin';
-    $sqlHelper = $connection->getSqlHelper();
-    $data = $sqlHelper->forSql($login, 50);
+    // $login = 'admin';
+    // $sqlHelper = $connection->getSqlHelper();
+    // $data = $sqlHelper->forSql($login, 50);
 
-    $query = "INSERT INTO `testcrm`(`name`, `json`) VALUES ('test','" . json_encode(['res' => $res, 'methodApi' => $methodApi, 'code' => $code]) . "');";
-    $result = $connection->query($query);
+    // $query = "INSERT INTO `testcrm`(`name`, `json`) VALUES ('test','" . json_encode(['res' => $res, 'methodApi' => $methodApi, 'code' => $code]) . "');";
+    // $result = $connection->query($query);
 
     return;
 }
@@ -127,8 +127,8 @@ function retailCrmApiResult($methodApi, $res, $code)
 
 function retailCrmBeforeCustomerSend($customer)
 {
-    $f = fopen('log.txt', 'a');
-    fwrite($f, 'asdasd' . "\n");
+    // $f = fopen('log.txt', 'a');
+    // fwrite($f, 'asdasd' . "\n");
     //Ваши изменения
     return $customer;
     //либо return false; и тогда данные отправлены в систему не будут
@@ -151,4 +151,10 @@ function retailCrmBeforeOrderSend($order, $arFields)
     //Ваши изменения
     return $order;
     //либо return false; и тогда данные отправлены в систему не будут
+}
+
+AddEventHandler("main", "OnBeforeUserUpdate", "OnBeforeUserUpdateHandler");
+function OnBeforeUserUpdateHandler(&$arFields)
+{
+    $arFields["LOGIN"] = $arFields["EMAIL"];
 }

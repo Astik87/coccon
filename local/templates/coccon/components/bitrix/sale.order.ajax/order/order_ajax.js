@@ -199,21 +199,17 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				this.initUserConsent();
 			}
 
-			// Применеие купона и обновление карзины
-			$('.enter-coupon').on('click', function () {
-				let couponVal = $(this).siblings('.enter-coupon-field').val();
-				if (couponVal) {
-					BX.Sale.OrderAjaxComponent.sendRequest('enterCoupon', couponVal);
-					BX.Sale.BasketComponent.sendRequest('recalculateAjax', {
-						'basket[QUANTITY_1020]': 1
-					});
-				}
-			});
-
 			// Способы доставки
 			// this.getAllFormData() все введенные данные
 
 			this.renderDeliveries();
+
+			$('#bx-soa-order-form').keydown(function(event) {
+				if (event.keyCode == 13) {
+					event.preventDefault();
+					return false;
+				}
+			});
 
 			$("#forename, #last-name").on('change', () => {
 				let forename = $('#forename').val();
@@ -282,6 +278,18 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					address += ", кв. " + flat.val();
 
 				$('#soa-property-7').val(address);
+			});
+
+			$("#street").on('change', function () {
+				$('#soa-property-21').val($(this).val());
+			});
+
+			$("#home").on('change', function () {
+				$('#soa-property-22').val($(this).val());
+			});
+
+			$("#flat").on('change', function () {
+				$('#soa-property-23').val($(this).val());
 			});
 
 			$('#comment').on('change', function () {
@@ -8124,6 +8132,15 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				if (errors[i] && errors[i].length) {
 					BX.addClass(inputDiv, 'has-error');
 					$(`input[data-id="${$(inputs[i]).attr('id')}"]`).parent().addClass('error');
+					if ($(inputs[i]).attr('id') == 'soa-property-21') {
+						$('#street').parent().addClass('error');
+					}
+					if ($(inputs[i]).attr('id') == 'soa-property-22') {
+						$('#home').parent().addClass('error');
+					}
+					if ($(inputs[i]).attr('id') == 'soa-property-23') {
+						$('#flat').parent().addClass('error');
+					}
 				} else {
 					BX.removeClass(inputDiv, 'has-error');
 					$(`input[data-id="${$(inputs[i]).attr('id')}"]`).parent().removeClass('error');
@@ -8149,6 +8166,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					$(input).each((i, e) => {
 						$(e).val(addres[i + 1]);
 					});
+					$('#soa-property-21').val($('#street').val());
+					$('#soa-property-22').val($('#home').val());
+					$('#soa-property-23').val($('#flat').val());
 				} else {
 					input.val($(inputs[i]).val());
 				}
@@ -8466,7 +8486,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 			let couponSubmit = BX.create('div', {
 				attrs: {
-					className: 'submit enter-coupon'
+					className: 'submit enter-coupon',
+					onclick: 'enterCoupon(this)'
 				},
 				html: '<span>Применить</span>',
 			});
@@ -8946,3 +8967,14 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 	};
 })();
+
+function enterCoupon(e) {
+	console.log($(e).siblings('.enter-coupon-field').val());
+	let couponVal = $(e).siblings('.enter-coupon-field').val();
+	if (couponVal) {
+		BX.Sale.OrderAjaxComponent.sendRequest('enterCoupon', couponVal);
+		BX.Sale.BasketComponent.sendRequest('recalculateAjax', {
+			'basket[QUANTITY_1020]': 1
+		});
+	}
+}
