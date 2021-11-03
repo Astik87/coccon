@@ -442,6 +442,11 @@ if ($request->get('ORDER_ID') <> '') {
 										<div class="bxb-btn btn">Выбрать пункт самовывоза</div>
 									</div>
 
+									<div class="item post-pickup-btn">
+										<label for=""></label>
+										<div class="post-btn btn">Выбрать пункт самовывоза</div>
+									</div>
+
 									<div class="item">
 										<label for="street">Улица *</label>
 										<input type="text" id="street" data-id="soa-property-7">

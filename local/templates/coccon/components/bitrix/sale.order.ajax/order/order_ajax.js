@@ -66,7 +66,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		/**
 		 * Initialization of sale.order.ajax component js
 		 */
-		renderDeliveries: function (parameters) {
+		renderDeliveries: function () {
 			$('.deliveryItem').remove();
 			let deliveries = this.result.DELIVERY;
 

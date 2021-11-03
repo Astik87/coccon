@@ -278,7 +278,7 @@ if (!$USER->IsAuthorized()) {
         ?>
 
         <div class="md-wrapper" style="display: none;" id="modal-promocode">
-            <div class="modal-promocode">
+            <div class="modal-promocode" style="background-image: url(<?= $promocode['IMAGE'] ?>); background-size: cover; background-repeat: no-repeat;">
                 <div class="modal-close">
                     <span></span>
                     <span></span>

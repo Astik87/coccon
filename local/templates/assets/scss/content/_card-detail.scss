@@ -3,18 +3,27 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 
+	@media screen and (max-width: 1300px) {
+		padding-left: 25px;
+	}
+
 	@media screen and (max-width: 1535px) {
 		justify-content: space-around;
 	}
 
 	@media screen and (max-width: 870px) {
 		flex-direction: column;
+		padding-left: 0;
 	}
 }
 
 .element-container {
 	position: relative;
 	padding: 0;
+
+	& .breadcrumbs {
+		padding-left: 25px;
+	}
 }
 
 // Slider & Slider nav
@@ -100,7 +109,7 @@
 }
 
 #slider-nav {
-	width: 315px;
+	width: 300px;
 	max-height: 770px;
 	margin-right: 30px;
 
@@ -133,18 +142,22 @@
 	min-width: 290px;
 	min-height: 400px;
 
+	@media screen and (max-width: 1550px) {
+		width: 695px;
+	}
+
 	@media screen and (max-width: 1200px) {
-		width: 600px;
+		width: 565px;
 		height: 700px;
 	}
 
 	@media screen and (max-width: 1070px) {
-		width: 500px;
+		width: 465px;
 		height: 600px;
 	}
 
 	@media screen and (max-width: 970px) {
-		width: 400px;
+		width: 365px;
 		height: 500px;
 	}
 
@@ -282,13 +295,14 @@
 	height: fit-content;
 
 	@media screen and (max-width: 870px) {
-		margin-left: 0;
+		margin-left: 25px;
 	}
 
 	@media screen and (max-width: 430px) {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-left: 0;
 
 		& .product-item-scu-item-list {
 			width: 90vw;
@@ -494,15 +508,11 @@
 	margin-top: 20px;
 	margin-bottom: 90px;
 	max-width: 1065px;
+	padding-left: 25px;
 
 	&-item {
 		padding: 20px 0;
 		border-bottom: 1px solid rgba(121, 155, 201, 0.5);
-
-		@media screen and (max-width: 1560px) {
-			padding: 20px 15px;
-		}
-
 	}
 
 	&-content {
